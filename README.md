@@ -46,7 +46,8 @@ py tools/png_to_mer_schematic.py scarletking.png \
 | `--simplify PX` | 轮廓容差。越低越还原、对象越多；越高越平滑、越省。 |
 | `--foreground {light,dark}` | 描摹亮部像素还是暗部像素。 |
 | `--threshold 0-255` | 前景/背景分界阈值。 |
-| `--color #RRGGBB[AA]` | 纹章颜色。线条会留空（透出墙面）。 |
+| `--color #RRGGBB[AA]` | 纯色填充。线条会留空（透出墙面）。 |
+| `--color-source {flat,image}` | `image` 按原图对每个基元取色，一次生成即保留原图颜色（网页界面：“保留原图颜色”）。 |
 | `--min-area PX` | 忽略小于该面积的轮廓（调低以保留细节）。 |
 | `--width UNITS` | 图纸最终宽度（Unity 单位）。 |
 | `--border-cylinders` | 把检测到的圆形边框转成 2 个廉价圆柱。 |

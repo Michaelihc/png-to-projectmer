@@ -262,10 +262,12 @@
       <div class="ghead"><span class="gnum">04</span><span class="eyebrow" data-i18n="g_output"></span></div>
       <div class="field">
         <label class="lbl" data-i18n="color"></label>
-        <div class="swatchrow">
+        <div class="swatchrow" id="colorRow">
           <input id="color" type="color" value="#d0021b">
           <input id="colorHex" type="text" value="#D0021BFF" style="flex:1">
         </div>
+        <label class="lbl" style="text-transform:none;letter-spacing:0;font-family:var(--body);margin-top:9px">
+          <span><input type="checkbox" id="keep_colors"><span data-i18n="keep_colors"></span></span></label>
         <div class="hint" data-i18n="color_hint"></div>
       </div>
       <div class="row">
@@ -378,7 +380,7 @@ const I18N = {
     g_trace:"描摹", trace_desc:"把哪些像素变成纹章", light:"亮部", dark:"暗部", threshold:"阈值",
     g_fill:"填充", ngon:"N 边形 · 更省", triangle:"逐三角形",
     detail:"细节 · 简化", detail_hint:"越低越还原、体量越大；越高越平滑、越省。",
-    g_output:"输出", color:"纹章颜色", color_hint:"线条留空，透出墙面。",
+    g_output:"输出", color:"纹章颜色", keep_colors:"保留原图颜色", color_hint:"线条留空，透出墙面。勾选后按原图取色，颜色框失效。",
     width:"宽度 · 单位", minarea:"最小面积 · px",
     advanced:"高级选项", prev_bg:"预览背景", min_tri:"最小三角面积", winding:"绕序",
     trace_mode:"描摹方式", polygon:"多边形 · 填充", rectfirst:"矩形优先 · 描边",
@@ -400,7 +402,7 @@ const I18N = {
     g_trace:"Trace", trace_desc:"which pixels become the emblem", light:"Light", dark:"Dark", threshold:"Threshold",
     g_fill:"Fill", ngon:"N-gon · fewer", triangle:"Per-triangle",
     detail:"Detail · simplify", detail_hint:"Lower = more faithful & heavier; higher = smoother & cheaper.",
-    g_output:"Output", color:"Fill colour", color_hint:"Linework stays as gaps — the wall shows through.",
+    g_output:"Output", color:"Fill colour", keep_colors:"Keep original colours", color_hint:"Linework stays as gaps. When checked, colours are sampled from the source and the picker is ignored.",
     width:"Width · units", minarea:"Min area · px",
     advanced:"Advanced options", prev_bg:"Preview background", min_tri:"Min triangle area", winding:"Winding",
     trace_mode:"Trace mode", polygon:"polygon · fill", rectfirst:"rectangle-first · strokes",
@@ -467,6 +469,13 @@ function bindColor(picker,hex,defA="FF"){
 }
 bindColor($("color"),$("colorHex")); bindColor($("bg"),$("bgHex"));
 
+/* keep-original-colours toggle greys out the flat colour picker */
+$("keep_colors").addEventListener("change",()=>{
+  const on=$("keep_colors").checked;
+  $("color").disabled=on; $("colorHex").disabled=on;
+  $("colorRow").style.opacity=on?.4:1;
+});
+
 /* ================= segmented toggles ================= */
 function seg(id){ const box=$(id);
   box.addEventListener("click",e=>{ if(e.target.tagName!=="BUTTON") return;
@@ -485,7 +494,8 @@ function txt(id){const v=$(id).value.trim();return v===""?undefined:v;}
 async function convert(){
   if(!fileData) return;
   const params={
-    name:txt("name"), color:$("colorHex").value.trim(), foreground:getFg(),
+    name:txt("name"), color:$("colorHex").value.trim(),
+    color_source:$("keep_colors").checked?"image":"flat", foreground:getFg(),
     threshold:parseInt($("threshold").value,10), fill_mode:getFill(),
     simplify:parseFloat($("simplify").value), min_area:num("min_area"), width:num("width"),
     preview_bg:$("bgHex").value.trim(), min_triangle_area:num("min_triangle_area"),

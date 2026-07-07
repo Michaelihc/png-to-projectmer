@@ -52,7 +52,8 @@ Run `py tools/png_to_mer_schematic.py --help` for every option.
 | `--simplify PX` | Contour tolerance. Lower = more faithful & more objects; higher = smoother & cheaper. |
 | `--foreground {light,dark}` | Trace the bright pixels or the dark pixels. |
 | `--threshold 0-255` | Foreground/background cutoff. |
-| `--color #RRGGBB[AA]` | Emblem colour. Linework stays as gaps (the wall shows through). |
+| `--color #RRGGBB[AA]` | Flat emblem colour. Linework stays as gaps (the wall shows through). |
+| `--color-source {flat,image}` | `image` samples each primitive's colour from the source, preserving the original colours in one pass (web UI: "Keep original colours"). |
 | `--min-area PX` | Ignore contours smaller than this (drop lower to keep fine detail). |
 | `--width UNITS` | Final schematic width in Unity units. |
 | `--border-cylinders` | Convert a detected circular border into 2 cheap cylinders. |

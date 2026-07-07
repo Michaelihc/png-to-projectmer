@@ -28,7 +28,7 @@ import mapbox_earcut as earcut
 import numpy as np
 from skimage.morphology import skeletonize
 
-from mer_triangle_primitives import triangle_points_to_primitive_blocks
+from mer_triangle_primitives import triangle_points_to_primitive_blocks, transform_point
 
 
 @dataclass(frozen=True)
@@ -151,7 +151,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--color",
         default="#FFFFFFFF",
-        help="MER color string for foreground triangles.",
+        help="Flat MER color string for foreground fill (used when --color-source flat).",
+    )
+    parser.add_argument(
+        "--color-source",
+        choices=("flat", "image"),
+        default="flat",
+        help="flat fills every primitive with --color; image samples each primitive's colour from the source image so the original colours are preserved.",
+    )
+    parser.add_argument(
+        "--color-sample-radius",
+        type=int,
+        default=2,
+        help="Half-size (px) of the neighbourhood median sampled per primitive when --color-source image.",
     )
     parser.add_argument(
         "--trace-mode",
@@ -1037,7 +1049,7 @@ def expand_removal_border(mask: np.ndarray, border: BorderCylinderPair, margin_p
 
 def extract_rings(
     args: argparse.Namespace,
-) -> tuple[list[list[list[tuple[float, float]]]], BorderCylinderPair | None, int, int, np.ndarray]:
+) -> tuple[list[list[list[tuple[float, float]]]], BorderCylinderPair | None, int, int, np.ndarray, np.ndarray]:
     image = cv2.imread(str(args.image), cv2.IMREAD_UNCHANGED)
     if image is None:
         raise FileNotFoundError(f"Could not read image: {args.image}")
@@ -1099,7 +1111,7 @@ def extract_rings(
 
     contours, hierarchy_raw = cv2.findContours(mask, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
     if hierarchy_raw is None:
-        return [], border, image_width, image_height, mask
+        return [], border, image_width, image_height, mask, image
 
     hierarchy = hierarchy_raw[0]
 
@@ -1127,7 +1139,7 @@ def extract_rings(
 
         polygons.append(rings)
 
-    return polygons, border, image_width, image_height, mask
+    return polygons, border, image_width, image_height, mask, image
 
 
 def triangulate_rings(
@@ -1247,6 +1259,143 @@ def estimate_triangle_runtime_toys(
                 max_shear_scale = max(max_shear_scale, shear_scale)
 
     return toys, rectangle_tiles, max_shear_scale
+
+
+# Role prefixes (the block-name segment AFTER the schematic name) that mark a
+# primitive as traced foreground fill, safe to recolour from the source image.
+# Matching the suffix — not the full name — keeps this immune to schematic names
+# that happen to contain these tokens, and border/bridge suffixes (border-*,
+# bridge-*) are naturally excluded so they keep their own configured colours.
+FILL_ROLE_PREFIXES = ("tri-", "par-", "tile-", "trace-")
+
+
+def _source_to_bgr(image: np.ndarray) -> np.ndarray:
+    """Normalise a cv2-read image (gray / BGR / BGRA) to a contiguous BGR uint8 array."""
+    if image.ndim == 2:
+        return cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+    if image.shape[2] == 4:
+        return np.ascontiguousarray(image[:, :, :3])
+    return np.ascontiguousarray(image[:, :, :3])
+
+
+def build_color_sampler(
+    image: np.ndarray,
+    mask: np.ndarray,
+    image_width: int,
+    image_height: int,
+    width_units: float,
+    radius: int,
+):
+    """Return sample(x, y) -> '#RRGGBBAA', reading the source colour at the Unity
+    point (x, y). Uses the median of foreground pixels in a (2*radius+1)^2 window
+    so a centroid that lands on a gap/edge pixel does not grab a stray colour."""
+    bgr = _source_to_bgr(image)
+    height, width = bgr.shape[:2]
+    radius = max(0, int(radius))
+    scale = width_units / image_width if image_width else 1.0
+
+    def sample(x: float, y: float) -> str:
+        # Quantise to the 5-decimal precision the schematic stores block Positions
+        # at (round_vec/round_vec3), so a preview centroid and the corresponding
+        # rounded JSON block Position map to the exact same source pixel.
+        x, y = round(x, 5), round(y, 5)
+        px = int(round((x / scale) + (image_width * 0.5))) if scale else 0
+        py = int(round((image_height * 0.5) - (y / scale))) if scale else 0
+        px = min(max(px, 0), width - 1)
+        py = min(max(py, 0), height - 1)
+        x0, x1 = max(px - radius, 0), min(px + radius + 1, width)
+        y0, y1 = max(py - radius, 0), min(py + radius + 1, height)
+        window = bgr[y0:y1, x0:x1].reshape(-1, 3)
+        window_mask = mask[y0:y1, x0:x1].reshape(-1)
+        foreground = window[window_mask > 0]
+        pixels = foreground if foreground.size else window
+        b, g, r = (int(round(v)) for v in np.median(pixels, axis=0))
+        return f"#{r:02X}{g:02X}{b:02X}FF"
+
+    return sample
+
+
+def triangle_preview_tiles(
+    triangle: tuple[tuple[float, float], tuple[float, float], tuple[float, float]],
+    color: str,
+) -> list[TraceParallelogram]:
+    """Expand a fill triangle into the same 3 medial parallelogram tiles the JSON
+    emits, so the preview draws (and colour-samples) each tile at the exact centre
+    its JSON quad uses — keeping preview colours consistent with the per-tile JSON.
+
+    Mirrors the tile geometry of triangle_parallelogram_tiles / the build path
+    (including the B/C swap), and also returns each tile's centre so the drawn
+    parallelogram's centroid equals the JSON quad's Position."""
+    a, b, c = triangle
+    b, c = c, b  # the runtime swaps B/C before building the quad tiles
+    midpoint_ab = mul2(add2(a, b), 0.5)
+    midpoint_bc = mul2(add2(b, c), 0.5)
+    midpoint_ca = mul2(add2(c, a), 0.5)
+    center_a = mul2(add2(a, midpoint_bc), 0.5)
+    center_b = mul2(add2(b, midpoint_ca), 0.5)
+    center_c = mul2(add2(c, midpoint_ab), 0.5)
+    spec = [
+        (sub2(midpoint_ca, center_a), sub2(a, center_a), center_a),
+        (sub2(midpoint_ab, center_b), sub2(b, center_b), center_b),
+        (sub2(midpoint_bc, center_c), sub2(c, center_c), center_c),
+    ]
+    tiles: list[TraceParallelogram] = []
+    for v_up, v_left, center in spec:
+        origin = sub2(center, v_left)
+        edge_x = sub2(v_left, v_up)
+        edge_y = add2(v_up, v_left)
+        tiles.append(TraceParallelogram(origin, edge_x, edge_y, color))
+    return tiles
+
+
+def recolor_fill_blocks(schematic: dict, sample, name: str) -> int:
+    """Recolour every traced foreground fill primitive from the source image.
+
+    A quad's world centre must be resolved through its parent: sheared tiles are
+    children of an Empty shear-parent, so their own Position is LOCAL, not the
+    absolute Unity coordinate the sampler expects. The hierarchy is at most two
+    deep (root -> shear-parent -> quad, or root -> quad), and shear-parents sit
+    at the schematic root, so composing the parent's TRS once yields the world
+    centre. Returns the number of primitives recoloured."""
+    blocks = schematic.get("Blocks", [])
+    by_id = {block.get("ObjectId"): block for block in blocks}
+    prefix = f"{name}-"
+
+    def is_fill(block_name: str) -> bool:
+        # Classify by the role segment after the schematic name so a schematic
+        # name that contains a role token can't misclassify border/bridge blocks.
+        suffix = block_name[len(prefix):] if block_name.startswith(prefix) else block_name
+        return suffix.startswith(FILL_ROLE_PREFIXES)
+
+    def vec(value, default=(0.0, 0.0, 0.0)):
+        if not isinstance(value, dict):
+            return default
+        return (float(value.get("x", default[0])), float(value.get("y", default[1])), float(value.get("z", default[2])))
+
+    def world_xy(block):
+        local = vec(block.get("Position"))
+        parent = by_id.get(block.get("ParentId"))
+        if parent is None:  # parented directly to the schematic root -> Position is absolute
+            return local[0], local[1]
+        world = transform_point(
+            local, vec(parent.get("Position")), vec(parent.get("Rotation")),
+            vec(parent.get("Scale"), (1.0, 1.0, 1.0)),
+        )
+        return world[0], world[1]
+
+    changed = 0
+    for block in blocks:
+        if block.get("BlockType") != 1:
+            continue
+        if not is_fill(block.get("Name", "")):
+            continue
+        properties = block.get("Properties")
+        if not isinstance(properties, dict) or "Color" not in properties:
+            continue
+        x, y = world_xy(block)
+        properties["Color"] = sample(x, y)
+        changed += 1
+    return changed
 
 
 def build_schematic(
@@ -1411,10 +1560,15 @@ def write_preview(
     border_outer_color: str | None,
     border_inner_color: str,
     preview_bg: str,
+    color_fn=None,
 ) -> None:
     height_units = width_units * (image_height / image_width)
     min_x = -width_units * 0.5
     min_y = -height_units * 0.5
+
+    def fill_attr(cx: float, cy: float) -> str:
+        return f' fill="{css_color(color_fn(cx, cy))}"' if color_fn else ""
+
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{min_x} {min_y} {width_units} {height_units}">',
         f'<rect x="{min_x}" y="{min_y}" width="{width_units}" height="{height_units}" fill="{css_color(preview_bg)}"/>',
@@ -1436,7 +1590,7 @@ def write_preview(
             rx = (x * math.cos(angle)) - (y * math.sin(angle))
             ry = (x * math.sin(angle)) + (y * math.cos(angle))
             points.append(f"{cx + rx:.5f},{-(cy + ry):.5f}")
-        lines.append(f'<polygon points="{" ".join(points)}"/>')
+        lines.append(f'<polygon points="{" ".join(points)}" fill="{css_color(bridge.color)}"/>')
 
     for rectangle in trace_rectangles:
         cx, cy = rectangle.center
@@ -1453,20 +1607,24 @@ def write_preview(
             rx = (x * math.cos(angle)) - (y * math.sin(angle))
             ry = (x * math.sin(angle)) + (y * math.cos(angle))
             points.append(f"{cx + rx:.5f},{-(cy + ry):.5f}")
-        lines.append(f'<polygon points="{" ".join(points)}"/>')
+        lines.append(f'<polygon points="{" ".join(points)}"{fill_attr(cx, cy)}/>')
 
     for parallelogram in trace_parallelograms:
         a = parallelogram.origin
         b = add2(a, parallelogram.edge_x)
         c = add2(b, parallelogram.edge_y)
         d = add2(a, parallelogram.edge_y)
+        mx = a[0] + (parallelogram.edge_x[0] + parallelogram.edge_y[0]) * 0.5
+        my = a[1] + (parallelogram.edge_x[1] + parallelogram.edge_y[1]) * 0.5
         points = " ".join(f"{x:.5f},{-y:.5f}" for x, y in (a, b, c, d))
-        lines.append(f'<polygon points="{points}"/>')
+        lines.append(f'<polygon points="{points}"{fill_attr(mx, my)}/>')
 
     for a, b, c in triangles:
         # SVG y grows downward, so invert the Unity y coordinates for preview.
+        mx = (a[0] + b[0] + c[0]) / 3.0
+        my = (a[1] + b[1] + c[1]) / 3.0
         points = " ".join(f"{x:.5f},{-y:.5f}" for x, y in (a, b, c))
-        lines.append(f'<polygon points="{points}"/>')
+        lines.append(f'<polygon points="{points}"{fill_attr(mx, my)}/>')
     lines.append("</g>")
     if border is not None:
         cx, cy = border.center
@@ -1497,6 +1655,7 @@ def write_png_preview(
     border_outer_color: str | None,
     border_inner_color: str,
     preview_bg: str,
+    color_fn=None,
 ) -> None:
     preview_height = max(1, round(preview_width * (image_height / image_width)))
     height_units = width_units * (image_height / image_width)
@@ -1504,6 +1663,9 @@ def write_png_preview(
     canvas[:, :] = color_to_bgr(preview_bg)
     foreground_bgr = color_to_bgr(color)
     border_bgr = color_to_bgr(border_outer_color if border_outer_color is not None else color)
+
+    def fill_bgr(cx: float, cy: float) -> tuple[int, int, int]:
+        return color_to_bgr(color_fn(cx, cy)) if color_fn else foreground_bgr
 
     def to_pixel(point: tuple[float, float]) -> tuple[int, int]:
         x, y = point
@@ -1526,7 +1688,7 @@ def write_png_preview(
             rx = (x * math.cos(angle)) - (y * math.sin(angle))
             ry = (x * math.sin(angle)) + (y * math.cos(angle))
             points.append(to_pixel((cx + rx, cy + ry)))
-        cv2.fillConvexPoly(canvas, np.array(points, dtype=np.int32), foreground_bgr, lineType=cv2.LINE_AA)
+        cv2.fillConvexPoly(canvas, np.array(points, dtype=np.int32), color_to_bgr(bridge.color), lineType=cv2.LINE_AA)
 
     for rectangle in trace_rectangles:
         cx, cy = rectangle.center
@@ -1543,19 +1705,23 @@ def write_png_preview(
             rx = (x * math.cos(angle)) - (y * math.sin(angle))
             ry = (x * math.sin(angle)) + (y * math.cos(angle))
             points.append(to_pixel((cx + rx, cy + ry)))
-        cv2.fillConvexPoly(canvas, np.array(points, dtype=np.int32), foreground_bgr, lineType=cv2.LINE_AA)
+        cv2.fillConvexPoly(canvas, np.array(points, dtype=np.int32), fill_bgr(cx, cy), lineType=cv2.LINE_AA)
 
     for parallelogram in trace_parallelograms:
         a = parallelogram.origin
         b = add2(a, parallelogram.edge_x)
         c = add2(b, parallelogram.edge_y)
         d = add2(a, parallelogram.edge_y)
+        mx = a[0] + (parallelogram.edge_x[0] + parallelogram.edge_y[0]) * 0.5
+        my = a[1] + (parallelogram.edge_x[1] + parallelogram.edge_y[1]) * 0.5
         points = np.array([to_pixel(point) for point in (a, b, c, d)], dtype=np.int32)
-        cv2.fillConvexPoly(canvas, points, foreground_bgr, lineType=cv2.LINE_AA)
+        cv2.fillConvexPoly(canvas, points, fill_bgr(mx, my), lineType=cv2.LINE_AA)
 
     for triangle in triangles:
+        mx = (triangle[0][0] + triangle[1][0] + triangle[2][0]) / 3.0
+        my = (triangle[0][1] + triangle[1][1] + triangle[2][1]) / 3.0
         points = np.array([to_pixel(point) for point in triangle], dtype=np.int32)
-        cv2.fillConvexPoly(canvas, points, foreground_bgr, lineType=cv2.LINE_AA)
+        cv2.fillConvexPoly(canvas, points, fill_bgr(mx, my), lineType=cv2.LINE_AA)
 
     if border is not None:
         center_px = to_pixel(border.center)
@@ -1632,7 +1798,7 @@ def main() -> None:
 
     name = clean_name(args.name or args.image.stem)
     bridges = parse_bridge_rects(args.bridge_rect, args.color)
-    polygons, border, image_width, image_height, mask = extract_rings(args)
+    polygons, border, image_width, image_height, mask, source_image = extract_rings(args)
 
     triangles = []
     trace_rectangles: list[TraceRectangle] = []
@@ -1728,14 +1894,34 @@ def main() -> None:
         args.border_gap,
         fill_blocks,
     )
+
+    color_fn = None
+    recolored = 0
+    if args.color_source == "image":
+        color_fn = build_color_sampler(
+            source_image, mask, image_width, image_height, args.width, args.color_sample_radius
+        )
+        recolored = recolor_fill_blocks(schematic, color_fn, name)
+
     json_path.write_text(json.dumps(schematic, separators=(",", ":")), encoding="utf-8")
 
     if args.preview:
+        preview_triangle_arg = triangles + preview_triangles
+        preview_parallelogram_arg = trace_parallelograms + preview_parallelograms
+        if color_fn is not None:
+            # In image-colour mode, draw each fill triangle as the same 3 medial
+            # tiles the JSON emits so preview colours match the per-tile JSON
+            # exactly (a whole-triangle preview would show one averaged colour).
+            fill_tiles = []
+            for tri in preview_triangle_arg:
+                fill_tiles.extend(triangle_preview_tiles(tri, args.color))
+            preview_triangle_arg = []
+            preview_parallelogram_arg = preview_parallelogram_arg + fill_tiles
         write_preview(
             out_dir / f"{name}.preview.svg",
-            triangles + preview_triangles,
+            preview_triangle_arg,
             trace_rectangles,
-            trace_parallelograms + preview_parallelograms,
+            preview_parallelogram_arg,
             border,
             bridges,
             args.width,
@@ -1745,12 +1931,13 @@ def main() -> None:
             args.border_outer_color,
             args.border_inner_color,
             args.preview_bg,
+            color_fn,
         )
         write_png_preview(
             out_dir / f"{name}.preview.png",
-            triangles + preview_triangles,
+            preview_triangle_arg,
             trace_rectangles,
-            trace_parallelograms + preview_parallelograms,
+            preview_parallelogram_arg,
             border,
             bridges,
             args.width,
@@ -1761,9 +1948,12 @@ def main() -> None:
             args.border_outer_color,
             args.border_inner_color,
             args.preview_bg,
+            color_fn,
         )
 
     print(f"Wrote: {json_path}")
+    if args.color_source == "image":
+        print(f"Colour source: image ({recolored} primitives recoloured from source)")
     print(f"Foreground polygons: {len(polygons)}")
     print(f"Border cylinders: {2 if border is not None else 0}")
     print(f"Bridge primitives: {len(bridges)}")

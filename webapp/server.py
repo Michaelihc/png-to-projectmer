@@ -39,6 +39,7 @@ MAX_UPLOAD_BYTES = 40 * 1024 * 1024  # 40 MB
 # param key -> (cli flag, kind). kind: "str" | "num" | "int" | "flag"
 PARAM_FLAGS: dict[str, tuple[str, str]] = {
     "color": ("--color", "str"),
+    "color_source": ("--color-source", "str"),
     "foreground": ("--foreground", "str"),
     "threshold": ("--threshold", "int"),
     "fill_mode": ("--fill-mode", "str"),
@@ -63,6 +64,7 @@ PARAM_FLAGS: dict[str, tuple[str, str]] = {
 }
 STR_CHOICES = {
     "foreground": {"light", "dark"},
+    "color_source": {"flat", "image"},
     "fill_mode": {"ngon", "triangle"},
     "triangle_winding": {"positive", "negative"},
     "trace_mode": {"polygon", "rectangle-first"},

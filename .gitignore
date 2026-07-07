@@ -9,6 +9,7 @@ __pycache__/
 # --- test / tooling artifacts ---
 .playwright-mcp/
 merbench-*.png
+.claude/
 
 # --- local workspace assets that are NOT part of this tool ---
 # third-party forks (their own repos), kept locally only
