@@ -6,6 +6,10 @@ webapp/_input/
 __pycache__/
 *.pyc
 
+# --- test / tooling artifacts ---
+.playwright-mcp/
+merbench-*.png
+
 # --- local workspace assets that are NOT part of this tool ---
 # third-party forks (their own repos), kept locally only
 /ProjectMER/
