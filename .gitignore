@@ -1,0 +1,24 @@
+# --- web app working directories ---
+webapp/_output/
+webapp/_input/
+
+# --- python ---
+__pycache__/
+*.pyc
+
+# --- local workspace assets that are NOT part of this tool ---
+# third-party forks (their own repos), kept locally only
+/ProjectMER/
+/TriangleScpSl/
+/path.txt
+
+# loose source images except the worked example
+/*.png
+/*.webp
+/*.jpg
+/*.jpeg
+!/scarletking.png
+
+# generated schematics except the worked example
+/converted_mer/*
+!/converted_mer/scarletking-opt/

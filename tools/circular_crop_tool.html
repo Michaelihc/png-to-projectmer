@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Circular Crop Tool</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #0b0c0a;
+      --line: #2b2d2a;
+      --line-strong: #555a50;
+      --text: #f2f2ee;
+      --muted: #9a9d94;
+      --signal: #ffb800;
+      --input: #070806;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      display: grid;
+      grid-template-rows: 48px minmax(0, 1fr);
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: auto auto auto auto minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .brand {
+      color: var(--signal);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      min-height: 0;
+    }
+
+    .stage {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 184, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 184, 0, 0.06) 1px, transparent 1px),
+        #000;
+      background-size: 48px 48px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+
+    canvas.dragging {
+      cursor: grabbing;
+    }
+
+    .readout {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.86);
+      color: var(--muted);
+      pointer-events: none;
+      white-space: pre;
+    }
+
+    .panel {
+      min-height: 0;
+      overflow: auto;
+      border-left: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .section {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin-bottom: 10px;
+      color: var(--signal);
+      font-weight: 700;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    label {
+      color: var(--muted);
+    }
+
+    input[type="number"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 7px 8px;
+      border: 1px solid var(--line-strong);
+      background: var(--input);
+      color: var(--text);
+      outline: none;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--signal);
+    }
+
+    input[type="file"] {
+      max-width: 190px;
+      color: var(--muted);
+    }
+
+    button {
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line-strong);
+      background: #000;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--signal);
+      color: var(--signal);
+    }
+
+    button.primary {
+      background: var(--signal);
+      border-color: var(--signal);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    textarea {
+      min-height: 98px;
+      resize: vertical;
+      color: var(--signal);
+    }
+
+    .status {
+      overflow: hidden;
+      color: var(--muted);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .metric {
+      padding: 8px;
+      border: 1px solid var(--line);
+      background: #000;
+      min-width: 0;
+    }
+
+    .metric b {
+      display: block;
+      color: var(--text);
+      font-weight: 400;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 920px) {
+      .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) 420px;
+      }
+
+      .panel {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .topbar {
+        grid-template-columns: auto auto minmax(0, 1fr);
+      }
+
+      .topbar .hide-small {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">Circular Crop</div>
+      <input id="fileInput" type="file" accept="image/*">
+      <button id="defaultBtn" type="button">Load logo</button>
+      <button id="fitBtn" type="button">Fit image</button>
+      <div id="status" class="status">No image loaded</div>
+      <button id="exportBtn" class="primary hide-small" type="button">Export PNG</button>
+    </header>
+
+    <main class="main">
+      <section class="stage">
+        <canvas id="canvas"></canvas>
+        <div id="readout" class="readout">source x 0.0  y 0.0</div>
+      </section>
+
+      <aside class="panel">
+        <div class="section">
+          <div class="section-title">Fixed Circle</div>
+          <div class="row">
+            <label for="diameterInput">Diameter px</label>
+            <input id="diameterInput" type="number" step="1" min="10" value="720">
+          </div>
+          <div class="row">
+            <label for="dimOutsideInput">Dim outside</label>
+            <input id="dimOutsideInput" type="range" min="0" max="0.95" step="0.05" value="0.55">
+          </div>
+          <div class="button-grid">
+            <button id="fitCircleBtn" type="button">Fit circle</button>
+            <button id="centerImageBtn" type="button">Center image</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Image</div>
+          <div class="row">
+            <label for="zoomInput">Zoom</label>
+            <input id="zoomInput" type="number" step="0.01" min="0.01" value="1">
+          </div>
+          <div class="row">
+            <label for="imageXInput">Image X</label>
+            <input id="imageXInput" type="number" step="1" value="0">
+          </div>
+          <div class="row">
+            <label for="imageYInput">Image Y</label>
+            <input id="imageYInput" type="number" step="1" value="0">
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Source Circle</div>
+          <div class="metrics">
+            <div class="metric">Center and diameter<b id="sourceCircle">0,0,0</b></div>
+            <div class="metric">Visible source area<b id="sourceBounds">0,0 to 0,0</b></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">MER Command</div>
+          <div class="row">
+            <label for="nameInput">Name</label>
+            <input id="nameInput" type="text" value="mtf-o2-logo-manual">
+          </div>
+          <div class="row">
+            <label for="widthUnitsInput">Width units</label>
+            <input id="widthUnitsInput" type="number" step="0.1" value="10">
+          </div>
+          <div class="row">
+            <label for="simplifyInput">Simplify</label>
+            <input id="simplifyInput" type="number" step="0.1" value="2.0">
+          </div>
+          <div class="row">
+            <label for="ringWidthInput">Ring width px</label>
+            <input id="ringWidthInput" type="number" step="1" min="0" value="42">
+          </div>
+          <div class="row">
+            <label for="marginInput">Mask margin</label>
+            <input id="marginInput" type="number" step="0.1" value="10">
+          </div>
+          <textarea id="commandOutput" readonly></textarea>
+          <div class="button-grid">
+            <button id="copyCircleBtn" type="button">Copy circle</button>
+            <button id="copyCommandBtn" type="button">Copy command</button>
+            <button id="exportPanelBtn" type="button">Export PNG</button>
+            <button id="resetBtn" type="button">Reset</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const fileInput = document.getElementById("fileInput");
+    const defaultBtn = document.getElementById("defaultBtn");
+    const fitBtn = document.getElementById("fitBtn");
+    const exportBtn = document.getElementById("exportBtn");
+    const exportPanelBtn = document.getElementById("exportPanelBtn");
+    const statusEl = document.getElementById("status");
+    const readoutEl = document.getElementById("readout");
+    const diameterInput = document.getElementById("diameterInput");
+    const dimOutsideInput = document.getElementById("dimOutsideInput");
+    const fitCircleBtn = document.getElementById("fitCircleBtn");
+    const centerImageBtn = document.getElementById("centerImageBtn");
+    const zoomInput = document.getElementById("zoomInput");
+    const imageXInput = document.getElementById("imageXInput");
+    const imageYInput = document.getElementById("imageYInput");
+    const sourceCircle = document.getElementById("sourceCircle");
+    const sourceBounds = document.getElementById("sourceBounds");
+    const nameInput = document.getElementById("nameInput");
+    const widthUnitsInput = document.getElementById("widthUnitsInput");
+    const simplifyInput = document.getElementById("simplifyInput");
+    const ringWidthInput = document.getElementById("ringWidthInput");
+    const marginInput = document.getElementById("marginInput");
+    const commandOutput = document.getElementById("commandOutput");
+    const copyCircleBtn = document.getElementById("copyCircleBtn");
+    const copyCommandBtn = document.getElementById("copyCommandBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const state = {
+      img: null,
+      imageName: "mtf-o2-logo.png",
+      viewScale: 1,
+      panX: 0,
+      panY: 0,
+      cropDiameter: 720,
+      pointerImage: { x: 0, y: 0 },
+      drag: null
+    };
+
+    function canvasSizeCss() {
+      return {
+        width: canvas.width / (window.devicePixelRatio || 1),
+        height: canvas.height / (window.devicePixelRatio || 1)
+      };
+    }
+
+    function cropCenterScreen() {
+      const size = canvasSizeCss();
+      return {
+        x: size.width * 0.5,
+        y: size.height * 0.5
+      };
+    }
+
+    function screenToImage(x, y) {
+      return {
+        x: (x - state.panX) / state.viewScale,
+        y: (y - state.panY) / state.viewScale
+      };
+    }
+
+    function imageToScreen(x, y) {
+      return {
+        x: state.panX + x * state.viewScale,
+        y: state.panY + y * state.viewScale
+      };
+    }
+
+    function sourceCropCircle() {
+      const center = cropCenterScreen();
+      const sourceCenter = screenToImage(center.x, center.y);
+      return {
+        cx: sourceCenter.x,
+        cy: sourceCenter.y,
+        diameter: state.cropDiameter / state.viewScale,
+        radius: state.cropDiameter / state.viewScale * 0.5
+      };
+    }
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      fitCircleToStage(false);
+      draw();
+    }
+
+    function fitCircleToStage(force = true) {
+      const size = canvasSizeCss();
+      const next = Math.max(40, Math.floor(Math.min(size.width, size.height) * 0.78));
+      if (force || !Number.isFinite(state.cropDiameter) || state.cropDiameter > Math.min(size.width, size.height)) {
+        state.cropDiameter = next;
+        diameterInput.value = String(Math.round(state.cropDiameter));
+      }
+    }
+
+    function fitImage() {
+      if (!state.img) return;
+      const size = canvasSizeCss();
+      const scale = Math.min(size.width / state.img.width, size.height / state.img.height) * 0.92;
+      state.viewScale = scale;
+      state.panX = (size.width - state.img.width * scale) * 0.5;
+      state.panY = (size.height - state.img.height * scale) * 0.5;
+      syncInputs();
+      draw();
+    }
+
+    function centerImageUnderCircle() {
+      if (!state.img) return;
+      const center = cropCenterScreen();
+      state.panX = center.x - (state.img.width * 0.5 * state.viewScale);
+      state.panY = center.y - (state.img.height * 0.5 * state.viewScale);
+      syncInputs();
+      draw();
+    }
+
+    function reset() {
+      if (!state.img) return;
+      fitCircleToStage(true);
+      fitImage();
+    }
+
+    function clampScale() {
+      state.viewScale = Math.min(16, Math.max(0.02, state.viewScale));
+    }
+
+    function syncInputs() {
+      clampScale();
+      zoomInput.value = state.viewScale.toFixed(4);
+      imageXInput.value = state.panX.toFixed(1);
+      imageYInput.value = state.panY.toFixed(1);
+      diameterInput.value = Math.round(state.cropDiameter).toString();
+      updateOutput();
+    }
+
+    function readInputs() {
+      const zoom = Number(zoomInput.value);
+      const imageX = Number(imageXInput.value);
+      const imageY = Number(imageYInput.value);
+      const diameter = Number(diameterInput.value);
+
+      if (Number.isFinite(zoom)) {
+        const center = cropCenterScreen();
+        const before = screenToImage(center.x, center.y);
+        state.viewScale = zoom;
+        clampScale();
+        state.panX = center.x - before.x * state.viewScale;
+        state.panY = center.y - before.y * state.viewScale;
+      }
+
+      if (Number.isFinite(imageX)) state.panX = imageX;
+      if (Number.isFinite(imageY)) state.panY = imageY;
+      if (Number.isFinite(diameter)) state.cropDiameter = Math.max(10, diameter);
+
+      syncInputs();
+      draw();
+    }
+
+    function circleText() {
+      const c = sourceCropCircle();
+      return `${c.cx.toFixed(1)},${c.cy.toFixed(1)},${c.diameter.toFixed(1)}`;
+    }
+
+    function borderCircleText() {
+      const c = sourceCropCircle();
+      const ringWidth = Math.max(0, Number(ringWidthInput.value) || 0);
+      const inner = Math.max(1, c.diameter - ringWidth);
+      return `${c.cx.toFixed(1)},${c.cy.toFixed(1)},${c.diameter.toFixed(1)},${inner.toFixed(1)}`;
+    }
+
+    function updateOutput() {
+      if (!state.img) return;
+      const c = sourceCropCircle();
+      const left = c.cx - c.radius;
+      const top = c.cy - c.radius;
+      const right = c.cx + c.radius;
+      const bottom = c.cy + c.radius;
+
+      sourceCircle.textContent = circleText();
+      sourceBounds.textContent = `${left.toFixed(1)},${top.toFixed(1)} to ${right.toFixed(1)},${bottom.toFixed(1)}`;
+
+      const name = nameInput.value.trim() || "mtf-o2-logo-manual";
+      const simplify = Number(simplifyInput.value) || 2;
+      const margin = Number(marginInput.value);
+      const marginArg = Number.isFinite(margin) ? ` --border-mask-margin ${margin}` : "";
+      commandOutput.value =
+        `python tools\\png_to_mer_schematic.py ${state.imageName} --name ${name} --preview ` +
+        `--simplify ${simplify} --border-cylinders --border-circle ${borderCircleText()}${marginArg}`;
+    }
+
+    function drawMask() {
+      const size = canvasSizeCss();
+      const center = cropCenterScreen();
+      const radius = state.cropDiameter * 0.5;
+      const dim = Number(dimOutsideInput.value) || 0;
+
+      ctx.save();
+      ctx.fillStyle = `rgba(0, 0, 0, ${dim})`;
+      ctx.beginPath();
+      ctx.rect(0, 0, size.width, size.height);
+      ctx.moveTo(center.x + radius, center.y);
+      ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+      ctx.fill("evenodd");
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#ffb800";
+      ctx.beginPath();
+      ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#ff3b30";
+      ctx.beginPath();
+      ctx.moveTo(center.x - 10, center.y);
+      ctx.lineTo(center.x + 10, center.y);
+      ctx.moveTo(center.x, center.y - 10);
+      ctx.lineTo(center.x, center.y + 10);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function draw() {
+      const size = canvasSizeCss();
+      ctx.clearRect(0, 0, size.width, size.height);
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, size.width, size.height);
+
+      if (state.img) {
+        ctx.save();
+        ctx.imageSmoothingEnabled = true;
+        ctx.drawImage(
+          state.img,
+          state.panX,
+          state.panY,
+          state.img.width * state.viewScale,
+          state.img.height * state.viewScale
+        );
+        ctx.restore();
+      }
+
+      drawMask();
+      const c = sourceCropCircle();
+      readoutEl.textContent =
+        `source x ${state.pointerImage.x.toFixed(1)}  y ${state.pointerImage.y.toFixed(1)}\n` +
+        `circle ${c.cx.toFixed(1)}, ${c.cy.toFixed(1)}, ${c.diameter.toFixed(1)}`;
+      updateOutput();
+    }
+
+    function loadImage(src, name) {
+      const img = new Image();
+      img.onload = () => {
+        state.img = img;
+        state.imageName = name;
+        setStatus(`${name}  ${img.width} x ${img.height}`);
+        fitCircleToStage(true);
+        fitImage();
+      };
+      img.onerror = () => setStatus(`Could not load ${name}`);
+      img.src = src;
+    }
+
+    function loadDefault() {
+      loadImage("../mtf-o2-logo.png", "mtf-o2-logo.png");
+    }
+
+    function pointerPos(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+      };
+    }
+
+    canvas.addEventListener("pointerdown", (event) => {
+      if (!state.img) return;
+      canvas.setPointerCapture(event.pointerId);
+      const pos = pointerPos(event);
+      state.drag = {
+        startX: pos.x,
+        startY: pos.y,
+        startPanX: state.panX,
+        startPanY: state.panY
+      };
+      canvas.classList.add("dragging");
+      event.preventDefault();
+    });
+
+    canvas.addEventListener("pointermove", (event) => {
+      const pos = pointerPos(event);
+      state.pointerImage = screenToImage(pos.x, pos.y);
+      if (state.drag) {
+        state.panX = state.drag.startPanX + (pos.x - state.drag.startX);
+        state.panY = state.drag.startPanY + (pos.y - state.drag.startY);
+        syncInputs();
+      }
+      draw();
+    });
+
+    canvas.addEventListener("pointerup", (event) => {
+      state.drag = null;
+      canvas.classList.remove("dragging");
+      try {
+        canvas.releasePointerCapture(event.pointerId);
+      } catch (_) {
+      }
+    });
+
+    canvas.addEventListener("pointercancel", () => {
+      state.drag = null;
+      canvas.classList.remove("dragging");
+    });
+
+    canvas.addEventListener("wheel", (event) => {
+      if (!state.img) return;
+      event.preventDefault();
+      const center = cropCenterScreen();
+      const before = screenToImage(center.x, center.y);
+      const factor = Math.exp(-event.deltaY * 0.001);
+      state.viewScale *= factor;
+      clampScale();
+      state.panX = center.x - before.x * state.viewScale;
+      state.panY = center.y - before.y * state.viewScale;
+      syncInputs();
+      draw();
+    }, { passive: false });
+
+    window.addEventListener("keydown", (event) => {
+      if (!state.img) return;
+      const step = event.shiftKey ? 10 : 1;
+      let used = true;
+      if (event.key === "ArrowLeft") state.panX -= step;
+      else if (event.key === "ArrowRight") state.panX += step;
+      else if (event.key === "ArrowUp") state.panY -= step;
+      else if (event.key === "ArrowDown") state.panY += step;
+      else used = false;
+      if (used) {
+        event.preventDefault();
+        syncInputs();
+        draw();
+      }
+    });
+
+    function buildOutputCanvas() {
+      if (!state.img) return null;
+      const c = sourceCropCircle();
+      const diameter = Math.max(1, Math.round(c.diameter));
+      const out = document.createElement("canvas");
+      out.width = diameter;
+      out.height = diameter;
+      const outCtx = out.getContext("2d");
+      outCtx.clearRect(0, 0, diameter, diameter);
+      outCtx.save();
+      outCtx.beginPath();
+      outCtx.arc(diameter * 0.5, diameter * 0.5, diameter * 0.5, 0, Math.PI * 2);
+      outCtx.clip();
+      outCtx.drawImage(state.img, diameter * 0.5 - c.cx, diameter * 0.5 - c.cy);
+      outCtx.restore();
+      return out;
+    }
+
+    function exportPng() {
+      const out = buildOutputCanvas();
+      if (!out) return;
+      const link = document.createElement("a");
+      const stem = state.imageName.replace(/\.[^.]+$/, "");
+      link.download = `${stem}.circle-crop.png`;
+      link.href = out.toDataURL("image/png");
+      link.click();
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Copied");
+      } catch (_) {
+        commandOutput.focus();
+        commandOutput.select();
+        document.execCommand("copy");
+        setStatus("Copied");
+      }
+    }
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      loadImage(URL.createObjectURL(file), file.name);
+    });
+
+    defaultBtn.addEventListener("click", loadDefault);
+    fitBtn.addEventListener("click", fitImage);
+    fitCircleBtn.addEventListener("click", () => {
+      fitCircleToStage(true);
+      draw();
+    });
+    centerImageBtn.addEventListener("click", centerImageUnderCircle);
+    exportBtn.addEventListener("click", exportPng);
+    exportPanelBtn.addEventListener("click", exportPng);
+    resetBtn.addEventListener("click", reset);
+    copyCircleBtn.addEventListener("click", () => copyText(circleText()));
+    copyCommandBtn.addEventListener("click", () => copyText(commandOutput.value));
+
+    [
+      diameterInput,
+      zoomInput,
+      imageXInput,
+      imageYInput
+    ].forEach((input) => input.addEventListener("input", readInputs));
+
+    [
+      dimOutsideInput,
+      nameInput,
+      widthUnitsInput,
+      simplifyInput,
+      ringWidthInput,
+      marginInput
+    ].forEach((input) => input.addEventListener("input", () => {
+      updateOutput();
+      draw();
+    }));
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    loadDefault();
+  </script>
+</body>
+</html>

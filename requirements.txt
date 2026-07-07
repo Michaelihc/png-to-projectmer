@@ -1,0 +1,8 @@
+# PNG -> vanilla ProjectMER schematic converter
+# Install with:  py -m pip install -r requirements.txt
+opencv-python>=4.8
+numpy>=1.24
+scikit-image>=0.22
+mapbox-earcut>=1.0
+# scipy is pulled in by scikit-image (skeletonize); pinned here for clarity.
+scipy>=1.10
