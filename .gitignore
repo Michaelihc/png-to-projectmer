@@ -17,13 +17,15 @@ merbench-*.png
 /TriangleScpSl/
 /path.txt
 
-# loose source images except the worked example
+# loose source images except the worked examples
 /*.png
 /*.webp
 /*.jpg
 /*.jpeg
 !/scarletking.png
+!/nu22.png
 
-# generated schematics except the worked example
+# generated schematics except the worked examples
 /converted_mer/*
 !/converted_mer/scarletking-opt/
+!/converted_mer/nu22-opt/

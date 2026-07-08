@@ -5,13 +5,13 @@ All source code (`tools/`, `webapp/`, the `.bat` launchers, and documentation)
 is licensed under the **MIT License** — see [LICENSE](LICENSE).
 
 ## Example artwork / 示例素材
-The bundled example emblem and its converted output are **not** MIT-licensed:
+The bundled example emblems and their converted output are **not** MIT-licensed:
 
-- `scarletking.png`
-- `converted_mer/scarletking-opt/` (generated from the above)
+- `scarletking.png`, `converted_mer/scarletking-opt/` (generated from the above)
+- `nu22.png`, `converted_mer/nu22-opt/` (MTF unit emblem; layered-conversion example)
 
-The **Scarlet King** is a concept from the **SCP Foundation** collaborative
-wiki. Like all SCP content, it is released under the
+These are concepts from the **SCP Foundation** collaborative wiki. Like all SCP
+content, they are released under the
 **Creative Commons Attribution-ShareAlike 3.0** license (CC BY-SA 3.0):
 <https://creativecommons.org/licenses/by-sa/3.0/>
 

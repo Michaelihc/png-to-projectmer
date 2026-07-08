@@ -44,6 +44,58 @@ py tools/png_to_mer_schematic.py scarletking.png \
 `--preview` also writes `<name>.preview.png` / `.svg` next to the JSON.
 Run `py tools/png_to_mer_schematic.py --help` for every option.
 
+## Multi-colour / layered emblems
+
+`png_to_mer_schematic.py` traces **one** silhouette, so it's built for single-
+colour art (linework shows as gaps). For an emblem with **stacked colours** —
+e.g. white figures on a green disc on a blue border — use the layered tool
+instead. It splits the image into one region per colour, traces each as a
+**smooth sub-pixel contour** (no pixel-grid staircase), and stacks the layers
+by Z into one vanilla schematic.
+
+```bash
+py tools/layered_emblem_to_mer.py nu22.png \
+    --config examples/nu22.layers.json \
+    --name nu22-opt --output converted_mer --preview
+```
+
+Omit `--config` to auto-detect a palette and stack with k-means (quick, but a
+hand-tuned config is smaller and cleaner). The bundled **`nu22`** MTF badge is a
+worked example: 3 colours → **1,326** vanilla primitives, gap-free.
+
+### Writing a layer config
+
+See [`examples/nu22.layers.json`](examples/nu22.layers.json). Each layer is
+`[fill "#RRGGBB", z_order, simplify_px, mode]`:
+
+| Field | Meaning |
+| --- | --- |
+| `centroids` | RGB of each palette colour (measured from the source). |
+| `background` | Which centroid is empty (not emitted). |
+| `z_order` | `0` = back; higher = drawn in front. |
+| `mode "region"` | Trace this colour's own area, holes preserved. Use for solid fills. |
+| `mode "silhouette"` | Fill the **whole emblem** solid — no holes. |
+| `layer_z` | Optional exact Z per layer (more negative = front-facing). |
+
+**The primitive-saving trick:** put the colour that is mostly thin detail
+(figures, stars, linework) as a **`silhouette` backing at `z_order` 0**, then
+draw the big solid colours on top as `region` layers. The detail then appears
+wherever the top layers have holes/gaps — at **zero geometry cost** — and no
+seam can reveal the background, because there's always backing behind it. In
+`nu22` this collapsed the white layer from ~250 traced vertices to a single
+41-vertex blob.
+
+### Verify before you build
+
+`check_trace.py` rasterizes the layer stack (antialiased) and reports seam
+coverage and colour agreement, so you can tune the config before generating the
+schematic:
+
+```bash
+py tools/check_trace.py nu22.png examples/nu22.layers.json
+# -> seams 0.09%, colour agreement 96.3%
+```
+
 ### Key options
 
 | Option | Meaning |
@@ -61,7 +113,7 @@ Run `py tools/png_to_mer_schematic.py --help` for every option.
 
 ## Toolchain
 
-The pipeline is three files in `tools/`:
+Core pipeline in `tools/`:
 
 - **`png_to_mer_schematic.py`** — CLI entry point: image → contours → triangles
   (or n-gon pieces) → vanilla quad-primitive schematic JSON, with SVG/PNG preview.
@@ -72,6 +124,14 @@ The pipeline is three files in `tools/`:
   and covers them with the fewest parallelograms (2D port of TriangleScpSl's
   NGonDecomposition).
 
+Layered multi-colour front-end:
+
+- **`layered_emblem_to_mer.py`** — CLI: split by colour → smooth per-layer trace
+  → stack into one schematic. Config-driven (`examples/*.layers.json`).
+- **`trace_svg.py`** — the smooth tracer: k-means palette, sub-pixel
+  marching-squares contours, hole-nesting rebuild → layered SVG.
+- **`check_trace.py`** — QA the layer stack (seam %, colour agreement) before building.
+
 `webapp/` holds the local UI (`server.py`, standard-library only, + `index.html`).
 `tools/circular_crop_tool.html` is a standalone helper for pre-cropping circular
 logos. Converted schematics live in `converted_mer/<name>/`.
@@ -79,9 +139,9 @@ logos. Converted schematics live in `converted_mer/<name>/`.
 ## Licensing
 
 - **Source code:** MIT — see [LICENSE](LICENSE).
-- **Example emblem** (`scarletking.png` and its converted output): from the SCP
-  Foundation, licensed **CC BY-SA 3.0**. See [NOTICE.md](NOTICE.md). Artwork you
-  convert yourself stays under its own license.
+- **Example emblems** (`scarletking.png`, `nu22.png`, and their converted
+  output): from the SCP Foundation, licensed **CC BY-SA 3.0**. See
+  [NOTICE.md](NOTICE.md). Artwork you convert yourself stays under its own license.
 
 > The fork-only `BlockType 11` triangle path and the one-off logo drivers were
 > removed — this repo now targets vanilla ProjectMER exclusively.

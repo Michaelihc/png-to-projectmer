@@ -1,0 +1,22 @@
+{
+  "_comment": "Layered-emblem config for the MTF-style nu22 badge. Palette centroids are RGB, measured from the source with k-means. 'background' names the centroid to treat as empty (not emitted). Each layer: [fill #RRGGBB, z_order (0 = back), simplify_tol_px, mode]. mode 'silhouette' fills the whole emblem union solid (cheap backing); mode 'region' traces that colour's own area with holes preserved. Stacking white as a solid backing behind blue+green makes the white figures/stars/ring free geometry (they show through green's holes) and stops any seam revealing the background.",
+  "width_units": 10.0,
+  "blur": 1.2,
+  "centroids": {
+    "black": [0, 0, 0],
+    "white": [246, 247, 247],
+    "blue": [24, 55, 111],
+    "green": [110, 154, 87]
+  },
+  "background": "black",
+  "layers": {
+    "white": ["#F6F6F6", 0, 1.2, "silhouette"],
+    "blue":  ["#1C3D75", 1, 1.5, "region"],
+    "green": ["#6D9A57", 2, 0.8, "region"]
+  },
+  "layer_z": {
+    "white": -0.04,
+    "blue": -0.06,
+    "green": -0.08
+  }
+}
