@@ -237,9 +237,10 @@ def build() -> None:
     blocks.append(quad("ci-bg-b", 0, 0, -0.009, WALL_W, WALL_H, 0, CREAM,
                        hdr=(1.15, 1.12, 1.02)))
 
-    # ---- variant A: white ring ----------------------------------------------
-    blocks.append(disc("ci-white-ring-outer", 0, 0, -0.010, 5.75, WHITE))
-    blocks.append(disc("ci-white-ring-cutout", 0, 0, -0.012, 5.10, RED_BG))
+    # ---- variant A: white ring (2026-07-16 live review: shrunk from 5.75 --
+    # it dominated the frame; the arrows still overshoot past it like the art)
+    blocks.append(disc("ci-white-ring-outer", 0, 0, -0.010, 5.0, WHITE))
+    blocks.append(disc("ci-white-ring-cutout", 0, 0, -0.012, 4.35, RED_BG))
 
     # ---- variant A: three arrows at 45 deg, passing through -----------------
     ang = math.radians(45.0)

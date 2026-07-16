@@ -61,8 +61,8 @@ GOC_CENTER_X = 0.00145
 # Emissive color pass: the emblems render self-lit (raw ColorRgba overrides)
 # so they read vivid under a dim fill light; pure black parts stay (0,0,0) and
 # melt into the void skybox instead of graying under a bright light.
-EMISSIVE_TARGET_MAX = 1.8
-EMISSIVE_MAX_BOOST = 2.5
+# Channels are copied 1:1 -- boosting past 1.0 clips per-channel and shifts
+# hue (the blues went green-cyan in game).
 BLACK_CHANNEL_SUM = 0.05
 
 
@@ -251,9 +251,9 @@ def compile_blocks(blocks: list[dict],
 
 
 def apply_emissive_colors(blocks: list[dict]) -> None:
-    """Give every visible primitive a raw ColorRgba: colors boosted to an
-    emissive/self-lit level, pure blacks pinned to (0,0,0) so they vanish into
-    the void. Authored ColorRgba overrides (the backdrop walls) are kept."""
+    """Give every visible primitive a raw ColorRgba (1:1 channels, hue
+    preserved) so it renders self-lit; pure blacks pin to (0,0,0) and vanish
+    into the void. Authored ColorRgba overrides (the backdrop walls) are kept."""
     for b in blocks:
         props = b.get("Properties")
         if b.get("BlockType") != 1 or not props or "ColorRgba" in props:
@@ -268,9 +268,8 @@ def apply_emissive_colors(blocks: list[dict]) -> None:
         if r + g + bl <= BLACK_CHANNEL_SUM:
             props["ColorRgba"] = {"r": 0.0, "g": 0.0, "b": 0.0, "a": round(a, 4)}
             continue
-        boost = min(EMISSIVE_MAX_BOOST, EMISSIVE_TARGET_MAX / max(r, g, bl, 0.01))
-        props["ColorRgba"] = {"r": round(r * boost, 4), "g": round(g * boost, 4),
-                              "b": round(bl * boost, 4), "a": round(a, 4)}
+        props["ColorRgba"] = {"r": round(r, 4), "g": round(g, 4),
+                              "b": round(bl, 4), "a": round(a, 4)}
 
 
 # ---- clip baking --------------------------------------------------------------
