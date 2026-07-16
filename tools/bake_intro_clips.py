@@ -268,8 +268,11 @@ def apply_emissive_colors(blocks: list[dict]) -> None:
         if r + g + bl <= BLACK_CHANNEL_SUM:
             props["ColorRgba"] = {"r": 0.0, "g": 0.0, "b": 0.0, "a": round(a, 4)}
             continue
-        props["ColorRgba"] = {"r": round(r, 4), "g": round(g, 4),
-                              "b": round(bl, 4), "a": round(a, 4)}
+        # Modest brightness boost, capped below channel clipping (clipped
+        # channels shift hue -- the earlier green-cyan blues).
+        boost = min(1.45, 1.0 / max(r, g, bl, 0.01))
+        props["ColorRgba"] = {"r": round(r * boost, 4), "g": round(g * boost, 4),
+                              "b": round(bl * boost, 4), "a": round(a, 4)}
 
 
 # ---- clip baking --------------------------------------------------------------

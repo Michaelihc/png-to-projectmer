@@ -56,6 +56,17 @@ def augment(path: Path, wall_name: str, center, wall_scale: float,
               and b["Name"] != wall_name]
     next_id = max(b["ObjectId"] for b in blocks) + 1
 
+    # Normalize arc motto letters to the in-game text convention: authored z is
+    # the pure in-plane angle (upright letter = polar - 90, facing outward).
+    # Recomputed absolutely from each letter's position, so re-running is safe.
+    import math
+    for b in blocks:
+        if b.get("BlockType") == 8:
+            dx = b["Position"]["x"] - center[0]
+            dy = b["Position"]["y"] - center[1]
+            polar = math.degrees(math.atan2(dy, dx))
+            b["Rotation"]["z"] = round(polar - 90.0, 5)
+
     # z=0.0 sits BEHIND every emblem layer (all content z is negative =
     # toward the viewer), so the wall never occludes the logo.
     blocks.insert(0, wall_block(wall_name, next_id, center, wall_scale))
@@ -74,9 +85,9 @@ def augment(path: Path, wall_name: str, center, wall_scale: float,
                              f"{ch if ch.isalnum() else 'q'}"),
                     "ObjectId": next_id, "ParentId": 0,
                     "Position": {"x": round(x, 5), "y": y, "z": -0.05},
-                    # upright, facing the viewer (same TextToy facing
-                    # convention as the GOC seal letters: rot_z + 180)
-                    "Rotation": {"x": 0.0, "y": 0.0, "z": 180.0},
+                    # authored z = pure in-plane angle (0 = upright); the
+                    # runtime rig adds the readable-side 180Y flip
+                    "Rotation": {"x": 0.0, "y": 0.0, "z": 0.0},
                     "Scale": {"x": 0.08, "y": 0.08, "z": 0.08},
                     "BlockType": 8,
                     "Properties": {

@@ -287,9 +287,10 @@ def build() -> None:
             continue
         rad = math.radians(polar)
         x, y = TEXT_R * math.cos(rad), TEXT_R * math.sin(rad)
-        # same TextToy facing convention as the GOC seal: rot_z = polar - 270
+        # authored z = pure in-plane angle (upright letter facing outward =
+        # polar - 90); the runtime rig adds the readable-side 180Y flip
         blocks.append(text(f"ci-text-{idx:02d}-{ch if ch.isalnum() else 'q'}",
-                           x, y, -0.110, polar - 270.0, ch, 30))
+                           x, y, -0.110, polar - 90.0, ch, 30))
         idx += 1
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)

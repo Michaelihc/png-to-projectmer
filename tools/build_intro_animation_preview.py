@@ -110,9 +110,9 @@ def shape_for(block: dict, by_id: dict | None = None) -> dict | None:
         size = int(sm.group(1)) * 0.0075 if sm else 0.15
         return {"kind": "text", "x": block["Position"]["x"],
                 "y": block["Position"]["y"], "size": round(size, 4),
-                # TMP toys face the viewer flipped; +180 recovers the upright arc
-                # orientation seen in-game / in the map-zoom render.
-                "rot": block["Rotation"]["z"] + 180.0,
+                # authored z is the pure in-plane angle (in-game the rig adds
+                # the readable-side 180Y flip; the preview needs no offset)
+                "rot": block["Rotation"]["z"],
                 "char": char, "fill": fill, "alpha": 1.0, "z": z}
     return None
 
