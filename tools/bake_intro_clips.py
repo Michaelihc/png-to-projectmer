@@ -49,15 +49,21 @@ EMBLEMS = [
     (preview.build_chaos, preview.CHAOS_JSON, "ci-dual", 8.3),
 ]
 
-# The GOC seal's map (508 tris) would cost 6 blocks per triangle after shear
-# expansion. It only animates as a whole unit and sits behind the pentagram,
-# so it is rasterized into merged rectangle quads (1 block each) at a fine
-# cell. The laurels stay EXACT triangle geometry (2026-07-16 live review:
-# rasterized leaves read pixelated) with tiny slivers decimated -- they keep
-# ~99% of their area at a fraction of the block count.
-MAP_RASTER_CELL = 0.03
+# 2026-07-16 live review: rasterized fills read pixelated in game, so ALL
+# triangle families keep their EXACT converted geometry. The only reduction is
+# sliver decimation (drops sub-visible triangles; ~91% map / ~99% laurel area
+# retained) to keep the 6-blocks-per-triangle shear expansion inside a
+# spawnable toy budget (~2.5k for the GOC seal, chunked at 50/frame).
+MAP_MIN_TRI_AREA = 0.001
 LAUREL_MIN_TRI_AREA = 0.002
 GOC_CENTER_X = 0.00145
+
+# Emissive color pass: the emblems render self-lit (raw ColorRgba overrides)
+# so they read vivid under a dim fill light; pure black parts stay (0,0,0) and
+# melt into the void skybox instead of graying under a bright light.
+EMISSIVE_TARGET_MAX = 1.8
+EMISSIVE_MAX_BOOST = 2.5
+BLACK_CHANNEL_SUM = 0.05
 
 
 # ---- easing (must match the preview JS engine) ------------------------------
@@ -234,6 +240,7 @@ def compile_blocks(blocks: list[dict],
                 next_id += 1
                 raster_count += 1
 
+    apply_emissive_colors(out)
     summary = {"triangles": stats.triangle_blocks,
                "directTiles": stats.direct_tiles,
                "shearedTiles": stats.sheared_tiles,
@@ -241,6 +248,29 @@ def compile_blocks(blocks: list[dict],
                "decimated": decimated,
                "skipped": stats.skipped_tiles}
     return out, summary
+
+
+def apply_emissive_colors(blocks: list[dict]) -> None:
+    """Give every visible primitive a raw ColorRgba: colors boosted to an
+    emissive/self-lit level, pure blacks pinned to (0,0,0) so they vanish into
+    the void. Authored ColorRgba overrides (the backdrop walls) are kept."""
+    for b in blocks:
+        props = b.get("Properties")
+        if b.get("BlockType") != 1 or not props or "ColorRgba" in props:
+            continue
+        col = props.get("Color", "")
+        if not col.startswith("#") or len(col) < 7:
+            continue
+        r = int(col[1:3], 16) / 255.0
+        g = int(col[3:5], 16) / 255.0
+        bl = int(col[5:7], 16) / 255.0
+        a = int(col[7:9], 16) / 255.0 if len(col) >= 9 else 1.0
+        if r + g + bl <= BLACK_CHANNEL_SUM:
+            props["ColorRgba"] = {"r": 0.0, "g": 0.0, "b": 0.0, "a": round(a, 4)}
+            continue
+        boost = min(EMISSIVE_MAX_BOOST, EMISSIVE_TARGET_MAX / max(r, g, bl, 0.01))
+        props["ColorRgba"] = {"r": round(r * boost, 4), "g": round(g * boost, 4),
+                              "b": round(bl * boost, 4), "a": round(a, 4)}
 
 
 # ---- clip baking --------------------------------------------------------------
@@ -368,14 +398,12 @@ def main() -> None:
     for builder, src_json, stem, view_height in EMBLEMS:
         emblem = builder()
         raw = json.loads(Path(src_json).read_text(encoding="utf-8"))
-        rasterize = None
         decimate = None
         bindings_override = None
         if stem == "goc-seal":
-            rasterize = [("map-tri", "goc-map-px", None, MAP_RASTER_CELL)]
-            decimate = {"laurel-tri": LAUREL_MIN_TRI_AREA}
-            bindings_override = {"map": ["goc-map-px"]}
-        compiled, tri_summary = compile_blocks(raw["Blocks"], rasterize, decimate)
+            decimate = {"map-tri": MAP_MIN_TRI_AREA,
+                        "laurel-tri": LAUREL_MIN_TRI_AREA}
+        compiled, tri_summary = compile_blocks(raw["Blocks"], None, decimate)
         mer_out = OUT_LOGOS / f"{stem}-emblem.mer.json"
         mer_out.write_text(json.dumps(
             {"RootObjectId": raw.get("RootObjectId", 0), "Blocks": compiled},
