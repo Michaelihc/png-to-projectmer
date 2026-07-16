@@ -365,7 +365,6 @@ def build_goc() -> dict:
 
     groups: dict[str, dict] = {
         "map": {"pivot": C},
-        "caps": {"pivot": C},
         "text": {"pivot": C},
         "wall": {"pivot": C},
         "laurelL": {"pivot": LAUREL_PIVOT},
@@ -377,6 +376,11 @@ def build_goc() -> dict:
         groups[gid] = {"pivot": C, "axis": axis}
     for gid, meta in bar_meta.items():
         groups[gid] = {"pivot": meta["pivot"], "axis": meta["axis"]}
+    # star tip caps: one group per pentagram corner, pivoted on the chain
+    # vertex so each cap blots outward from the joint as the stroke arrives
+    chain_vertices = [bar_meta[f"bar{i}"]["pivot"] for i in range(5)]
+    for i, v in enumerate(chain_vertices):
+        groups[f"cap{i}"] = {"pivot": v}
 
     tweens: list[dict] = []
 
@@ -415,18 +419,23 @@ def build_goc() -> dict:
     ]
 
     # Phase 4 -- the pentagram is drawn as one continuous stroke, tip to tip
-    # (bars 0..4 chain start->end), then the point caps snap on.
+    # (bars 0..4 chain start->end). Each corner's tip cap blots in the moment
+    # the stroke first touches that vertex (top at draw start, then each
+    # corner as the pen arrives), not all at once at the end.
+    BAR_T0, BAR_STAGGER, BAR_DUR = 3.65, 0.28, 0.31
     for i in range(5):
-        t0 = 3.65 + i * 0.28
+        t0 = BAR_T0 + i * BAR_STAGGER
         tweens += [
-            {"group": f"bar{i}", "t0": t0, "dur": 0.31, "ease": "inOutCubic",
+            {"group": f"bar{i}", "t0": t0, "dur": BAR_DUR, "ease": "inOutCubic",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
             {"group": f"bar{i}", "t0": t0, "dur": 0.05, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
-    tweens.append({"group": "caps", "t0": 5.05, "dur": 0.45,
-                   "ease": "outBack:1.6", "kind": "scale", "from": 0.0,
-                   "to": 1.0})
+    for i in range(5):
+        touch = BAR_T0 if i == 0 else BAR_T0 + (i - 1) * BAR_STAGGER + BAR_DUR
+        tweens.append({"group": f"cap{i}", "t0": touch, "dur": 0.3,
+                       "ease": "outBack:1.6", "kind": "scale", "from": 0.0,
+                       "to": 1.0})
 
     # Phase 5 -- motto letters cascade around the seal.
     tweens.append({"group": "text", "t0": 5.30, "dur": 0.20, "ease": "outBack:1.5",
@@ -439,11 +448,19 @@ def build_goc() -> dict:
     emblem = build_emblem(blocks, group_of, groups, tweens, 6.9,
                           "Global Occult Coalition",
                           view=[0.00145, 0.00374, 3.1, 2.75])
-    # split laurel group by centroid x
+    # split laurel group by centroid x; caps by nearest pentagram corner
+    cap_centroids = {b["Name"]: centroid(tri_pts(b)) for b in blocks
+                     if b["Name"].startswith("goc-star-cap")}
     for s in emblem["shapes"]:
         if s["group"] == "laurel":
             cx = tri_centroids[s["id"]][0]
             s["group"] = "laurelL" if cx < C[0] else "laurelR"
+        elif s["group"] == "caps":
+            cc = cap_centroids[s["id"]]
+            nearest = min(range(5), key=lambda i: (
+                (chain_vertices[i][0] - cc[0]) ** 2 +
+                (chain_vertices[i][1] - cc[1]) ** 2))
+            s["group"] = f"cap{nearest}"
     # per-letter pivots for the stagger pop
     for s in emblem["shapes"]:
         if s["kind"] == "text":
