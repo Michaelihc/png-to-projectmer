@@ -49,13 +49,14 @@ EMBLEMS = [
     (preview.build_chaos, preview.CHAOS_JSON, "ci-dual", 8.3),
 ]
 
-# The GOC seal's map (508 tris) and laurels (236 tris) would cost 6 blocks per
-# triangle after shear expansion (~4.5k toys -- far beyond the ~650-toy budget
-# proven by ci-classic). Both groups only animate as whole units, so they are
-# rasterized into merged rectangle quads (1 block each) instead. Laurels are
-# split by side FIRST so the rects bind to laurelL/laurelR exactly like the
-# preview's animation groups.
-RASTER_CELL = 0.04
+# The GOC seal's map (508 tris) would cost 6 blocks per triangle after shear
+# expansion. It only animates as a whole unit and sits behind the pentagram,
+# so it is rasterized into merged rectangle quads (1 block each) at a fine
+# cell. The laurels stay EXACT triangle geometry (2026-07-16 live review:
+# rasterized leaves read pixelated) with tiny slivers decimated -- they keep
+# ~99% of their area at a fraction of the block count.
+MAP_RASTER_CELL = 0.03
+LAUREL_MIN_TRI_AREA = 0.002
 GOC_CENTER_X = 0.00145
 
 
@@ -159,19 +160,28 @@ def rect_quad(name: str, object_id: int, rect, z: float, color: str) -> dict:
                            "Color": color, "Static": True}}
 
 
+def tri_area(pts: list[tuple[float, float]]) -> float:
+    (ax, ay), (bx, by), (cx, cy) = pts
+    return abs((bx - ax) * (cy - ay) - (cx - ax) * (by - ay)) / 2.0
+
+
 def compile_blocks(blocks: list[dict],
-                   rasterize: list[tuple] | None = None) -> tuple[list[dict], dict]:
+                   rasterize: list[tuple] | None = None,
+                   decimate: dict[str, float] | None = None) -> tuple[list[dict], dict]:
     """Expand BT11 triangles into shear-quad tiles; optionally divert selected
     triangle families into rasterized rect quads (rasterize entries:
-    (name_substring, out_prefix, split_by_center_x))."""
+    (name_substring, out_prefix, split_by_center_x, cell)) and drop sliver
+    triangles below a per-family area threshold (decimate: substring->m^2)."""
     out: list[dict] = []
     raster_sets: dict[str, dict] = {}
     rasterize = rasterize or []
+    decimate = decimate or {}
+    decimated = 0
 
     def raster_target(bname: str):
-        for substr, prefix, split_x in rasterize:
+        for substr, prefix, split_x, cell in rasterize:
             if substr in bname:
-                return substr, prefix, split_x
+                return substr, prefix, split_x, cell
         return None
 
     next_id = max(b["ObjectId"] for b in blocks) + 1
@@ -182,11 +192,16 @@ def compile_blocks(blocks: list[dict],
             continue
         target = raster_target(b["Name"])
         if target is not None:
-            substr, prefix, split_x = target
+            substr, prefix, split_x, cell = target
             entry = raster_sets.setdefault(substr, {
-                "prefix": prefix, "split_x": split_x, "tris": [],
+                "prefix": prefix, "split_x": split_x, "cell": cell, "tris": [],
                 "z": b["Position"]["z"], "color": b["Properties"]["Color"]})
             entry["tris"].append(tri_points(b))
+            continue
+        min_area = next((a for substr, a in decimate.items()
+                         if substr in b["Name"]), 0.0)
+        if min_area > 0.0 and tri_area(tri_points(b)) < min_area:
+            decimated += 1
             continue
         pr = b["Properties"]
         z = b["Position"]["z"]
@@ -210,7 +225,7 @@ def compile_blocks(blocks: list[dict],
         else:
             buckets[""] = entry["tris"]
         for side, tris in sorted(buckets.items()):
-            rects = rasterize_tris_to_rects(tris, RASTER_CELL)
+            rects = rasterize_tris_to_rects(tris, entry["cell"])
             for i, rect in enumerate(rects):
                 name = (f"{entry['prefix']}-{side}-{i:04d}" if side
                         else f"{entry['prefix']}-{i:04d}")
@@ -223,6 +238,7 @@ def compile_blocks(blocks: list[dict],
                "directTiles": stats.direct_tiles,
                "shearedTiles": stats.sheared_tiles,
                "rasterRects": raster_count,
+               "decimated": decimated,
                "skipped": stats.skipped_tiles}
     return out, summary
 
@@ -353,14 +369,13 @@ def main() -> None:
         emblem = builder()
         raw = json.loads(Path(src_json).read_text(encoding="utf-8"))
         rasterize = None
+        decimate = None
         bindings_override = None
         if stem == "goc-seal":
-            rasterize = [("map-tri", "goc-map-px", None),
-                         ("laurel-tri", "goc-laurel-px", GOC_CENTER_X)]
-            bindings_override = {"map": ["goc-map-px"],
-                                 "laurelL": ["goc-laurel-px-L"],
-                                 "laurelR": ["goc-laurel-px-R"]}
-        compiled, tri_summary = compile_blocks(raw["Blocks"], rasterize)
+            rasterize = [("map-tri", "goc-map-px", None, MAP_RASTER_CELL)]
+            decimate = {"laurel-tri": LAUREL_MIN_TRI_AREA}
+            bindings_override = {"map": ["goc-map-px"]}
+        compiled, tri_summary = compile_blocks(raw["Blocks"], rasterize, decimate)
         mer_out = OUT_LOGOS / f"{stem}-emblem.mer.json"
         mer_out.write_text(json.dumps(
             {"RootObjectId": raw.get("RootObjectId", 0), "Blocks": compiled},
