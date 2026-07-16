@@ -229,10 +229,12 @@ def build() -> None:
     meta: dict = {"center": [0.0, 0.0], "arrows": [], "petals": []}
 
     # ---- backgrounds: massive HDR walls (bg-b stacked just in front of bg-a)
-    # sized to fill the whole camera view at cinematic framing distance
+    # sized to fill the whole camera view at cinematic framing distance.
+    # 8mm authored gap: two coplanar 30m walls z-fight at cinematic distance
+    # even after the runtime depth exaggeration.
     blocks.append(quad("ci-bg-a", 0, 0, -0.001, WALL_W, WALL_H, 0, RED_BG,
                        hdr=(1.8, 0.07, 0.07)))
-    blocks.append(quad("ci-bg-b", 0, 0, -0.002, WALL_W, WALL_H, 0, CREAM,
+    blocks.append(quad("ci-bg-b", 0, 0, -0.009, WALL_W, WALL_H, 0, CREAM,
                        hdr=(1.15, 1.12, 1.02)))
 
     # ---- variant A: white ring ----------------------------------------------
