@@ -303,7 +303,7 @@ def build_strike() -> dict:
 
     emblem = build_emblem(blocks, group_of, groups, tweens, 6.7,
                           "GOC Physics Strike Division",
-                          view=[-0.0167, -0.35, 4.75, 5.35])
+                          view=[-0.0167, -0.55, 4.75, 5.75])
     for s in emblem["shapes"]:
         if s["kind"] == "text":
             s["pivot"] = [s["x"], s["y"]]

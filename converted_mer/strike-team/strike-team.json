@@ -1581,8 +1581,8 @@
    "ObjectId": 42,
    "ParentId": 0,
    "Position": {
-    "x": -4.2917,
-    "y": -4.85,
+    "x": -3.4667,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1597,7 +1597,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>P</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>P</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1610,8 +1610,8 @@
    "ObjectId": 43,
    "ParentId": 0,
    "Position": {
-    "x": -4.1017,
-    "y": -4.85,
+    "x": -3.0067,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1626,7 +1626,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>H</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>H</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1639,8 +1639,8 @@
    "ObjectId": 44,
    "ParentId": 0,
    "Position": {
-    "x": -3.9117,
-    "y": -4.85,
+    "x": -2.5467,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1655,7 +1655,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>Y</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>Y</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1668,8 +1668,8 @@
    "ObjectId": 45,
    "ParentId": 0,
    "Position": {
-    "x": -3.7217,
-    "y": -4.85,
+    "x": -2.0867,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1684,7 +1684,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>S</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1697,8 +1697,8 @@
    "ObjectId": 46,
    "ParentId": 0,
    "Position": {
-    "x": -3.5317,
-    "y": -4.85,
+    "x": -1.6267,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1713,7 +1713,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>I</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1726,8 +1726,8 @@
    "ObjectId": 47,
    "ParentId": 0,
    "Position": {
-    "x": -3.3417,
-    "y": -4.85,
+    "x": -1.1667,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1742,7 +1742,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>C</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>C</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1755,8 +1755,8 @@
    "ObjectId": 48,
    "ParentId": 0,
    "Position": {
-    "x": -3.1517,
-    "y": -4.85,
+    "x": -0.7067,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1771,7 +1771,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>S</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1784,8 +1784,8 @@
    "ObjectId": 49,
    "ParentId": 0,
    "Position": {
-    "x": -2.7717,
-    "y": -4.85,
+    "x": 0.2133,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1800,7 +1800,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>D</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>D</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1809,12 +1809,12 @@
    }
   },
   {
-   "Name": "strike-caption-08-i",
+   "Name": "strike-caption-08-I",
    "ObjectId": 50,
    "ParentId": 0,
    "Position": {
-    "x": -2.5817,
-    "y": -4.85,
+    "x": 0.6733,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1829,7 +1829,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>i</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1838,12 +1838,12 @@
    }
   },
   {
-   "Name": "strike-caption-09-v",
+   "Name": "strike-caption-09-V",
    "ObjectId": 51,
    "ParentId": 0,
    "Position": {
-    "x": -2.3917,
-    "y": -4.85,
+    "x": 1.1333,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1858,7 +1858,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>v</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>V</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1867,12 +1867,12 @@
    }
   },
   {
-   "Name": "strike-caption-10-i",
+   "Name": "strike-caption-10-I",
    "ObjectId": 52,
    "ParentId": 0,
    "Position": {
-    "x": -2.2017,
-    "y": -4.85,
+    "x": 1.5933,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1887,7 +1887,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>i</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1896,12 +1896,12 @@
    }
   },
   {
-   "Name": "strike-caption-11-s",
+   "Name": "strike-caption-11-S",
    "ObjectId": 53,
    "ParentId": 0,
    "Position": {
-    "x": -2.0117,
-    "y": -4.85,
+    "x": 2.0533,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1916,7 +1916,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1925,12 +1925,12 @@
    }
   },
   {
-   "Name": "strike-caption-12-i",
+   "Name": "strike-caption-12-I",
    "ObjectId": 54,
    "ParentId": 0,
    "Position": {
-    "x": -1.8217,
-    "y": -4.85,
+    "x": 2.5133,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1945,7 +1945,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>i</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1954,12 +1954,12 @@
    }
   },
   {
-   "Name": "strike-caption-13-o",
+   "Name": "strike-caption-13-O",
    "ObjectId": 55,
    "ParentId": 0,
    "Position": {
-    "x": -1.6317,
-    "y": -4.85,
+    "x": 2.9733,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -1974,7 +1974,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>o</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>O</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -1983,12 +1983,12 @@
    }
   },
   {
-   "Name": "strike-caption-14-n",
+   "Name": "strike-caption-14-N",
    "ObjectId": 56,
    "ParentId": 0,
    "Position": {
-    "x": -1.4417,
-    "y": -4.85,
+    "x": 3.4333,
+    "y": -4.92,
     "z": -0.05
    },
    "Rotation": {
@@ -2003,7 +2003,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>n</color></b></size></align>",
+    "Text": "<align=center><size=56><b><color=#6FA3F0>N</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2012,12 +2012,12 @@
    }
   },
   {
-   "Name": "strike-caption-15-q",
+   "Name": "strike-caption-15-A",
    "ObjectId": 57,
    "ParentId": 0,
    "Position": {
-    "x": -1.0617,
-    "y": -4.85,
+    "x": -3.5267,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2032,7 +2032,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>-</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>A</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2041,12 +2041,12 @@
    }
   },
   {
-   "Name": "strike-caption-16-A",
+   "Name": "strike-caption-16-s",
    "ObjectId": 58,
    "ParentId": 0,
    "Position": {
-    "x": -0.6817,
-    "y": -4.85,
+    "x": -3.2567,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2061,7 +2061,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>A</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2074,8 +2074,8 @@
    "ObjectId": 59,
    "ParentId": 0,
    "Position": {
-    "x": -0.4917,
-    "y": -4.85,
+    "x": -2.9867,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2090,7 +2090,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2099,12 +2099,12 @@
    }
   },
   {
-   "Name": "strike-caption-18-s",
+   "Name": "strike-caption-18-e",
    "ObjectId": 60,
    "ParentId": 0,
    "Position": {
-    "x": -0.3017,
-    "y": -4.85,
+    "x": -2.7167,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2119,7 +2119,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2128,12 +2128,12 @@
    }
   },
   {
-   "Name": "strike-caption-19-e",
+   "Name": "strike-caption-19-s",
    "ObjectId": 61,
    "ParentId": 0,
    "Position": {
-    "x": -0.1117,
-    "y": -4.85,
+    "x": -2.4467,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2148,7 +2148,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>e</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2161,8 +2161,8 @@
    "ObjectId": 62,
    "ParentId": 0,
    "Position": {
-    "x": 0.0783,
-    "y": -4.85,
+    "x": -2.1767,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2177,7 +2177,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2186,12 +2186,12 @@
    }
   },
   {
-   "Name": "strike-caption-21-s",
+   "Name": "strike-caption-21-m",
    "ObjectId": 63,
    "ParentId": 0,
    "Position": {
-    "x": 0.2683,
-    "y": -4.85,
+    "x": -1.9067,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2206,7 +2206,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>m</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2215,12 +2215,12 @@
    }
   },
   {
-   "Name": "strike-caption-22-m",
+   "Name": "strike-caption-22-e",
    "ObjectId": 64,
    "ParentId": 0,
    "Position": {
-    "x": 0.4583,
-    "y": -4.85,
+    "x": -1.6367,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2235,7 +2235,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>m</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2244,12 +2244,12 @@
    }
   },
   {
-   "Name": "strike-caption-23-e",
+   "Name": "strike-caption-23-n",
    "ObjectId": 65,
    "ParentId": 0,
    "Position": {
-    "x": 0.6483,
-    "y": -4.85,
+    "x": -1.3667,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2264,7 +2264,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>e</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>n</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2273,12 +2273,12 @@
    }
   },
   {
-   "Name": "strike-caption-24-n",
+   "Name": "strike-caption-24-t",
    "ObjectId": 66,
    "ParentId": 0,
    "Position": {
-    "x": 0.8383,
-    "y": -4.85,
+    "x": -1.0967,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2293,7 +2293,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>n</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>t</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2302,12 +2302,12 @@
    }
   },
   {
-   "Name": "strike-caption-25-t",
+   "Name": "strike-caption-25-a",
    "ObjectId": 67,
    "ParentId": 0,
    "Position": {
-    "x": 1.0283,
-    "y": -4.85,
+    "x": -0.5567,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2322,7 +2322,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>t</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>a</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2331,12 +2331,12 @@
    }
   },
   {
-   "Name": "strike-caption-26-a",
+   "Name": "strike-caption-26-n",
    "ObjectId": 68,
    "ParentId": 0,
    "Position": {
-    "x": 1.4083,
-    "y": -4.85,
+    "x": -0.2867,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2351,7 +2351,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>a</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>n</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2360,12 +2360,12 @@
    }
   },
   {
-   "Name": "strike-caption-27-n",
+   "Name": "strike-caption-27-d",
    "ObjectId": 69,
    "ParentId": 0,
    "Position": {
-    "x": 1.5983,
-    "y": -4.85,
+    "x": -0.0167,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2380,7 +2380,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>n</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>d</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2389,12 +2389,12 @@
    }
   },
   {
-   "Name": "strike-caption-28-d",
+   "Name": "strike-caption-28-S",
    "ObjectId": 70,
    "ParentId": 0,
    "Position": {
-    "x": 1.7883,
-    "y": -4.85,
+    "x": 0.5233,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2409,7 +2409,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>d</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>S</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2418,12 +2418,12 @@
    }
   },
   {
-   "Name": "strike-caption-29-S",
+   "Name": "strike-caption-29-t",
    "ObjectId": 71,
    "ParentId": 0,
    "Position": {
-    "x": 2.1683,
-    "y": -4.85,
+    "x": 0.7933,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2438,7 +2438,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>S</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>t</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2447,12 +2447,12 @@
    }
   },
   {
-   "Name": "strike-caption-30-t",
+   "Name": "strike-caption-30-r",
    "ObjectId": 72,
    "ParentId": 0,
    "Position": {
-    "x": 2.3583,
-    "y": -4.85,
+    "x": 1.0633,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2467,7 +2467,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>t</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>r</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2476,12 +2476,12 @@
    }
   },
   {
-   "Name": "strike-caption-31-r",
+   "Name": "strike-caption-31-i",
    "ObjectId": 73,
    "ParentId": 0,
    "Position": {
-    "x": 2.5483,
-    "y": -4.85,
+    "x": 1.3333,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2496,7 +2496,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>r</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>i</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2505,12 +2505,12 @@
    }
   },
   {
-   "Name": "strike-caption-32-i",
+   "Name": "strike-caption-32-k",
    "ObjectId": 74,
    "ParentId": 0,
    "Position": {
-    "x": 2.7383,
-    "y": -4.85,
+    "x": 1.6033,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2525,7 +2525,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>i</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>k</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2534,12 +2534,12 @@
    }
   },
   {
-   "Name": "strike-caption-33-k",
+   "Name": "strike-caption-33-e",
    "ObjectId": 75,
    "ParentId": 0,
    "Position": {
-    "x": 2.9283,
-    "y": -4.85,
+    "x": 1.8733,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2554,7 +2554,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>k</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2563,12 +2563,12 @@
    }
   },
   {
-   "Name": "strike-caption-34-e",
+   "Name": "strike-caption-34-T",
    "ObjectId": 76,
    "ParentId": 0,
    "Position": {
-    "x": 3.1183,
-    "y": -4.85,
+    "x": 2.4133,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2583,7 +2583,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>e</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>T</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2592,12 +2592,12 @@
    }
   },
   {
-   "Name": "strike-caption-35-T",
+   "Name": "strike-caption-35-e",
    "ObjectId": 77,
    "ParentId": 0,
    "Position": {
-    "x": 3.4983,
-    "y": -4.85,
+    "x": 2.6833,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2612,7 +2612,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>T</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2621,12 +2621,12 @@
    }
   },
   {
-   "Name": "strike-caption-36-e",
+   "Name": "strike-caption-36-a",
    "ObjectId": 78,
    "ParentId": 0,
    "Position": {
-    "x": 3.6883,
-    "y": -4.85,
+    "x": 2.9533,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2641,7 +2641,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>e</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>a</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2650,12 +2650,12 @@
    }
   },
   {
-   "Name": "strike-caption-37-a",
+   "Name": "strike-caption-37-m",
    "ObjectId": 79,
    "ParentId": 0,
    "Position": {
-    "x": 3.8783,
-    "y": -4.85,
+    "x": 3.2233,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2670,7 +2670,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>a</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>m</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
@@ -2679,12 +2679,12 @@
    }
   },
   {
-   "Name": "strike-caption-38-m",
+   "Name": "strike-caption-38-s",
    "ObjectId": 80,
    "ParentId": 0,
    "Position": {
-    "x": 4.0683,
-    "y": -4.85,
+    "x": 3.4933,
+    "y": -5.52,
     "z": -0.05
    },
    "Rotation": {
@@ -2699,36 +2699,7 @@
    },
    "BlockType": 8,
    "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>m</color></b></size></align>",
-    "DisplaySize": {
-     "x": 1.5,
-     "y": 0.4
-    },
-    "Static": true
-   }
-  },
-  {
-   "Name": "strike-caption-39-s",
-   "ObjectId": 81,
-   "ParentId": 0,
-   "Position": {
-    "x": 4.2583,
-    "y": -4.85,
-    "z": -0.05
-   },
-   "Rotation": {
-    "x": 0.0,
-    "y": 0.0,
-    "z": 180.0
-   },
-   "Scale": {
-    "x": 0.08,
-    "y": 0.08,
-    "z": 0.08
-   },
-   "BlockType": 8,
-   "Properties": {
-    "Text": "<align=center><size=26><b><color=#5F95E6>s</color></b></size></align>",
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
     "DisplaySize": {
      "x": 1.5,
      "y": 0.4
