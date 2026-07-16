@@ -2,7 +2,7 @@
  "format": "emblem-intro-timeline",
  "version": 1,
  "source": "strike-team.json",
- "duration": 5.7,
+ "duration": 6.7,
  "groups": {
   "outer": {
    "pivot": [
@@ -17,6 +17,18 @@
    ]
   },
   "star": {
+   "pivot": [
+    -0.0167,
+    0.0167
+   ]
+  },
+  "caption": {
+   "pivot": [
+    -0.0167,
+    0.0167
+   ]
+  },
+  "wall": {
    "pivot": [
     -0.0167,
     0.0167
@@ -644,6 +656,115 @@
    "kind": "rotate",
    "from": -120.0,
    "to": 0.0
+  },
+  {
+   "group": "caption",
+   "t0": 5.0,
+   "dur": 0.18,
+   "ease": "outBack:1.6",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0,
+   "pivot": "block",
+   "stagger": {
+    "per": 0.03,
+    "order": [
+     "strike-caption-00-P",
+     "strike-caption-01-H",
+     "strike-caption-02-Y",
+     "strike-caption-03-S",
+     "strike-caption-04-I",
+     "strike-caption-05-C",
+     "strike-caption-06-S",
+     "strike-caption-07-D",
+     "strike-caption-08-i",
+     "strike-caption-09-v",
+     "strike-caption-10-i",
+     "strike-caption-11-s",
+     "strike-caption-12-i",
+     "strike-caption-13-o",
+     "strike-caption-14-n",
+     "strike-caption-15-q",
+     "strike-caption-16-A",
+     "strike-caption-17-s",
+     "strike-caption-18-s",
+     "strike-caption-19-e",
+     "strike-caption-20-s",
+     "strike-caption-21-s",
+     "strike-caption-22-m",
+     "strike-caption-23-e",
+     "strike-caption-24-n",
+     "strike-caption-25-t",
+     "strike-caption-26-a",
+     "strike-caption-27-n",
+     "strike-caption-28-d",
+     "strike-caption-29-S",
+     "strike-caption-30-t",
+     "strike-caption-31-r",
+     "strike-caption-32-i",
+     "strike-caption-33-k",
+     "strike-caption-34-e",
+     "strike-caption-35-T",
+     "strike-caption-36-e",
+     "strike-caption-37-a",
+     "strike-caption-38-m",
+     "strike-caption-39-s"
+    ]
+   }
+  },
+  {
+   "group": "caption",
+   "t0": 5.0,
+   "dur": 0.12,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0,
+   "stagger": {
+    "per": 0.03,
+    "order": [
+     "strike-caption-00-P",
+     "strike-caption-01-H",
+     "strike-caption-02-Y",
+     "strike-caption-03-S",
+     "strike-caption-04-I",
+     "strike-caption-05-C",
+     "strike-caption-06-S",
+     "strike-caption-07-D",
+     "strike-caption-08-i",
+     "strike-caption-09-v",
+     "strike-caption-10-i",
+     "strike-caption-11-s",
+     "strike-caption-12-i",
+     "strike-caption-13-o",
+     "strike-caption-14-n",
+     "strike-caption-15-q",
+     "strike-caption-16-A",
+     "strike-caption-17-s",
+     "strike-caption-18-s",
+     "strike-caption-19-e",
+     "strike-caption-20-s",
+     "strike-caption-21-s",
+     "strike-caption-22-m",
+     "strike-caption-23-e",
+     "strike-caption-24-n",
+     "strike-caption-25-t",
+     "strike-caption-26-a",
+     "strike-caption-27-n",
+     "strike-caption-28-d",
+     "strike-caption-29-S",
+     "strike-caption-30-t",
+     "strike-caption-31-r",
+     "strike-caption-32-i",
+     "strike-caption-33-k",
+     "strike-caption-34-e",
+     "strike-caption-35-T",
+     "strike-caption-36-e",
+     "strike-caption-37-a",
+     "strike-caption-38-m",
+     "strike-caption-39-s"
+    ]
+   }
   }
  ]
 }

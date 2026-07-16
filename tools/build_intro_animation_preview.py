@@ -122,7 +122,8 @@ def centroid(pts: list[tuple[float, float]]) -> tuple[float, float]:
 
 
 def build_emblem(blocks: list[dict], group_of, groups_meta: dict,
-                 tweens: list[dict], duration: float, name: str) -> dict:
+                 tweens: list[dict], duration: float, name: str,
+                 view: list[float] | None = None) -> dict:
     by_id = {b["ObjectId"]: b for b in blocks}
     shapes = []
     for b in blocks:
@@ -135,7 +136,7 @@ def build_emblem(blocks: list[dict], group_of, groups_meta: dict,
     # Draw order: LESS negative z first (back), more negative z on top (viewer side).
     shapes.sort(key=lambda s: -s["z"])
     return {"name": name, "shapes": shapes, "groups": groups_meta,
-            "tweens": tweens, "duration": duration}
+            "tweens": tweens, "duration": duration, "view": view}
 
 
 # --------------------------------------------------------------------------
@@ -154,6 +155,10 @@ def build_strike() -> dict:
         return pts
 
     def group_of(bname: str) -> str:
+        if bname == "strike-bg-wall":
+            return "wall"
+        if bname.startswith("strike-caption"):
+            return "caption"
         if bname.startswith("strike-outer-circle"):
             return "outer"
         if bname.startswith("strike-center-ring"):
@@ -178,8 +183,12 @@ def build_strike() -> dict:
         "outer": {"pivot": C},
         "centerRing": {"pivot": C},
         "star": {"pivot": C},
+        "caption": {"pivot": C},
+        "wall": {"pivot": C},
         "misc": {"pivot": C},
     }
+    caption_letters = [b["Name"] for b in blocks
+                       if b["Name"].startswith("strike-caption-")]
     for i in range(3):
         groups[f"sep{i}"] = {"pivot": C}
         gpts = tris_starting(f"strike-marker-{i}-")
@@ -281,8 +290,24 @@ def build_strike() -> dict:
          "kind": "rotate", "from": -120.0, "to": 0.0},
     ]
 
-    return build_emblem(blocks, group_of, groups, tweens, 5.7,
-                        "GOC Physics Strike Division")
+    # Phase 7 -- division caption types on under the logo, char by char.
+    if caption_letters:
+        tweens.append({"group": "caption", "t0": 5.0, "dur": 0.18,
+                       "ease": "outBack:1.6", "kind": "scale", "from": 0.0,
+                       "to": 1.0, "pivot": "block",
+                       "stagger": {"per": 0.03, "order": caption_letters}})
+        tweens.append({"group": "caption", "t0": 5.0, "dur": 0.12,
+                       "ease": "outCubic", "kind": "opacity", "from": 0.0,
+                       "to": 1.0,
+                       "stagger": {"per": 0.03, "order": caption_letters}})
+
+    emblem = build_emblem(blocks, group_of, groups, tweens, 6.7,
+                          "GOC Physics Strike Division",
+                          view=[-0.0167, -0.35, 4.75, 5.35])
+    for s in emblem["shapes"]:
+        if s["kind"] == "text":
+            s["pivot"] = [s["x"], s["y"]]
+    return emblem
 
 
 # --------------------------------------------------------------------------
@@ -297,6 +322,8 @@ def build_goc() -> dict:
     letters = [b["Name"] for b in blocks if b["BlockType"] == 8]
 
     def group_of(bname: str) -> str:
+        if bname == "goc-bg-wall":
+            return "wall"
         m = re.match(r"goc-ring-(\d)", bname)
         if m:
             return f"ring{m.group(1)}"
@@ -340,6 +367,7 @@ def build_goc() -> dict:
         "map": {"pivot": C},
         "caps": {"pivot": C},
         "text": {"pivot": C},
+        "wall": {"pivot": C},
         "laurelL": {"pivot": LAUREL_PIVOT},
         "laurelR": {"pivot": LAUREL_PIVOT},
     }
@@ -409,7 +437,8 @@ def build_goc() -> dict:
                    "stagger": {"per": 0.022, "order": letters}})
 
     emblem = build_emblem(blocks, group_of, groups, tweens, 6.9,
-                          "Global Occult Coalition")
+                          "Global Occult Coalition",
+                          view=[0.00145, 0.00374, 3.1, 2.75])
     # split laurel group by centroid x
     for s in emblem["shapes"]:
         if s["group"] == "laurel":
@@ -563,7 +592,8 @@ def build_chaos() -> dict:
                    "stagger": {"per": 0.028, "order": letters}})
 
     emblem = build_emblem(blocks, group_of, groups, tweens, 11.2,
-                          "Chaos Insurgency — classic → plague daisy")
+                          "Chaos Insurgency — classic → plague daisy",
+                          view=[0.0, 0.0, 4.15, 4.15])
     for s in emblem["shapes"]:
         if s["kind"] == "text":
             s["pivot"] = [s["x"], s["y"]]
@@ -750,21 +780,28 @@ function makePlayer(emblem, svg, elements) {
 // ---- build DOM --------------------------------------------------------------
 const players = {};
 for (const emblem of EMBLEMS) {
-  // bounds
-  let minx=1e9, maxx=-1e9, miny=1e9, maxy=-1e9;
-  for (const s of emblem.shapes) {
-    let pts = [];
-    if (s.kind === "poly") pts = s.pts;
-    else if (s.kind === "circle")
-      pts = [[s.cx-s.d/2, s.cy-s.d/2],[s.cx+s.d/2, s.cy+s.d/2]];
-    else pts = [[s.x-0.2, s.y-0.2],[s.x+0.2, s.y+0.2]];
-    for (const p of pts) {
-      minx=Math.min(minx,p[0]); maxx=Math.max(maxx,p[0]);
-      miny=Math.min(miny,p[1]); maxy=Math.max(maxy,p[1]);
+  // bounds: explicit camera framing when the emblem declares one (backdrop
+  // walls are far larger than the logo), else auto-fit with padding.
+  let minx, maxx, miny, maxy;
+  if (emblem.view) {
+    const [cx, cy, hw, hh] = emblem.view;
+    minx = cx - hw; maxx = cx + hw; miny = cy - hh; maxy = cy + hh;
+  } else {
+    minx=1e9; maxx=-1e9; miny=1e9; maxy=-1e9;
+    for (const s of emblem.shapes) {
+      let pts = [];
+      if (s.kind === "poly") pts = s.pts;
+      else if (s.kind === "circle")
+        pts = [[s.cx-s.d/2, s.cy-s.d/2],[s.cx+s.d/2, s.cy+s.d/2]];
+      else pts = [[s.x-0.2, s.y-0.2],[s.x+0.2, s.y+0.2]];
+      for (const p of pts) {
+        minx=Math.min(minx,p[0]); maxx=Math.max(maxx,p[0]);
+        miny=Math.min(miny,p[1]); maxy=Math.max(maxy,p[1]);
+      }
     }
+    const pad = 0.55;
+    minx-=pad; maxx+=pad; miny-=pad; maxy+=pad;
   }
-  const pad = 0.55;
-  minx-=pad; maxx+=pad; miny-=pad; maxy+=pad;
 
   const card = document.createElement("div");
   card.className = "card";

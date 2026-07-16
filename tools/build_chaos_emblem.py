@@ -37,6 +37,7 @@ CREAM = "#F4F1E6FF"
 TEXT_COLOR = "#111111"
 
 CANVAS = 8.0          # world units, emblem centered on (0,0)
+WALL_W, WALL_H = 60.0, 34.0   # backdrop wall size (fills the camera view)
 DAISY_SCALE = 0.72    # source daisy spans ~9.7 world units -> fit the canvas
 DAISY_Z_SHIFT = -0.035  # stack the whole daisy in front of variant A layers
 
@@ -61,12 +62,18 @@ def vec(x: float, y: float, z: float) -> dict:
 
 
 def quad(name: str, x: float, y: float, z: float, w: float, h: float,
-         rot_z: float, color: str) -> dict:
+         rot_z: float, color: str, hdr: tuple | None = None) -> dict:
+    props = {"PrimitiveType": 5, "PrimitiveFlags": 2,
+             "Color": color, "Static": True}
+    if hdr is not None:
+        # raw (possibly >1) channel override so the Lit material can feed
+        # client bloom -- the skybox is untunable, so the intro background is
+        # a massive emissive wall behind the emblem instead.
+        props["ColorRgba"] = {"r": hdr[0], "g": hdr[1], "b": hdr[2],
+                              "a": hdr[3] if len(hdr) > 3 else 1.0}
     return {"Name": name, "ObjectId": nid(), "ParentId": 0,
             "Position": vec(x, y, z), "Rotation": vec(0, 0, rot_z),
-            "Scale": vec(w, h, 1.0), "BlockType": 1,
-            "Properties": {"PrimitiveType": 5, "PrimitiveFlags": 2,
-                           "Color": color, "Static": True}}
+            "Scale": vec(w, h, 1.0), "BlockType": 1, "Properties": props}
 
 
 def disc(name: str, x: float, y: float, z: float, d: float, color: str) -> dict:
@@ -221,9 +228,12 @@ def build() -> None:
     blocks: list[dict] = []
     meta: dict = {"center": [0.0, 0.0], "arrows": [], "petals": []}
 
-    # ---- backgrounds (bg-b stacked just in front of bg-a) -------------------
-    blocks.append(quad("ci-bg-a", 0, 0, -0.001, CANVAS, CANVAS, 0, RED_BG))
-    blocks.append(quad("ci-bg-b", 0, 0, -0.002, CANVAS, CANVAS, 0, CREAM))
+    # ---- backgrounds: massive HDR walls (bg-b stacked just in front of bg-a)
+    # sized to fill the whole camera view at cinematic framing distance
+    blocks.append(quad("ci-bg-a", 0, 0, -0.001, WALL_W, WALL_H, 0, RED_BG,
+                       hdr=(1.8, 0.07, 0.07)))
+    blocks.append(quad("ci-bg-b", 0, 0, -0.002, WALL_W, WALL_H, 0, CREAM,
+                       hdr=(1.15, 1.12, 1.02)))
 
     # ---- variant A: white ring ----------------------------------------------
     blocks.append(disc("ci-white-ring-outer", 0, 0, -0.010, 5.75, WHITE))
