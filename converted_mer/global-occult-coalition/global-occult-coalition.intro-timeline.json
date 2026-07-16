@@ -2,7 +2,7 @@
  "format": "emblem-intro-timeline",
  "version": 1,
  "source": "global-occult-coalition.json",
- "duration": 7.4,
+ "duration": 6.9,
  "groups": {
   "map": {
    "pivot": [
@@ -495,19 +495,6 @@
      "goc-text-protection-09-N"
     ]
    }
-  },
-  {
-   "group": "__root__",
-   "t0": 6.65,
-   "dur": 0.5,
-   "ease": "pulse",
-   "kind": "scale",
-   "from": 1.0,
-   "to": 1.02,
-   "pivot": [
-    0.00145,
-    0.00374
-   ]
   }
  ]
 }

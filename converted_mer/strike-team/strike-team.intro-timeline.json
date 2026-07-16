@@ -2,7 +2,7 @@
  "format": "emblem-intro-timeline",
  "version": 1,
  "source": "strike-team.json",
- "duration": 6.2,
+ "duration": 5.7,
  "groups": {
   "outer": {
    "pivot": [
@@ -644,19 +644,6 @@
    "kind": "rotate",
    "from": -120.0,
    "to": 0.0
-  },
-  {
-   "group": "__root__",
-   "t0": 5.45,
-   "dur": 0.5,
-   "ease": "pulse",
-   "kind": "scale",
-   "from": 1.0,
-   "to": 1.03,
-   "pivot": [
-    -0.0167,
-    0.0167
-   ]
   }
  ]
 }

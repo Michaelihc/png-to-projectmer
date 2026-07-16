@@ -1,0 +1,774 @@
+{
+ "format": "emblem-intro-timeline",
+ "version": 1,
+ "source": "chaos-insurgency.json",
+ "duration": 11.2,
+ "groups": {
+  "bgA": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "bgB": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "whiteRing": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "centerRing": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "arrowsRoot": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "wheelRoot": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "wheelChrome": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "dot": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "text": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "misc": {
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  "arrow0": {
+   "pivot": [
+    -3.44,
+    -1.36
+   ],
+   "axis": 45.0,
+   "parent": "arrowsRoot"
+  },
+  "head0": {
+   "pivot": [
+    0.8282485578727798,
+    2.82824855787278
+   ],
+   "parent": "arrow0"
+  },
+  "arrow1": {
+   "pivot": [
+    -2.96,
+    -2.86
+   ],
+   "axis": 45.0,
+   "parent": "arrowsRoot"
+  },
+  "head1": {
+   "pivot": [
+    2.2482485578727798,
+    2.34824855787278
+   ],
+   "parent": "arrow1"
+  },
+  "arrow2": {
+   "pivot": [
+    -1.36,
+    -3.44
+   ],
+   "axis": 45.0,
+   "parent": "arrowsRoot"
+  },
+  "head2": {
+   "pivot": [
+    2.76824855787278,
+    0.6882485578727799
+   ],
+   "parent": "arrow2"
+  },
+  "petal0": {
+   "pivot": [
+    2.9805,
+    -0.5387
+   ],
+   "axis": 169.76,
+   "parent": "wheelRoot"
+  },
+  "petal1": {
+   "pivot": [
+    2.4733,
+    1.7372
+   ],
+   "axis": -144.92,
+   "parent": "wheelRoot"
+  },
+  "petal2": {
+   "pivot": [
+    0.5117,
+    2.9805
+   ],
+   "axis": -99.74,
+   "parent": "wheelRoot"
+  },
+  "petal3": {
+   "pivot": [
+    -1.8584,
+    2.4239
+   ],
+   "axis": -52.52,
+   "parent": "wheelRoot"
+  },
+  "petal4": {
+   "pivot": [
+    -2.9761,
+    0.4893
+   ],
+   "axis": -9.34,
+   "parent": "wheelRoot"
+  },
+  "petal5": {
+   "pivot": [
+    -2.4195,
+    -1.8269
+   ],
+   "axis": 37.06,
+   "parent": "wheelRoot"
+  },
+  "petal6": {
+   "pivot": [
+    -0.5117,
+    -2.9805
+   ],
+   "axis": 80.26,
+   "parent": "wheelRoot"
+  },
+  "petal7": {
+   "pivot": [
+    1.7237,
+    -2.4868
+   ],
+   "axis": 124.73,
+   "parent": "wheelRoot"
+  }
+ },
+ "tweens": [
+  {
+   "group": "bgA",
+   "t0": 0.0,
+   "dur": 0.25,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "whiteRing",
+   "t0": 0.25,
+   "dur": 0.7,
+   "ease": "outBack:1.3",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "centerRing",
+   "t0": 0.8,
+   "dur": 0.5,
+   "ease": "outBack:1.6",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "arrow1",
+   "t0": 1.3,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "translate",
+   "from": [
+    -3.394112549695428,
+    -3.394112549695428
+   ],
+   "to": [
+    0,
+    0
+   ]
+  },
+  {
+   "group": "arrow1",
+   "t0": 1.3,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.1,
+   "to": 1.0
+  },
+  {
+   "group": "arrow1",
+   "t0": 1.3,
+   "dur": 0.12,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "head1",
+   "t0": 1.75,
+   "dur": 0.22,
+   "ease": "outBack:2.2",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "arrow0",
+   "t0": 1.6,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "translate",
+   "from": [
+    -3.394112549695428,
+    -3.394112549695428
+   ],
+   "to": [
+    0,
+    0
+   ]
+  },
+  {
+   "group": "arrow0",
+   "t0": 1.6,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.1,
+   "to": 1.0
+  },
+  {
+   "group": "arrow0",
+   "t0": 1.6,
+   "dur": 0.12,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "head0",
+   "t0": 2.0500000000000003,
+   "dur": 0.22,
+   "ease": "outBack:2.2",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "arrow2",
+   "t0": 1.9,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "translate",
+   "from": [
+    -3.394112549695428,
+    -3.394112549695428
+   ],
+   "to": [
+    0,
+    0
+   ]
+  },
+  {
+   "group": "arrow2",
+   "t0": 1.9,
+   "dur": 0.6,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.1,
+   "to": 1.0
+  },
+  {
+   "group": "arrow2",
+   "t0": 1.9,
+   "dur": 0.12,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "head2",
+   "t0": 2.35,
+   "dur": 0.22,
+   "ease": "outBack:2.2",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "arrowsRoot",
+   "t0": 5.3,
+   "dur": 1.9,
+   "ease": "inOutCubic",
+   "kind": "rotate",
+   "from": 0.0,
+   "to": 540.0,
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "group": "arrowsRoot",
+   "t0": 6.55,
+   "dur": 0.7,
+   "ease": "inOutCubic",
+   "kind": "scale",
+   "from": 1.0,
+   "to": 0.0,
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "group": "arrow0",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "head0",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "arrow1",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "head1",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "arrow2",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "head2",
+   "t0": 6.7,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "whiteRing",
+   "t0": 6.5,
+   "dur": 0.6,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "centerRing",
+   "t0": 6.6,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 1.0,
+   "to": 0.0
+  },
+  {
+   "group": "bgB",
+   "t0": 6.5,
+   "dur": 0.9,
+   "ease": "inOutCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "wheelRoot",
+   "t0": 6.9,
+   "dur": 2.0,
+   "ease": "outQuint",
+   "kind": "rotate",
+   "from": -300.0,
+   "to": 0.0,
+   "pivot": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "group": "wheelChrome",
+   "t0": 6.9,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "wheelChrome",
+   "t0": 6.9,
+   "dur": 0.9,
+   "ease": "outCubic",
+   "kind": "scale",
+   "from": 1.22,
+   "to": 1.0
+  },
+  {
+   "group": "petal2",
+   "t0": 7.05,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal2",
+   "t0": 7.05,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal1",
+   "t0": 7.14,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal1",
+   "t0": 7.14,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal7",
+   "t0": 7.2299999999999995,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal7",
+   "t0": 7.2299999999999995,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal0",
+   "t0": 7.32,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal0",
+   "t0": 7.32,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal6",
+   "t0": 7.41,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal6",
+   "t0": 7.41,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal5",
+   "t0": 7.5,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal5",
+   "t0": 7.5,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal4",
+   "t0": 7.59,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal4",
+   "t0": 7.59,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal3",
+   "t0": 7.68,
+   "dur": 0.5,
+   "ease": "outCubic",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "petal3",
+   "t0": 7.68,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "dot",
+   "t0": 8.6,
+   "dur": 0.4,
+   "ease": "outBack:1.8",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "text",
+   "t0": 8.95,
+   "dur": 0.2,
+   "ease": "outBack:1.5",
+   "kind": "scale",
+   "from": 0.0,
+   "to": 1.0,
+   "pivot": "block",
+   "stagger": {
+    "per": 0.028,
+    "order": [
+     "ci-text-00-S",
+     "ci-text-01-H",
+     "ci-text-02-O",
+     "ci-text-03-U",
+     "ci-text-04-L",
+     "ci-text-05-D",
+     "ci-text-06-I",
+     "ci-text-07-N",
+     "ci-text-08-T",
+     "ci-text-09-E",
+     "ci-text-10-R",
+     "ci-text-11-M",
+     "ci-text-12-I",
+     "ci-text-13-T",
+     "ci-text-14-T",
+     "ci-text-15-E",
+     "ci-text-16-N",
+     "ci-text-17-T",
+     "ci-text-18-V",
+     "ci-text-19-E",
+     "ci-text-20-N",
+     "ci-text-21-G",
+     "ci-text-22-E",
+     "ci-text-23-A",
+     "ci-text-24-N",
+     "ci-text-25-C",
+     "ci-text-26-E",
+     "ci-text-27-A",
+     "ci-text-28-R",
+     "ci-text-29-M",
+     "ci-text-30-A",
+     "ci-text-31-G",
+     "ci-text-32-A",
+     "ci-text-33-I",
+     "ci-text-34-N",
+     "ci-text-35-H",
+     "ci-text-36-I",
+     "ci-text-37-S",
+     "ci-text-38-R",
+     "ci-text-39-E",
+     "ci-text-40-D",
+     "ci-text-41-R",
+     "ci-text-42-I",
+     "ci-text-43-G",
+     "ci-text-44-H",
+     "ci-text-45-T",
+     "ci-text-46-H",
+     "ci-text-47-A",
+     "ci-text-48-N",
+     "ci-text-49-D",
+     "ci-text-50-T",
+     "ci-text-51-O",
+     "ci-text-52-P",
+     "ci-text-53-L",
+     "ci-text-54-A",
+     "ci-text-55-G",
+     "ci-text-56-U",
+     "ci-text-57-E",
+     "ci-text-58-U",
+     "ci-text-59-S",
+     "ci-text-60-q"
+    ]
+   }
+  },
+  {
+   "group": "text",
+   "t0": 8.95,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0,
+   "stagger": {
+    "per": 0.028,
+    "order": [
+     "ci-text-00-S",
+     "ci-text-01-H",
+     "ci-text-02-O",
+     "ci-text-03-U",
+     "ci-text-04-L",
+     "ci-text-05-D",
+     "ci-text-06-I",
+     "ci-text-07-N",
+     "ci-text-08-T",
+     "ci-text-09-E",
+     "ci-text-10-R",
+     "ci-text-11-M",
+     "ci-text-12-I",
+     "ci-text-13-T",
+     "ci-text-14-T",
+     "ci-text-15-E",
+     "ci-text-16-N",
+     "ci-text-17-T",
+     "ci-text-18-V",
+     "ci-text-19-E",
+     "ci-text-20-N",
+     "ci-text-21-G",
+     "ci-text-22-E",
+     "ci-text-23-A",
+     "ci-text-24-N",
+     "ci-text-25-C",
+     "ci-text-26-E",
+     "ci-text-27-A",
+     "ci-text-28-R",
+     "ci-text-29-M",
+     "ci-text-30-A",
+     "ci-text-31-G",
+     "ci-text-32-A",
+     "ci-text-33-I",
+     "ci-text-34-N",
+     "ci-text-35-H",
+     "ci-text-36-I",
+     "ci-text-37-S",
+     "ci-text-38-R",
+     "ci-text-39-E",
+     "ci-text-40-D",
+     "ci-text-41-R",
+     "ci-text-42-I",
+     "ci-text-43-G",
+     "ci-text-44-H",
+     "ci-text-45-T",
+     "ci-text-46-H",
+     "ci-text-47-A",
+     "ci-text-48-N",
+     "ci-text-49-D",
+     "ci-text-50-T",
+     "ci-text-51-O",
+     "ci-text-52-P",
+     "ci-text-53-L",
+     "ci-text-54-A",
+     "ci-text-55-G",
+     "ci-text-56-U",
+     "ci-text-57-E",
+     "ci-text-58-U",
+     "ci-text-59-S",
+     "ci-text-60-q"
+    ]
+   }
+  }
+ ]
+}

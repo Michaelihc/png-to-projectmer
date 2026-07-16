@@ -30,9 +30,12 @@ MER = ROOT / "converted_mer"
 
 GOC_JSON = MER / "global-occult-coalition" / "global-occult-coalition.json"
 STRIKE_JSON = MER / "strike-team" / "strike-team.json"
+CHAOS_JSON = MER / "chaos-insurgency" / "chaos-insurgency.json"
+CHAOS_META = MER / "chaos-insurgency" / "chaos-insurgency.meta.json"
 OUT_HTML = MER / "intro-anim-preview.html"
 
 TEXT_COLOR_RE = re.compile(r"<color=(#[0-9A-Fa-f]{6})>(.*?)</color>")
+TEXT_SIZE_RE = re.compile(r"<size=(\d+)>")
 
 
 def load(path: Path) -> list[dict]:
@@ -45,12 +48,18 @@ def rot_pt(x: float, y: float, deg: float) -> tuple[float, float]:
     return (c * x - s * y, s * x + c * y)
 
 
-def quad_pts(block: dict) -> list[tuple[float, float]]:
+def quad_pts(block: dict, parent: dict | None = None) -> list[tuple[float, float]]:
     p, r, s = block["Position"], block["Rotation"], block["Scale"]
     out = []
     for ux, uy in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5)):
         x, y = rot_pt(ux * s["x"], uy * s["y"], r["z"])
-        out.append((x + p["x"], y + p["y"]))
+        x, y = x + p["x"], y + p["y"]
+        if parent is not None:
+            # shear-parent composition (TRS hierarchy from the triangle expander)
+            pp, pr, ps = parent["Position"], parent["Rotation"], parent["Scale"]
+            x, y = rot_pt(x * ps["x"], y * ps["y"], pr["z"])
+            x, y = x + pp["x"], y + pp["y"]
+        out.append((x, y))
     return out
 
 
@@ -67,20 +76,26 @@ def block_color(block: dict) -> tuple[str, float]:
     return rgb, alpha
 
 
-def shape_for(block: dict) -> dict | None:
+def shape_for(block: dict, by_id: dict | None = None) -> dict | None:
     """World-space drawable for one block (kind, geometry, fill, z)."""
     bt = block["BlockType"]
     z = block["Position"]["z"]
     if bt == 1:
         fill, alpha = block_color(block)
         pt = block["Properties"].get("PrimitiveType")
+        parent = None
+        if by_id is not None:
+            cand = by_id.get(block.get("ParentId", 0))
+            if cand is not None and cand.get("BlockType") == 0:
+                parent = cand
+                z = cand["Position"]["z"] + block["Position"]["z"]
         if pt == 2:  # flat cylinder disc facing the viewer
             p, s = block["Position"], block["Scale"]
             return {"kind": "circle", "cx": p["x"], "cy": p["y"], "d": s["x"],
                     "fill": fill, "alpha": alpha, "z": z}
         if pt == 5:  # quad
-            return {"kind": "poly", "pts": quad_pts(block), "fill": fill,
-                    "alpha": alpha, "z": z}
+            return {"kind": "poly", "pts": quad_pts(block, parent),
+                    "fill": fill, "alpha": alpha, "z": z}
         return None
     if bt == 11:  # triangle
         fill, alpha = block_color(block)
@@ -91,8 +106,10 @@ def shape_for(block: dict) -> dict | None:
         m = TEXT_COLOR_RE.search(pr.get("Text", ""))
         fill = m.group(1) if m else "#FFFFFF"
         char = m.group(2) if m else "?"
+        sm = TEXT_SIZE_RE.search(pr.get("Text", ""))
+        size = int(sm.group(1)) * 0.0075 if sm else 0.15
         return {"kind": "text", "x": block["Position"]["x"],
-                "y": block["Position"]["y"],
+                "y": block["Position"]["y"], "size": round(size, 4),
                 # TMP toys face the viewer flipped; +180 recovers the upright arc
                 # orientation seen in-game / in the map-zoom render.
                 "rot": block["Rotation"]["z"] + 180.0,
@@ -106,9 +123,10 @@ def centroid(pts: list[tuple[float, float]]) -> tuple[float, float]:
 
 def build_emblem(blocks: list[dict], group_of, groups_meta: dict,
                  tweens: list[dict], duration: float, name: str) -> dict:
+    by_id = {b["ObjectId"]: b for b in blocks}
     shapes = []
     for b in blocks:
-        s = shape_for(b)
+        s = shape_for(b, by_id)
         if s is None:
             continue
         s["id"] = b["Name"]
@@ -263,12 +281,7 @@ def build_strike() -> dict:
          "kind": "rotate", "from": -120.0, "to": 0.0},
     ]
 
-    # Phase 7 -- whole-emblem settle pulse.
-    tweens.append({"group": "__root__", "t0": 5.45, "dur": 0.5,
-                   "ease": "pulse", "kind": "scale", "from": 1.0, "to": 1.03,
-                   "pivot": C})
-
-    return build_emblem(blocks, group_of, groups, tweens, 6.2,
+    return build_emblem(blocks, group_of, groups, tweens, 5.7,
                         "GOC Physics Strike Division")
 
 
@@ -395,12 +408,7 @@ def build_goc() -> dict:
                    "kind": "opacity", "from": 0.0, "to": 1.0,
                    "stagger": {"per": 0.022, "order": letters}})
 
-    # Phase 6 -- whole-emblem settle pulse.
-    tweens.append({"group": "__root__", "t0": 6.65, "dur": 0.5,
-                   "ease": "pulse", "kind": "scale", "from": 1.0, "to": 1.02,
-                   "pivot": C})
-
-    emblem = build_emblem(blocks, group_of, groups, tweens, 7.4,
+    emblem = build_emblem(blocks, group_of, groups, tweens, 6.9,
                           "Global Occult Coalition")
     # split laurel group by centroid x
     for s in emblem["shapes"]:
@@ -408,6 +416,154 @@ def build_goc() -> dict:
             cx = tri_centroids[s["id"]][0]
             s["group"] = "laurelL" if cx < C[0] else "laurelR"
     # per-letter pivots for the stagger pop
+    for s in emblem["shapes"]:
+        if s["kind"] == "text":
+            s["pivot"] = [s["x"], s["y"]]
+    return emblem
+
+
+# --------------------------------------------------------------------------
+# Chaos Insurgency choreography: variant A build, then transition to the
+# plague daisy (variant B) in place.
+# --------------------------------------------------------------------------
+
+def build_chaos() -> dict:
+    blocks = load(CHAOS_JSON)
+    meta = json.loads(CHAOS_META.read_text(encoding="utf-8"))
+    C = (0.0, 0.0)
+
+    tri_to_petal = {}
+    for k, petal in enumerate(meta["petals"]):
+        for num in petal["tris"]:
+            tri_to_petal[num] = k
+
+    letters = [b["Name"] for b in blocks if b["BlockType"] == 8]
+
+    def group_of(bname: str) -> str:
+        if bname == "ci-bg-a":
+            return "bgA"
+        if bname == "ci-bg-b":
+            return "bgB"
+        if bname.startswith("ci-white-ring"):
+            return "whiteRing"
+        if bname.startswith("ci-center-ring"):
+            return "centerRing"
+        m = re.match(r"ci-arrow-(\d)-shaft", bname)
+        if m:
+            return f"arrow{m.group(1)}"
+        m = re.match(r"ci-arrow-(\d)-head", bname)
+        if m:
+            return f"head{m.group(1)}"
+        m = re.match(r"ci-plague-petal-tri-(\d+)-", bname)
+        if m:
+            return f"petal{tri_to_petal.get(m.group(1), 0)}"
+        if bname == "ci-plague-red-dot":
+            return "dot"
+        if bname.startswith("ci-plague"):
+            return "wheelChrome"
+        if bname.startswith("ci-text-"):
+            return "text"
+        return "misc"
+
+    groups: dict[str, dict] = {
+        "bgA": {"pivot": C}, "bgB": {"pivot": C},
+        "whiteRing": {"pivot": C}, "centerRing": {"pivot": C},
+        "arrowsRoot": {"pivot": C}, "wheelRoot": {"pivot": C},
+        "wheelChrome": {"pivot": C}, "dot": {"pivot": C},
+        "text": {"pivot": C}, "misc": {"pivot": C},
+    }
+    for i, arrow in enumerate(meta["arrows"]):
+        groups[f"arrow{i}"] = {"pivot": arrow["tail"], "axis": arrow["dir"],
+                               "parent": "arrowsRoot"}
+        groups[f"head{i}"] = {"pivot": arrow["headBase"],
+                              "parent": f"arrow{i}"}
+    for k, petal in enumerate(meta["petals"]):
+        groups[f"petal{k}"] = {"pivot": petal["tip"], "axis": petal["chord"],
+                               "parent": "wheelRoot"}
+
+    tweens: list[dict] = []
+
+    # ---- variant A build -----------------------------------------------------
+    tweens.append({"group": "bgA", "t0": 0.0, "dur": 0.25, "ease": "outCubic",
+                   "kind": "opacity", "from": 0.0, "to": 1.0})
+    tweens.append({"group": "whiteRing", "t0": 0.25, "dur": 0.7,
+                   "ease": "outBack:1.3", "kind": "scale", "from": 0.0, "to": 1.0})
+    tweens.append({"group": "centerRing", "t0": 0.8, "dur": 0.5,
+                   "ease": "outBack:1.6", "kind": "scale", "from": 0.0, "to": 1.0})
+    # arrows fired along their own 45-deg axis, middle first; each streaks in
+    # (translate + lengthen from the tail), then its head snaps on at arrival.
+    fire = math.radians(45.0)
+    off = (-4.8 * math.cos(fire), -4.8 * math.sin(fire))
+    for order, i in enumerate([1, 0, 2]):
+        t0 = 1.3 + order * 0.3
+        tweens += [
+            {"group": f"arrow{i}", "t0": t0, "dur": 0.6, "ease": "outQuint",
+             "kind": "translate", "from": [off[0], off[1]], "to": [0, 0]},
+            {"group": f"arrow{i}", "t0": t0, "dur": 0.6, "ease": "outQuint",
+             "kind": "scaleAxis", "from": 0.1, "to": 1.0},
+            {"group": f"arrow{i}", "t0": t0, "dur": 0.12, "ease": "outCubic",
+             "kind": "opacity", "from": 0.0, "to": 1.0},
+            {"group": f"head{i}", "t0": t0 + 0.45, "dur": 0.22,
+             "ease": "outBack:2.2", "kind": "scale", "from": 0.0, "to": 1.0},
+        ]
+
+    # ---- transition A -> B ----------------------------------------------------
+    # arrows spin up around the center and collapse into it...
+    tweens += [
+        {"group": "arrowsRoot", "t0": 5.3, "dur": 1.9, "ease": "inOutCubic",
+         "kind": "rotate", "from": 0.0, "to": 540.0, "pivot": C},
+        {"group": "arrowsRoot", "t0": 6.55, "dur": 0.7, "ease": "inOutCubic",
+         "kind": "scale", "from": 1.0, "to": 0.0, "pivot": C},
+    ]
+    for i in range(3):
+        tweens.append({"group": f"arrow{i}", "t0": 6.7, "dur": 0.5,
+                       "ease": "outCubic", "kind": "opacity",
+                       "from": 1.0, "to": 0.0})
+        tweens.append({"group": f"head{i}", "t0": 6.7, "dur": 0.5,
+                       "ease": "outCubic", "kind": "opacity",
+                       "from": 1.0, "to": 0.0})
+    # ...while the field bleaches from red to parchment and the rings dissolve
+    tweens += [
+        {"group": "whiteRing", "t0": 6.5, "dur": 0.6, "ease": "outCubic",
+         "kind": "opacity", "from": 1.0, "to": 0.0},
+        {"group": "centerRing", "t0": 6.6, "dur": 0.5, "ease": "outCubic",
+         "kind": "opacity", "from": 1.0, "to": 0.0},
+        {"group": "bgB", "t0": 6.5, "dur": 0.9, "ease": "inOutCubic",
+         "kind": "opacity", "from": 0.0, "to": 1.0},
+    ]
+    # the daisy spins in decelerating; each petal expands in from the rim
+    tweens += [
+        {"group": "wheelRoot", "t0": 6.9, "dur": 2.0, "ease": "outQuint",
+         "kind": "rotate", "from": -300.0, "to": 0.0, "pivot": C},
+        {"group": "wheelChrome", "t0": 6.9, "dur": 0.5, "ease": "outCubic",
+         "kind": "opacity", "from": 0.0, "to": 1.0},
+        {"group": "wheelChrome", "t0": 6.9, "dur": 0.9, "ease": "outCubic",
+         "kind": "scale", "from": 1.22, "to": 1.0},
+    ]
+    petal_order = sorted(range(len(meta["petals"])),
+                         key=lambda k: -((meta["petals"][k]["angle"] - 90) % 360))
+    for order, k in enumerate(petal_order):
+        t0 = 7.05 + order * 0.09
+        tweens += [
+            {"group": f"petal{k}", "t0": t0, "dur": 0.5, "ease": "outCubic",
+             "kind": "scaleAxis", "from": 0.0, "to": 1.0},
+            {"group": f"petal{k}", "t0": t0, "dur": 0.15, "ease": "outCubic",
+             "kind": "opacity", "from": 0.0, "to": 1.0},
+        ]
+    tweens.append({"group": "dot", "t0": 8.6, "dur": 0.4,
+                   "ease": "outBack:1.8", "kind": "scale", "from": 0.0,
+                   "to": 1.0})
+    # motto cascades around the wheel (per-letter TextToys, like the GOC seal)
+    tweens.append({"group": "text", "t0": 8.95, "dur": 0.20,
+                   "ease": "outBack:1.5", "kind": "scale", "from": 0.0,
+                   "to": 1.0, "pivot": "block",
+                   "stagger": {"per": 0.028, "order": letters}})
+    tweens.append({"group": "text", "t0": 8.95, "dur": 0.15, "ease": "outCubic",
+                   "kind": "opacity", "from": 0.0, "to": 1.0,
+                   "stagger": {"per": 0.028, "order": letters}})
+
+    emblem = build_emblem(blocks, group_of, groups, tweens, 11.2,
+                          "Chaos Insurgency — classic → plague daisy")
     for s in emblem["shapes"]:
         if s["kind"] == "text":
             s["pivot"] = [s["x"], s["y"]]
@@ -635,7 +791,7 @@ for (const emblem of EMBLEMS) {
     } else {
       node = document.createElementNS(NS, "text");
       node.textContent = s.char;
-      node.setAttribute("font-size", "0.15");
+      node.setAttribute("font-size", (s.size || 0.15).toString());
       node.setAttribute("font-family", "Arial, sans-serif");
       node.setAttribute("font-weight", "bold");
       node.setAttribute("text-anchor", "middle");
@@ -702,8 +858,8 @@ window.__seekAll = (t) => Object.values(players).forEach(p => p.seek(t));
 
 
 def main() -> None:
-    emblems = [build_strike(), build_goc()]
-    for emblem, src in zip(emblems, (STRIKE_JSON, GOC_JSON)):
+    emblems = [build_strike(), build_goc(), build_chaos()]
+    for emblem, src in zip(emblems, (STRIKE_JSON, GOC_JSON, CHAOS_JSON)):
         out = src.with_name(src.stem + ".intro-timeline.json")
         out.write_text(json.dumps(
             {"format": "emblem-intro-timeline", "version": 1,
