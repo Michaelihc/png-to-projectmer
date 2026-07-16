@@ -22,12 +22,6 @@
     0.0167
    ]
   },
-  "raysRoot": {
-   "pivot": [
-    -0.0167,
-    0.0167
-   ]
-  },
   "misc": {
    "pivot": [
     -0.0167,
@@ -138,51 +132,45 @@
   },
   "ray0": {
    "pivot": [
-    -0.016667,
-    -0.933333
+    0.233333,
+    -3.4
    ],
-   "axis": -84.21275781271987,
-   "parent": "raysRoot"
+   "axis": 95.78724218728013
   },
   "ray1": {
    "pivot": [
-    -0.839391,
-    0.491667
+    -3.100587,
+    1.508494
    ],
-   "axis": 155.7872426307094,
-   "parent": "raysRoot"
+   "axis": -24.21275736929064
   },
   "ray2": {
    "pivot": [
-    0.806057,
-    0.491667
+    3.067253,
+    1.508494
    ],
-   "axis": 24.21275736929064,
-   "parent": "raysRoot"
+   "axis": -155.7872426307094
   },
   "ray3": {
    "pivot": [
     -0.016667,
     0.966667
    ],
-   "axis": 82.87492018494929,
-   "parent": "raysRoot"
+   "axis": 82.87492018494929
   },
   "ray4": {
    "pivot": [
     -0.966667,
     -0.533333
    ],
-   "axis": -145.30482584227468,
-   "parent": "raysRoot"
+   "axis": -145.30482584227468
   },
   "ray5": {
    "pivot": [
     0.933333,
     -0.533333
    ],
-   "axis": -34.69511227831562,
-   "parent": "raysRoot"
+   "axis": -34.69511227831562
   }
  },
  "tweens": [
@@ -505,31 +493,18 @@
    "to": 1.0
   },
   {
-   "group": "raysRoot",
-   "t0": 2.8,
-   "dur": 1.25,
+   "group": "ray0",
+   "t0": 2.85,
+   "dur": 0.55,
    "ease": "outQuint",
-   "kind": "rotate",
-   "from": -80.0,
-   "to": 0.0,
-   "pivot": [
-    -0.0167,
-    0.0167
-   ]
-  },
-  {
-   "group": "ray0",
-   "t0": 2.9,
-   "dur": 0.5,
-   "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
    "to": 1.0
   },
   {
    "group": "ray0",
-   "t0": 2.9,
-   "dur": 0.18,
+   "t0": 2.85,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -537,17 +512,17 @@
   },
   {
    "group": "ray1",
-   "t0": 3.02,
-   "dur": 0.5,
-   "ease": "outCubic",
+   "t0": 3.0,
+   "dur": 0.55,
+   "ease": "outQuint",
    "kind": "scaleAxis",
    "from": 0.0,
    "to": 1.0
   },
   {
    "group": "ray1",
-   "t0": 3.02,
-   "dur": 0.18,
+   "t0": 3.0,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -555,17 +530,17 @@
   },
   {
    "group": "ray2",
-   "t0": 3.1399999999999997,
-   "dur": 0.5,
-   "ease": "outCubic",
+   "t0": 3.15,
+   "dur": 0.55,
+   "ease": "outQuint",
    "kind": "scaleAxis",
    "from": 0.0,
    "to": 1.0
   },
   {
    "group": "ray2",
-   "t0": 3.1399999999999997,
-   "dur": 0.18,
+   "t0": 3.15,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -573,8 +548,8 @@
   },
   {
    "group": "ray3",
-   "t0": 3.26,
-   "dur": 0.5,
+   "t0": 3.45,
+   "dur": 0.4,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
@@ -582,8 +557,8 @@
   },
   {
    "group": "ray3",
-   "t0": 3.26,
-   "dur": 0.18,
+   "t0": 3.45,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -591,8 +566,8 @@
   },
   {
    "group": "ray4",
-   "t0": 3.38,
-   "dur": 0.5,
+   "t0": 3.5700000000000003,
+   "dur": 0.4,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
@@ -600,8 +575,8 @@
   },
   {
    "group": "ray4",
-   "t0": 3.38,
-   "dur": 0.18,
+   "t0": 3.5700000000000003,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -609,8 +584,8 @@
   },
   {
    "group": "ray5",
-   "t0": 3.5,
-   "dur": 0.5,
+   "t0": 3.6900000000000004,
+   "dur": 0.4,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
@@ -618,8 +593,8 @@
   },
   {
    "group": "ray5",
-   "t0": 3.5,
-   "dur": 0.18,
+   "t0": 3.6900000000000004,
+   "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,

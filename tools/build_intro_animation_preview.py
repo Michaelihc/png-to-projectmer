@@ -160,7 +160,6 @@ def build_strike() -> dict:
         "outer": {"pivot": C},
         "centerRing": {"pivot": C},
         "star": {"pivot": C},
-        "raysRoot": {"pivot": C},
         "misc": {"pivot": C},
     }
     for i in range(3):
@@ -182,13 +181,17 @@ def build_strike() -> dict:
         nl = math.hypot(nx, ny)
         groups[f"hex{i}"] = {"pivot": cen, "axis": axis,
                              "normal": (nx / nl, ny / nl)}
-    # rays: pivot = vertex closest to center (they grow outward from the hub)
+    # spikes: the three long needles (rays 0-2) EXPAND IN -- anchored at their
+    # outer tip on the hexagon corner, lengthening inward toward the center.
+    # The three short ticks (rays 3-5) grow outward from their inner end.
     for i in range(6):
         gpts = tris_starting(f"strike-compass-ray-{i}")
         near = min(gpts, key=lambda p: (p[0] - C[0]) ** 2 + (p[1] - C[1]) ** 2)
         far = max(gpts, key=lambda p: (p[0] - C[0]) ** 2 + (p[1] - C[1]) ** 2)
-        axis = math.degrees(math.atan2(far[1] - near[1], far[0] - near[0]))
-        groups[f"ray{i}"] = {"pivot": near, "axis": axis, "parent": "raysRoot"}
+        span = math.hypot(far[0] - near[0], far[1] - near[1])
+        anchor, tip = (far, near) if span > 1.5 else (near, far)
+        axis = math.degrees(math.atan2(tip[1] - anchor[1], tip[0] - anchor[0]))
+        groups[f"ray{i}"] = {"pivot": anchor, "axis": axis}
 
     tweens: list[dict] = []
 
@@ -226,17 +229,22 @@ def build_strike() -> dict:
          "kind": "opacity", "from": 0.0, "to": 1.0},
     ]
 
-    # Phase 4 -- compass rays: radar sweep locks bearings; each needle
-    # lengthens outward from the hub while the whole rose swings into place.
-    tweens.append({"group": "raysRoot", "t0": 2.80, "dur": 1.25,
-                   "ease": "outQuint", "kind": "rotate", "from": -80.0,
-                   "to": 0.0, "pivot": C})
-    for order, i in enumerate([0, 1, 2, 3, 4, 5]):
-        t0 = 2.90 + order * 0.12
+    # Phase 4 -- spikes expand in: the long needles thrust inward from the
+    # hexagon corners toward the core, then the short ticks flick outward.
+    for order, i in enumerate([0, 1, 2]):
+        t0 = 2.85 + order * 0.15
         tweens += [
-            {"group": f"ray{i}", "t0": t0, "dur": 0.5, "ease": "outCubic",
+            {"group": f"ray{i}", "t0": t0, "dur": 0.55, "ease": "outQuint",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
-            {"group": f"ray{i}", "t0": t0, "dur": 0.18, "ease": "outCubic",
+            {"group": f"ray{i}", "t0": t0, "dur": 0.15, "ease": "outCubic",
+             "kind": "opacity", "from": 0.0, "to": 1.0},
+        ]
+    for order, i in enumerate([3, 4, 5]):
+        t0 = 3.45 + order * 0.12
+        tweens += [
+            {"group": f"ray{i}", "t0": t0, "dur": 0.4, "ease": "outCubic",
+             "kind": "scaleAxis", "from": 0.0, "to": 1.0},
+            {"group": f"ray{i}", "t0": t0, "dur": 0.15, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
 
