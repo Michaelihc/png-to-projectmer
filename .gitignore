@@ -29,3 +29,6 @@ merbench-*.png
 /converted_mer/*
 !/converted_mer/scarletking-opt/
 !/converted_mer/nu22-opt/
+!/converted_mer/global-occult-coalition/
+!/converted_mer/strike-team/
+!/converted_mer/intro-anim-preview.html
