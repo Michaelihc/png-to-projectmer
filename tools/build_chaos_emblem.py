@@ -36,6 +36,12 @@ BLACK = "#0B0B0BFF"
 CREAM = "#F4F1E6FF"
 TEXT_COLOR = "#111111"
 
+# deployment rig props (intro-only hardware; hidden in the final emblem)
+GUNMETAL = "#2A2F36FF"
+GUNMETAL_DARK = "#1B1F24FF"
+HAZARD_RED = "#C8102EFF"
+STATUS_AMBER = "#E8A33DFF"
+
 CANVAS = 8.0          # world units, emblem centered on (0,0)
 WALL_W, WALL_H = 60.0, 34.0   # backdrop wall size (fills the camera view)
 DAISY_SCALE = 0.72    # source daisy spans ~9.7 world units -> fit the canvas
@@ -274,6 +280,75 @@ def build() -> None:
     # (red cutout hides the shaft inside the circle = interrupted, like the art)
     blocks.append(disc("ci-center-ring-outer", 0, 0, -0.024, 1.78, BLACK))
     blocks.append(disc("ci-center-ring-cutout", 0, 0, -0.026, 1.34, RED_BG))
+
+    # ---- deployment rig (intro-only hardware; the timeline hides it at rest) --
+    # Signature device: a two-segment radar sweep arm that unfolds from the hub
+    # and "paints" the emblem into existence, plus the C-clamp halves that slam
+    # together into the center ring and the arc slabs the ring is painted from.
+    meta["rig"] = {}
+
+    # hub cap: heavy plate over the center while the rig works (+4 bolt studs)
+    blocks.append(disc("ci-rig-hub-cap", 0, 0, -0.058, 1.15, GUNMETAL))
+    for i in range(4):
+        a = math.radians(45.0 + i * 90.0)
+        blocks.append(quad(f"ci-rig-hub-bolt-{i}", 0.38 * math.cos(a),
+                           0.38 * math.sin(a), -0.059, 0.14, 0.14,
+                           45.0 + i * 90.0, GUNMETAL_DARK))
+    blocks.append(quad("ci-rig-hub-lamp", 0, 0, -0.060, 0.16, 0.16, 45.0,
+                       STATUS_AMBER))
+
+    # sweep arm: boom (root at hub) + blade (root at boom tip) + red edge.
+    # Authored at rest POINTING UP (+y); the fold groups articulate it.
+    BOOM_LEN, BOOM_W = 1.35, 0.42
+    BLADE_LEN, BLADE_W = 1.25, 0.30
+    blocks.append(quad("ci-rig-boom", 0, 0.35 + BOOM_LEN / 2, -0.056,
+                       BOOM_W, BOOM_LEN, 0.0, GUNMETAL))
+    blocks.append(quad("ci-rig-boom-seam", 0, 0.35 + BOOM_LEN - 0.06, -0.057,
+                       BOOM_W * 0.92, 0.07, 0.0, GUNMETAL_DARK))
+    blade_root = 0.35 + BOOM_LEN
+    blocks.append(quad("ci-rig-blade", 0, blade_root + BLADE_LEN / 2, -0.056,
+                       BLADE_W, BLADE_LEN, 0.0, GUNMETAL))
+    blocks.append(quad("ci-rig-blade-edge", 0.5 * (BLADE_W + 0.09),
+                       blade_root + BLADE_LEN / 2, -0.057, 0.09,
+                       BLADE_LEN, 0.0, HAZARD_RED))
+    meta["rig"]["hub"] = [0.0, 0.0]
+    meta["rig"]["bladeRoot"] = [0.0, blade_root]
+    meta["rig"]["armTipRadius"] = blade_root + BLADE_LEN
+
+    # C-clamp halves: chunky half-octagon arcs that slam into the center ring.
+    # Arc radius matches the ring centerline (d 1.78/1.34 -> r ~0.78).
+    CLAMP_R, CLAMP_W = 0.78, 0.34
+    for side, start_deg in (("L", 90.0), ("R", -90.0)):
+        for k in range(4):
+            a0 = math.radians(start_deg + k * 45.0 + 22.5)
+            seg_len = 2.0 * CLAMP_R * math.sin(math.radians(22.5))
+            blocks.append(quad(
+                f"ci-clamp-{side}-{k}",
+                CLAMP_R * math.cos(a0), CLAMP_R * math.sin(a0), -0.055,
+                seg_len * 1.06, CLAMP_W,
+                math.degrees(a0) + 90.0, GUNMETAL))
+        stud_a = math.radians(start_deg + 90.0)
+        blocks.append(quad(
+            f"ci-clamp-{side}-stud",
+            (CLAMP_R + 0.24) * math.cos(stud_a),
+            (CLAMP_R + 0.24) * math.sin(stud_a), -0.055,
+            0.22, 0.22, math.degrees(stud_a), GUNMETAL_DARK))
+
+    # ring slabs: six 60-degree chords the white ring is painted from
+    # (they swap to the true ring once the first sweep completes).
+    SLAB_R = (5.0 + 4.35) / 4.0            # ring centerline radius ~2.34
+    SLAB_LEN = 2.0 * SLAB_R * math.sin(math.radians(30.0))
+    slab_angles = []
+    for k in range(6):
+        a = math.radians(90.0 - k * 60.0)   # clockwise from the top
+        deg = math.degrees(a)
+        slab_angles.append(deg % 360.0)
+        blocks.append(quad(
+            f"ci-slab-{k}",
+            SLAB_R * math.cos(a), SLAB_R * math.sin(a), -0.011,
+            SLAB_LEN * 1.04, 0.42, deg + 90.0, WHITE))
+    meta["rig"]["slabAngles"] = slab_angles
+    meta["rig"]["slabRadius"] = SLAB_R
 
     # ---- variant B: the converted plague daisy ------------------------------
     import_daisy(blocks, meta)

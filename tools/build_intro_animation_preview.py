@@ -490,6 +490,19 @@ def build_chaos() -> dict:
             return "bgA"
         if bname == "ci-bg-b":
             return "bgB"
+        if bname.startswith("ci-rig-hub"):
+            return "hubCap"
+        if bname.startswith("ci-rig-boom"):
+            return "boom"
+        if bname.startswith("ci-rig-blade"):
+            return "blade"
+        if bname.startswith("ci-clamp-L"):
+            return "clampL"
+        if bname.startswith("ci-clamp-R"):
+            return "clampR"
+        m = re.match(r"ci-slab-(\d)", bname)
+        if m:
+            return f"slab{m.group(1)}"
         if bname.startswith("ci-white-ring"):
             return "whiteRing"
         if bname.startswith("ci-center-ring"):
@@ -511,13 +524,28 @@ def build_chaos() -> dict:
             return "text"
         return "misc"
 
+    rig = meta["rig"]
+    hub = tuple(rig["hub"])
+    blade_root = tuple(rig["bladeRoot"])
+    slab_r = rig["slabRadius"]
+
     groups: dict[str, dict] = {
         "bgA": {"pivot": C}, "bgB": {"pivot": C},
         "whiteRing": {"pivot": C}, "centerRing": {"pivot": C},
         "arrowsRoot": {"pivot": C}, "wheelRoot": {"pivot": C},
         "wheelChrome": {"pivot": C}, "dot": {"pivot": C},
         "text": {"pivot": C}, "misc": {"pivot": C},
+        # deployment rig: sweep arm articulation chain + clamps + ring slabs
+        "sweepRoot": {"pivot": hub},
+        "boom": {"pivot": hub, "parent": "sweepRoot"},
+        "blade": {"pivot": blade_root, "parent": "boom"},
+        "hubCap": {"pivot": hub},
+        "clampL": {"pivot": C}, "clampR": {"pivot": C},
     }
+    for k, alpha in enumerate(rig["slabAngles"]):
+        rad = math.radians(alpha)
+        inner = (slab_r - 0.21) * math.cos(rad), (slab_r - 0.21) * math.sin(rad)
+        groups[f"slab{k}"] = {"pivot": inner, "axis": alpha}
     for i, arrow in enumerate(meta["arrows"]):
         groups[f"arrow{i}"] = {"pivot": arrow["tail"], "axis": arrow["dir"],
                                "parent": "arrowsRoot"}
@@ -529,86 +557,175 @@ def build_chaos() -> dict:
 
     tweens: list[dict] = []
 
-    # ---- variant A build -----------------------------------------------------
-    tweens.append({"group": "bgA", "t0": 0.0, "dur": 0.25, "ease": "outCubic",
+    # ---- variant A: the deployment rig paints the insignia --------------------
+    # Military-radar / SRA-deploy language: heavy clamps latch the center ring,
+    # a two-segment sweep arm unfolds from the hub and does two decelerating
+    # clockwise sweeps; everything it passes deploys with mechanical overshoot.
+    SWEEP1_T0, SWEEP1_DUR = 1.95, 1.05
+    SWEEP2_T0, SWEEP2_DUR = 3.00, 1.45
+    BLADE_REST_DEG = 90.0   # arm authored pointing up
+
+    def inv_out_cubic(k: float) -> float:
+        return 1.0 - (1.0 - k) ** (1.0 / 3.0)
+
+    def inv_out_quint(k: float) -> float:
+        return 1.0 - (1.0 - k) ** (1.0 / 5.0)
+
+    def sweep1_cross(alpha_deg: float) -> float:
+        """Time the CW sweep-1 blade passes world angle alpha."""
+        rho = (BLADE_REST_DEG - alpha_deg) % 360.0
+        return SWEEP1_T0 + SWEEP1_DUR * inv_out_cubic(rho / 360.0)
+
+    def sweep2_cross(alpha_deg: float) -> float:
+        rho = (BLADE_REST_DEG - alpha_deg) % 360.0
+        return SWEEP2_T0 + SWEEP2_DUR * inv_out_quint(rho / 360.0)
+
+    # power-on: the field wall snaps on (near-cut, not a slow fade)
+    tweens.append({"group": "bgA", "t0": 0.0, "dur": 0.3, "ease": "outCubic",
                    "kind": "opacity", "from": 0.0, "to": 1.0})
-    tweens.append({"group": "whiteRing", "t0": 0.25, "dur": 0.7,
-                   "ease": "outBack:1.3", "kind": "scale", "from": 0.0, "to": 1.0})
-    tweens.append({"group": "centerRing", "t0": 0.8, "dur": 0.5,
-                   "ease": "outBack:1.6", "kind": "scale", "from": 0.0, "to": 1.0})
-    # arrows fired along their own 45-deg axis, middle first; each streaks in
-    # (translate + lengthen from the tail), then its head snaps on at arrival.
-    fire = math.radians(45.0)
-    off = (-4.8 * math.cos(fire), -4.8 * math.sin(fire))
-    for order, i in enumerate([1, 0, 2]):
-        t0 = 1.3 + order * 0.3
+
+    # clamps slam in from the sides and latch into the center ring
+    for gid, from_x in (("clampL", -2.6), ("clampR", 2.6)):
         tweens += [
-            {"group": f"arrow{i}", "t0": t0, "dur": 0.6, "ease": "outQuint",
-             "kind": "translate", "from": [off[0], off[1]], "to": [0, 0]},
-            {"group": f"arrow{i}", "t0": t0, "dur": 0.6, "ease": "outQuint",
-             "kind": "scaleAxis", "from": 0.1, "to": 1.0},
-            {"group": f"arrow{i}", "t0": t0, "dur": 0.12, "ease": "outCubic",
+            {"group": gid, "t0": 0.15, "dur": 0.8, "ease": "outBack:1.15",
+             "kind": "translate", "from": [from_x, 0.0], "to": [0.0, 0.0]},
+            {"group": gid, "t0": 0.15, "dur": 0.08, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
-            {"group": f"head{i}", "t0": t0 + 0.45, "dur": 0.22,
-             "ease": "outBack:2.2", "kind": "scale", "from": 0.0, "to": 1.0},
+            {"group": gid, "t0": 1.02, "dur": 0.10, "ease": "outCubic",
+             "kind": "opacity", "from": 1.0, "to": 0.0},
         ]
+    tweens.append({"group": "centerRing", "t0": 0.95, "dur": 0.08,
+                   "ease": "outCubic", "kind": "opacity", "from": 0.0, "to": 1.0})
+
+    # hub cap seats, then the sweep arm unfolds (boom swings out, blade flicks
+    # open off its tip -- the transformer beat)
+    tweens += [
+        {"group": "hubCap", "t0": 0.95, "dur": 0.30, "ease": "outBack:1.5",
+         "kind": "scale", "from": 0.0, "to": 1.0},
+        {"group": "hubCap", "t0": 0.95, "dur": 0.05, "ease": "outCubic",
+         "kind": "opacity", "from": 0.0, "to": 1.0},
+        {"group": "boom", "t0": 1.15, "dur": 0.50, "ease": "outQuint",
+         "kind": "rotate", "from": -170.0, "to": 0.0},
+        {"group": "boom", "t0": 1.15, "dur": 0.06, "ease": "outCubic",
+         "kind": "opacity", "from": 0.0, "to": 1.0},
+        {"group": "blade", "t0": 1.45, "dur": 0.45, "ease": "outBack:1.25",
+         "kind": "rotate", "from": -155.0, "to": 0.0},
+        {"group": "blade", "t0": 1.45, "dur": 0.06, "ease": "outCubic",
+         "kind": "opacity", "from": 0.0, "to": 1.0},
+    ]
+
+    # two decelerating clockwise sweeps (multiple rotate tweens are additive)
+    tweens += [
+        {"group": "sweepRoot", "t0": SWEEP1_T0, "dur": SWEEP1_DUR,
+         "ease": "outCubic", "kind": "rotate", "from": 0.0, "to": -360.0},
+        {"group": "sweepRoot", "t0": SWEEP2_T0, "dur": SWEEP2_DUR,
+         "ease": "outQuint", "kind": "rotate", "from": 0.0, "to": -360.0},
+    ]
+
+    # sweep 1 paints the white ring as six chunky slabs, radially expanding
+    # right behind the blade; they swap to the true ring when the sweep ends
+    for k, alpha in enumerate(rig["slabAngles"]):
+        t0 = sweep1_cross(alpha) + 0.02
+        tweens += [
+            {"group": f"slab{k}", "t0": t0, "dur": 0.24, "ease": "outBack:1.5",
+             "kind": "scaleAxis", "from": 0.0, "to": 1.0},
+            {"group": f"slab{k}", "t0": t0, "dur": 0.06, "ease": "outCubic",
+             "kind": "opacity", "from": 0.0, "to": 1.0},
+            {"group": f"slab{k}", "t0": 3.10, "dur": 0.12, "ease": "outCubic",
+             "kind": "opacity", "from": 1.0, "to": 0.0},
+        ]
+    tweens.append({"group": "whiteRing", "t0": 3.05, "dur": 0.08,
+                   "ease": "outCubic", "kind": "opacity", "from": 0.0, "to": 1.0})
+
+    # sweep 2 deploys the arrows lane by lane: shaft ratchet-extends in three
+    # mechanical lurches, then the head flicks open off the shaft tip
+    for i, arrow in enumerate(meta["arrows"]):
+        mid_x = (arrow["tail"][0] + arrow["headBase"][0]) / 2.0
+        mid_y = (arrow["tail"][1] + arrow["headBase"][1]) / 2.0
+        lane = math.degrees(math.atan2(mid_y, mid_x)) % 360.0
+        t0 = sweep2_cross(lane) + 0.02
+        tweens += [
+            {"group": f"arrow{i}", "t0": t0, "dur": 0.60, "ease": "ratchet:3",
+             "kind": "scaleAxis", "from": 0.0, "to": 1.0},
+            {"group": f"arrow{i}", "t0": t0, "dur": 0.05, "ease": "outCubic",
+             "kind": "opacity", "from": 0.0, "to": 1.0},
+            {"group": f"head{i}", "t0": t0 + 0.55, "dur": 0.28,
+             "ease": "outBack:1.6", "kind": "rotate", "from": -110.0, "to": 0.0},
+            {"group": f"head{i}", "t0": t0 + 0.55, "dur": 0.10,
+             "ease": "outCubic", "kind": "scale", "from": 0.0, "to": 1.0},
+        ]
+
+    # stow: the blade folds back in, the boom swings behind the hub, the
+    # hardware vanishes -- the insignia remains
+    tweens += [
+        {"group": "blade", "t0": 4.55, "dur": 0.40, "ease": "inOutCubic",
+         "kind": "rotate", "from": 0.0, "to": -155.0},
+        {"group": "boom", "t0": 4.80, "dur": 0.45, "ease": "inOutCubic",
+         "kind": "rotate", "from": 0.0, "to": -170.0},
+        {"group": "blade", "t0": 5.20, "dur": 0.12, "ease": "outCubic",
+         "kind": "opacity", "from": 1.0, "to": 0.0},
+        {"group": "boom", "t0": 5.20, "dur": 0.12, "ease": "outCubic",
+         "kind": "opacity", "from": 1.0, "to": 0.0},
+        {"group": "hubCap", "t0": 5.25, "dur": 0.15, "ease": "outCubic",
+         "kind": "opacity", "from": 1.0, "to": 0.0},
+    ]
 
     # ---- transition A -> B ----------------------------------------------------
     # arrows spin up around the center and collapse into it...
     tweens += [
-        {"group": "arrowsRoot", "t0": 5.3, "dur": 1.9, "ease": "inOutCubic",
+        {"group": "arrowsRoot", "t0": 5.65, "dur": 1.9, "ease": "inOutCubic",
          "kind": "rotate", "from": 0.0, "to": 540.0, "pivot": C},
-        {"group": "arrowsRoot", "t0": 6.55, "dur": 0.7, "ease": "inOutCubic",
+        {"group": "arrowsRoot", "t0": 6.90, "dur": 0.7, "ease": "inOutCubic",
          "kind": "scale", "from": 1.0, "to": 0.0, "pivot": C},
     ]
     for i in range(3):
-        tweens.append({"group": f"arrow{i}", "t0": 6.7, "dur": 0.5,
+        tweens.append({"group": f"arrow{i}", "t0": 7.05, "dur": 0.5,
                        "ease": "outCubic", "kind": "opacity",
                        "from": 1.0, "to": 0.0})
-        tweens.append({"group": f"head{i}", "t0": 6.7, "dur": 0.5,
+        tweens.append({"group": f"head{i}", "t0": 7.05, "dur": 0.5,
                        "ease": "outCubic", "kind": "opacity",
                        "from": 1.0, "to": 0.0})
     # ...while the field bleaches from red to parchment and the rings dissolve
     tweens += [
-        {"group": "whiteRing", "t0": 6.5, "dur": 0.6, "ease": "outCubic",
+        {"group": "whiteRing", "t0": 6.85, "dur": 0.6, "ease": "outCubic",
          "kind": "opacity", "from": 1.0, "to": 0.0},
-        {"group": "centerRing", "t0": 6.6, "dur": 0.5, "ease": "outCubic",
+        {"group": "centerRing", "t0": 6.95, "dur": 0.5, "ease": "outCubic",
          "kind": "opacity", "from": 1.0, "to": 0.0},
-        {"group": "bgB", "t0": 6.5, "dur": 0.9, "ease": "inOutCubic",
+        {"group": "bgB", "t0": 6.85, "dur": 0.9, "ease": "inOutCubic",
          "kind": "opacity", "from": 0.0, "to": 1.0},
     ]
     # the daisy spins in decelerating; each petal expands in from the rim
     tweens += [
-        {"group": "wheelRoot", "t0": 6.9, "dur": 2.0, "ease": "outQuint",
+        {"group": "wheelRoot", "t0": 7.25, "dur": 2.0, "ease": "outQuint",
          "kind": "rotate", "from": -300.0, "to": 0.0, "pivot": C},
-        {"group": "wheelChrome", "t0": 6.9, "dur": 0.5, "ease": "outCubic",
+        {"group": "wheelChrome", "t0": 7.25, "dur": 0.5, "ease": "outCubic",
          "kind": "opacity", "from": 0.0, "to": 1.0},
-        {"group": "wheelChrome", "t0": 6.9, "dur": 0.9, "ease": "outCubic",
+        {"group": "wheelChrome", "t0": 7.25, "dur": 0.9, "ease": "outCubic",
          "kind": "scale", "from": 1.22, "to": 1.0},
     ]
     petal_order = sorted(range(len(meta["petals"])),
                          key=lambda k: -((meta["petals"][k]["angle"] - 90) % 360))
     for order, k in enumerate(petal_order):
-        t0 = 7.05 + order * 0.09
+        t0 = 7.40 + order * 0.09
         tweens += [
             {"group": f"petal{k}", "t0": t0, "dur": 0.5, "ease": "outCubic",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
             {"group": f"petal{k}", "t0": t0, "dur": 0.15, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
-    tweens.append({"group": "dot", "t0": 8.6, "dur": 0.4,
+    tweens.append({"group": "dot", "t0": 8.95, "dur": 0.4,
                    "ease": "outBack:1.8", "kind": "scale", "from": 0.0,
                    "to": 1.0})
     # motto cascades around the wheel (per-letter TextToys, like the GOC seal)
-    tweens.append({"group": "text", "t0": 8.95, "dur": 0.20,
+    tweens.append({"group": "text", "t0": 9.30, "dur": 0.20,
                    "ease": "outBack:1.5", "kind": "scale", "from": 0.0,
                    "to": 1.0, "pivot": "block",
                    "stagger": {"per": 0.028, "order": letters}})
-    tweens.append({"group": "text", "t0": 8.95, "dur": 0.15, "ease": "outCubic",
+    tweens.append({"group": "text", "t0": 9.30, "dur": 0.15, "ease": "outCubic",
                    "kind": "opacity", "from": 0.0, "to": 1.0,
                    "stagger": {"per": 0.028, "order": letters}})
 
-    emblem = build_emblem(blocks, group_of, groups, tweens, 11.2,
+    emblem = build_emblem(blocks, group_of, groups, tweens, 11.55,
                           "Chaos Insurgency — classic → plague daisy",
                           view=[0.0, 0.0, 4.15, 4.15])
     for s in emblem["shapes"]:
@@ -674,6 +791,13 @@ function ease(name, t) {
     const k = parseFloat(name.split(":")[1] || "1.7");
     const u = t - 1;
     return 1 + u*u*((k+1)*u + k);
+  }
+  if (name.startsWith("ratchet")) {
+    // N mechanical lurches: eased-out within each step (telescoping segments)
+    const n = Math.max(1, parseInt(name.split(":")[1] || "3", 10));
+    const seg = Math.min(n - 1, Math.floor(t * n));
+    const frac = t * n - seg;
+    return (seg + (1 - Math.pow(1 - frac, 3))) / n;
   }
   if (name === "pulse") return Math.sin(Math.PI * t); // 0 -> 1 -> 0
   return t;
