@@ -42,9 +42,11 @@ DAISY_SCALE = 0.72    # source daisy spans ~9.7 world units -> fit the canvas
 DAISY_Z_SHIFT = -0.035  # stack the whole daisy in front of variant A layers
 
 MOTTO = "SHOULD INTERMITTENT VENGEANCE ARM AGAIN HIS RED RIGHT HAND TO PLAGUE US?"
-# centerline of the white text band (band spans r 4.49..4.93 in source units),
-# so the TextToy glyphs stay clear of both black outline rings
-TEXT_R = 4.71 * DAISY_SCALE
+# Text ring pulled INSIDE the wheel (2026-07-16 live review: at the band
+# centerline the 2x glyphs overflowed the rim; the fix is a tighter circle,
+# not a smaller font). r ~3.25 spans ~3.02..3.47 in emblem units: outer edge
+# clear of the rim (3.61), inner edge kissing the petal tips (~3.0).
+TEXT_R = 4.51 * DAISY_SCALE
 TEXT_ARC_DEG = 330.0
 TEXT_START_DEG = 86.0         # first glyph polar angle, running clockwise
 
