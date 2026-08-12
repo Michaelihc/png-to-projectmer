@@ -3,6 +3,8 @@ webapp/_output/
 webapp/_input/
 webapp/_chrome_screenshot*/
 docs/screenshots/workflow-*.png
+/dist/
+/.venv/
 
 # --- python ---
 __pycache__/

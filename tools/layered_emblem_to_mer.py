@@ -97,14 +97,35 @@ def quality_scale(quality):
     return 0.25 + 3.0 * ((100 - quality) / 75.0) ** 1.4
 
 
-def layers_at_quality(layers, quality):
-    if quality is None:
-        return layers
-    scale = quality_scale(quality)
-    return {
-        layer_name: [fill, z_order, max(0.12, float(tolerance) * scale), mode]
-        for layer_name, (fill, z_order, tolerance, mode) in layers.items()
-    }
+def layers_at_quality(layers, quality=None, layer_qualities=None):
+    """Apply a global quality, optionally overridden for named layers."""
+    layer_qualities = layer_qualities or {}
+    adjusted = {}
+    for layer_name, (fill, z_order, tolerance, mode) in layers.items():
+        layer_quality = layer_qualities.get(layer_name, quality)
+        if layer_quality is None:
+            adjusted[layer_name] = [fill, z_order, tolerance, mode]
+            continue
+        scale = quality_scale(layer_quality)
+        adjusted[layer_name] = [
+            fill, z_order, max(0.12, float(tolerance) * scale), mode
+        ]
+    return adjusted
+
+
+def parse_layer_qualities(values):
+    """Parse repeated NAME=1-100 CLI values into a quality map."""
+    qualities = {}
+    for value in values or []:
+        if "=" not in value:
+            raise ValueError(f"layer quality must be NAME=1-100, got {value!r}")
+        name, raw_quality = value.split("=", 1)
+        name = name.strip()
+        quality = int(raw_quality)
+        if not name or not 1 <= quality <= 100:
+            raise ValueError(f"layer quality must be NAME=1-100, got {value!r}")
+        qualities[name] = quality
+    return qualities
 
 
 def write_mesh_preview(path, layer_geometry, source_triangles, W, H, width_units):
@@ -122,7 +143,7 @@ def write_mesh_preview(path, layer_geometry, source_triangles, W, H, width_units
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
         f'<rect width="{W}" height="{H}" fill="#05080C"/>',
     ]
-    for fill, polys in layer_geometry:
+    for _layer_name, fill, polys, _triangles in layer_geometry:
         for poly in polys:
             body.extend(ts.poly_to_svg(poly, fill))
 
@@ -146,7 +167,7 @@ def write_mesh_preview(path, layer_geometry, source_triangles, W, H, width_units
 
     raster = Image.new("RGB", (W, H), (5, 8, 12))
     draw = ImageDraw.Draw(raster)
-    for fill, polys in layer_geometry:
+    for _layer_name, fill, polys, _triangles in layer_geometry:
         rgb = ImageColor.getrgb(fill[:7])
         for poly in polys:
             geometries = poly.geoms if poly.geom_type == "MultiPolygon" else [poly]
@@ -162,8 +183,37 @@ def write_mesh_preview(path, layer_geometry, source_triangles, W, H, width_units
     raster.save(Path(path).with_suffix(".png"))
 
 
+def write_layer_previews(out_dir, name, layer_geometry, W, H, width_units):
+    """Write one real triangulation preview per tuned colour layer."""
+    for layer_name, fill, polys, triangles in layer_geometry:
+        raster = Image.new("RGB", (W, H), (5, 8, 12))
+        draw = ImageDraw.Draw(raster)
+        rgb = ImageColor.getrgb(fill[:7])
+        for poly in polys:
+            geometries = poly.geoms if poly.geom_type == "MultiPolygon" else [poly]
+            for geometry in geometries:
+                draw.polygon(list(geometry.exterior.coords), fill=rgb)
+                for interior in geometry.interiors:
+                    draw.polygon(list(interior.coords), fill=(5, 8, 12))
+        height_units = width_units * H / W
+        for triangle in triangles:
+            points = [
+                (
+                    ((x / width_units) + 0.5) * W,
+                    (0.5 - (y / height_units)) * H,
+                )
+                for x, y in triangle
+            ]
+            points.append(points[0])
+            draw.line(points, fill=(5, 8, 12), width=3, joint="curve")
+            draw.line(points, fill=(244, 248, 251), width=1, joint="curve")
+        safe_layer_name = p2m.clean_name(layer_name)
+        raster.save(out_dir / f"{name}.{safe_layer_name}.layer.png")
+
+
 def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
-            make_mesh_preview=False):
+            make_mesh_preview=False, layer_qualities=None,
+            make_layer_previews=False, only_layer=None):
     im = np.array(Image.open(image_path).convert("RGB")).astype(float)
     H, W = im.shape[:2]
     cfg = json.loads(Path(config_path).read_text()) if config_path else ts.auto_config(im)
@@ -171,12 +221,20 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
     blur = cfg.get("blur", 1.2)
     centroids = {n: tuple(v) for n, v in cfg["centroids"].items()}
     background = cfg.get("background", "black")
-    layers = layers_at_quality(cfg["layers"], quality)
+    unknown_layers = set(layer_qualities or {}) - set(cfg["layers"])
+    if unknown_layers:
+        raise ValueError(f"unknown layer quality override(s): {', '.join(sorted(unknown_layers))}")
+    layers = layers_at_quality(cfg["layers"], quality, layer_qualities)
+    if only_layer is not None:
+        if only_layer not in layers:
+            raise ValueError(f"unknown layer: {only_layer}")
+        layers = {only_layer: layers[only_layer]}
     n_layers = len(layers)
 
     all_blocks = []
     next_id = 1
     summary = []
+    export_stats = {}
     layer_geometry = []
     source_triangles = []
     for lname, fill, z_order, polys in ts.build_layers(im, centroids, background, layers, blur):
@@ -190,13 +248,22 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
         )
         all_blocks.extend(blocks)
         summary.append((lname, len(polys), len(blocks), stats.line()))
-        layer_geometry.append((fill, polys))
+        export_stats[lname] = {
+            "source_triangles": stats.source_triangles,
+            "quad_primitives": sum(block.get("BlockType") == 1 for block in blocks),
+            "objects": len(blocks),
+        }
+        layer_geometry.append((lname, fill, polys, geometry["source_triangles"]))
         source_triangles.extend(geometry["source_triangles"])
 
     schematic = {"RootObjectId": 0, "Blocks": all_blocks}
     out_dir.mkdir(parents=True, exist_ok=True)
     out_json = out_dir / f"{name}.json"
     out_json.write_text(json.dumps(schematic, separators=(",", ":")), encoding="utf-8")
+    (out_dir / f"{name}.stats.json").write_text(
+        json.dumps({"layers": export_stats}, separators=(",", ":")),
+        encoding="utf-8",
+    )
 
     for lname, npoly, nblk, line in summary:
         print(f"  {lname}: {npoly} polys -> {nblk} blocks | {line}")
@@ -209,6 +276,9 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
         mesh_path = out_dir / f"{name}.mesh.svg"
         write_mesh_preview(mesh_path, layer_geometry, source_triangles, W, H, width_units)
         print(f"Wrote {mesh_path}")
+    if make_layer_previews:
+        write_layer_previews(out_dir, name, layer_geometry, W, H, width_units)
+        print(f"Wrote {len(layer_geometry)} layer previews")
     print(f"Triangulation: {len(source_triangles)} source triangles")
     return out_json
 
@@ -223,6 +293,12 @@ def main():
     ap.add_argument("--mesh-preview", action="store_true", help="Also write <name>.mesh.svg with the source triangulation.")
     ap.add_argument("--quality", type=int, choices=range(1, 101), metavar="1-100",
                     help="Contour quality. Higher keeps more detail and creates more geometry.")
+    ap.add_argument("--layer-quality", action="append", default=[], metavar="NAME=1-100",
+                    help="Override quality for one named layer. Repeat for multiple layers.")
+    ap.add_argument("--layer-previews", action="store_true",
+                    help="Also write one clean PNG preview for each tuned layer.")
+    ap.add_argument("--only-layer", metavar="NAME",
+                    help="Build only one named layer (used by the incremental web UI).")
     args = ap.parse_args()
 
     image_path = Path(args.image)
@@ -231,7 +307,8 @@ def main():
     name = p2m.clean_name(args.name or image_path.stem)
     out_dir = Path(args.output) / name
     convert(image_path, args.config, name, out_dir, args.preview, args.quality,
-            args.mesh_preview)
+            args.mesh_preview, parse_layer_qualities(args.layer_quality),
+            args.layer_previews, args.only_layer)
 
 
 if __name__ == "__main__":

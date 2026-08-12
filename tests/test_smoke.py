@@ -22,9 +22,23 @@ class SmokeTests(unittest.TestCase):
 
     def test_ui_has_the_three_step_workflow(self):
         html = (ROOT / "webapp" / "index.html").read_text("utf-8")
-        self.assertIn("1. Split layers", html)
-        self.assertIn("2. Triangulate", html)
+        self.assertIn("1. Choose image", html)
+        self.assertIn("2. Preview combined schematic", html)
         self.assertIn("3. Export", html)
+        self.assertIn('id="preview-loading"', html)
+        self.assertIn('id="status" role="status" aria-live="polite" hidden', html)
+        self.assertIn('id="download-combined"', html)
+        self.assertIn('id="download-separated"', html)
+        self.assertIn("changed_layer: changedLayer", html)
+        self.assertIn("source_triangles", html)
+        self.assertIn("quad_primitives", html)
+        self.assertIn("layer_counts", html)
+        self.assertIn('include.type = "checkbox"', html)
+        self.assertIn("range.setPointerCapture", html)
+        self.assertNotIn('range.addEventListener("change"', html)
+        queue_start = html.index("async function runQueuedPreview()")
+        queue_end = html.index("function loadFile(file)")
+        self.assertNotIn("setControlsDisabled", html[queue_start:queue_end])
 
     def test_quality_is_monotonic(self):
         self.assertGreater(
@@ -34,6 +48,22 @@ class SmokeTests(unittest.TestCase):
         self.assertGreater(
             layered_emblem_to_mer.quality_scale(70),
             layered_emblem_to_mer.quality_scale(100),
+        )
+
+    def test_named_layer_quality_overrides_global_quality(self):
+        layers = {
+            "back": ["#FFFFFF", 0, 1.0, "silhouette"],
+            "front": ["#FF0000", 1, 1.0, "region"],
+        }
+        adjusted = layered_emblem_to_mer.layers_at_quality(
+            layers, quality=20, layer_qualities={"front": 100}
+        )
+        self.assertGreater(adjusted["back"][2], adjusted["front"][2])
+
+    def test_layer_quality_cli_parser(self):
+        self.assertEqual(
+            layered_emblem_to_mer.parse_layer_qualities(["back=20", "front=95"]),
+            {"back": 20, "front": 95},
         )
 
     def test_background_comes_from_the_boundary(self):

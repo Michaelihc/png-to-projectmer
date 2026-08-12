@@ -1,23 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meshmark — PNG to ProjectMER</title>
+  <title>图片转为 PMer</title>
 </head>
 <body>
   <header>
-    <h1>Meshmark</h1>
-    <p data-text="tagline">Turn an emblem into a vanilla ProjectMER schematic.</p>
-    <button id="language" type="button">中文</button>
+    <h1 data-text="brand">图片转为 PMer</h1>
+    <p data-text="attribution">部分转换逻辑基于 TriangleSCP-SL。</p>
+    <button id="language" type="button">English</button>
   </header>
 
   <main>
-    <p id="status" role="status" aria-live="polite">Choose a PNG, JPG, or WEBP image.</p>
+    <p id="status" role="status" aria-live="polite" hidden></p>
 
-    <section aria-labelledby="split-heading">
-      <h2 id="split-heading" data-text="split_heading">1. Split layers</h2>
-      <p data-text="split_help">Choose an emblem. Meshmark finds the background and colour layers automatically.</p>
+    <section aria-labelledby="layers-heading">
+      <h2 id="layers-heading" data-text="layers_heading">1. 选择图片</h2>
       <p><input id="file" type="file" accept="image/png,image/jpeg,image/webp,image/bmp"></p>
       <figure id="source-figure" hidden>
         <img id="source" width="256" alt="Selected source emblem">
@@ -31,139 +30,309 @@
 
     <hr>
 
-    <section aria-labelledby="mesh-heading">
-      <h2 id="mesh-heading" data-text="mesh_heading">2. Triangulate</h2>
-      <p data-text="mesh_help">Drag once: left makes a smaller schematic; right keeps more detail.</p>
-      <label for="quality"><span data-text="quality">Quality</span>: <output id="quality-value" for="quality">70</output></label>
-      <p><input id="quality" type="range" min="1" max="100" value="70" disabled></p>
-      <figure id="mesh-figure" hidden>
-        <img id="mesh" width="720" alt="Triangulated emblem preview">
-        <figcaption id="mesh-caption"></figcaption>
+    <section aria-labelledby="preview-heading">
+      <h2 id="preview-heading" data-text="preview_heading">2. 预览合并图纸</h2>
+      <p id="preview-loading" hidden><strong data-text="preview_loading">正在加载合并预览…</strong></p>
+      <figure id="preview-figure" hidden>
+        <img id="preview" width="720" alt="Combined ProjectMER preview">
+        <figcaption id="preview-caption"></figcaption>
       </figure>
     </section>
 
     <hr>
 
     <section aria-labelledby="export-heading">
-      <h2 id="export-heading" data-text="export_heading">3. Export</h2>
+      <h2 id="export-heading" data-text="export_heading">3. 导出</h2>
       <p>
-        <label for="name"><span data-text="name">Schematic name</span>:</label>
+        <label for="name"><span data-text="name">图纸名称</span>:</label>
         <input id="name" type="text" value="emblem" disabled>
       </p>
-      <p><a id="download" href="#" hidden data-text="export">Export ProjectMER ZIP</a></p>
+      <p><a id="download-combined" href="#" hidden data-text="export_combined">导出合并图纸 (.zip)</a></p>
+      <p><a id="download-separated" href="#" hidden data-text="export_separated">分别导出各图层 (.zip)</a></p>
       <p id="install" hidden><code>LabAPI-beta/configs/ProjectMER/Schematics/</code></p>
     </section>
   </main>
 
-  <hr>
-
-  <footer>
-    <p><a href="https://github.com/Michaelihc/png-to-projectmer">GitHub</a> · MIT</p>
-  </footer>
-
   <script>
     const copy = {
       en: {
-        tagline: "Turn an emblem into a vanilla ProjectMER schematic.",
-        split_heading: "1. Split layers",
-        split_help: "Choose an emblem. Meshmark finds the background and colour layers automatically.",
-        mesh_heading: "2. Triangulate",
-        mesh_help: "Drag once: left makes a smaller schematic; right keeps more detail.",
-        quality: "Quality",
+        brand: "Image to PMer",
+        attribution: "Conversion logic adapted from TriangleSCP-SL.",
+        layers_heading: "1. Choose image",
+        preview_heading: "2. Preview combined schematic",
+        loading: "Loading…",
+        layer_loading: "Loading this layer…",
+        preview_loading: "Loading combined preview…",
         export_heading: "3. Export",
         name: "Schematic name",
-        export: "Export ProjectMER ZIP",
-        choose: "Choose a PNG, JPG, or WEBP image.",
-        splitting: "Splitting the image into colour layers…",
-        split_done: count => `${count} layers found. Building the first mesh…`,
-        layer_summary: (count, bg) => `${count} layers · background ${bg}`,
+        export_combined: "Export combined schematic (.zip)",
+        export_separated: "Export layers separately (.zip)",
+        splitting: "Detecting colour layers…",
+        split_done: count => `${count} layers found. Loading preview…`,
+        layer_summary: (count, background) => `${count} layers · background colour ${background}`,
         backing: "backing",
         region: "region",
-        building: quality => `Triangulating at quality ${quality}…`,
-        ready: "Ready to export.",
-        mesh_caption: (triangles, blocks, quality) => `${triangles.toLocaleString()} triangles · ${blocks.toLocaleString()} ProjectMER primitives · quality ${quality}`,
+        detail: "Detail level",
+        include: "Include in result",
+        keep_one: "At least one layer must be included.",
+        layer_counts: (triangles, quads, objects) => `${triangles.toLocaleString()} source triangles · export: ${quads.toLocaleString()} quad primitives / ${objects.toLocaleString()} objects`,
+        layer_preview_alt: number => `Triangulation preview of layer ${number}`,
+        building: "Loading…",
+        ready: "Preview updated.",
+        preview_caption: (triangles, quads, blocks, count) => `${triangles.toLocaleString()} source triangles · export: ${quads.toLocaleString()} quad primitives / ${blocks.toLocaleString()} objects · ${count} layers included`,
         failed: error => `Could not convert: ${error}`,
-        selected_alt: "Selected source emblem",
-        mesh_alt: "Triangulated emblem preview",
+        selected_alt: "Selected source image",
+        preview_alt: "Combined ProjectMER preview",
       },
       zh: {
-        tagline: "把纹章图片转换成原版 ProjectMER 图纸。",
-        split_heading: "1. 拆分图层",
-        split_help: "选择纹章图片；Meshmark 会自动识别背景与颜色图层。",
-        mesh_heading: "2. 三角剖分",
-        mesh_help: "拖动一次：向左减小图纸，向右保留更多细节。",
-        quality: "质量",
+        brand: "图片转为 PMer",
+        attribution: "部分转换逻辑基于 TriangleSCP-SL。",
+        layers_heading: "1. 选择图片",
+        preview_heading: "2. 预览合并图纸",
+        loading: "加载中…",
+        layer_loading: "正在加载此图层…",
+        preview_loading: "正在加载合并预览…",
         export_heading: "3. 导出",
         name: "图纸名称",
-        export: "导出 ProjectMER ZIP",
-        choose: "请选择 PNG、JPG 或 WEBP 图片。",
-        splitting: "正在拆分颜色图层…",
-        split_done: count => `已识别 ${count} 个图层，正在生成首次网格…`,
-        layer_summary: (count, bg) => `${count} 个图层 · 背景 ${bg}`,
+        export_combined: "导出合并图纸 (.zip)",
+        export_separated: "分别导出各图层 (.zip)",
+        splitting: "正在识别颜色图层…",
+        split_done: count => `已识别 ${count} 个图层，正在加载预览…`,
+        layer_summary: (count, background) => `${count} 个图层 · 背景色 ${background}`,
         backing: "底衬",
         region: "区域",
-        building: quality => `正在以质量 ${quality} 进行三角剖分…`,
-        ready: "可以导出了。",
-        mesh_caption: (triangles, blocks, quality) => `${triangles.toLocaleString()} 个三角形 · ${blocks.toLocaleString()} 个 ProjectMER 基元 · 质量 ${quality}`,
+        detail: "细节级别",
+        include: "包含在结果中",
+        keep_one: "至少需要包含一个图层。",
+        layer_counts: (triangles, quads, objects) => `${triangles.toLocaleString()} 个源三角形 · 导出：${quads.toLocaleString()} 个四边形基元 / ${objects.toLocaleString()} 个对象`,
+        layer_preview_alt: number => `图层 ${number} 的三角剖分预览`,
+        building: "加载中…",
+        ready: "预览已更新。",
+        preview_caption: (triangles, quads, blocks, count) => `${triangles.toLocaleString()} 个源三角形 · 导出：${quads.toLocaleString()} 个四边形基元 / ${blocks.toLocaleString()} 个对象 · 已包含 ${count} 个图层`,
         failed: error => `转换失败：${error}`,
-        selected_alt: "已选择的源纹章",
-        mesh_alt: "纹章三角剖分预览",
+        selected_alt: "已选择的源图片",
+        preview_alt: "合并后的 ProjectMER 预览",
       },
     };
 
     const element = id => document.getElementById(id);
     const fileInput = element("file");
-    const qualityInput = element("quality");
     const nameInput = element("name");
     const status = element("status");
-    let language = "en";
+    let language = "zh";
     let fileData = "";
     let fileName = "";
     let layerData = null;
     let resultData = null;
-    let requestNumber = 0;
+    let qualityValues = {};
+    let includedValues = {};
+    let stateVersion = 0;
+    let loadingAll = false;
+    let loadingLayers = new Set();
+    let conversionInFlight = false;
+    let queuedLayer;
+    let updateTimer = null;
 
     function text(key, ...values) {
       const value = copy[language][key];
       return typeof value === "function" ? value(...values) : value;
     }
 
+    function setStatus(message = "") {
+      status.textContent = message;
+      status.hidden = !message;
+    }
+
+    function safeId(value) {
+      return value.replace(/[^A-Za-z0-9_-]/g, "-");
+    }
+
     function applyLanguage() {
       document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+      document.title = text("brand");
       document.querySelectorAll("[data-text]").forEach(node => {
         node.textContent = text(node.dataset.text);
       });
       element("language").textContent = language === "en" ? "中文" : "English";
       element("source").alt = text("selected_alt");
-      element("mesh").alt = text("mesh_alt");
+      element("preview").alt = text("preview_alt");
       renderLayers();
       renderResult();
-      if (!fileData) status.textContent = text("choose");
+      if (!fileData) setStatus();
     }
 
     function renderLayers() {
       if (!layerData) return;
-      element("layer-summary").textContent = text("layer_summary", layerData.layers.length, layerData.background);
+      element("layer-summary").textContent = text(
+        "layer_summary", layerData.layers.length, layerData.background
+      );
       const list = element("layers");
       list.replaceChildren();
-      layerData.layers.forEach(layer => {
+      layerData.layers.forEach((layer, index) => {
+        if (qualityValues[layer.name] == null) qualityValues[layer.name] = 70;
+        const controlId = `detail-${safeId(layer.name)}`;
         const item = document.createElement("li");
+        const fieldset = document.createElement("fieldset");
+        fieldset.dataset.layer = layer.name;
+        const legend = document.createElement("legend");
         const swatch = document.createElement("input");
+        const mode = layer.mode === "silhouette" ? text("backing") : text("region");
         swatch.type = "color";
         swatch.value = layer.color;
         swatch.disabled = true;
-        const label = layer.mode === "silhouette" ? text("backing") : text("region");
-        item.append(swatch, ` ${layer.color} · ${label} · ${layer.share}%`);
+        legend.append(swatch, ` ${index + 1}. ${layer.color} · ${mode} · ${layer.share}%`);
+
+        const label = document.createElement("label");
+        const output = document.createElement("output");
+        output.id = `${controlId}-value`;
+        output.htmlFor = controlId;
+        output.value = qualityValues[layer.name];
+        label.htmlFor = controlId;
+        label.append(`${text("detail")}: `, output);
+
+        const range = document.createElement("input");
+        range.id = controlId;
+        range.type = "range";
+        range.min = "1";
+        range.max = "100";
+        range.value = qualityValues[layer.name];
+        range.dataset.layer = layer.name;
+        range.addEventListener("pointerdown", event => {
+          if (range.setPointerCapture) range.setPointerCapture(event.pointerId);
+        });
+        ["pointerup", "pointercancel"].forEach(eventName => {
+          range.addEventListener(eventName, event => {
+            if (range.hasPointerCapture?.(event.pointerId)) {
+              range.releasePointerCapture(event.pointerId);
+            }
+          });
+        });
+        range.addEventListener("input", () => {
+          qualityValues[layer.name] = Number(range.value);
+          output.value = range.value;
+          queuePreview(layer.name);
+        });
+
+        const include = document.createElement("input");
+        include.type = "checkbox";
+        include.id = `include-${safeId(layer.name)}`;
+        include.checked = includedValues[layer.name] !== false;
+        include.addEventListener("change", () => {
+          includedValues[layer.name] = include.checked;
+          if (!Object.values(includedValues).some(Boolean)) {
+            includedValues[layer.name] = true;
+            include.checked = true;
+            setStatus(text("keep_one"));
+            return;
+          }
+          queuePreview("__selection__");
+        });
+        const includeLabel = document.createElement("label");
+        includeLabel.htmlFor = include.id;
+        includeLabel.append(include, ` ${text("include")}`);
+
+        fieldset.append(
+          legend, includeLabel, document.createElement("br"),
+          label, document.createElement("br"), range
+        );
+        const layerStats = resultData?.layer_stats?.[layer.name];
+        const layerPreview = resultData?.layer_previews?.[layer.name];
+        const layerIsLoading = loadingAll || loadingLayers.has(layer.name);
+        if (layerIsLoading) {
+          const loadingMessage = document.createElement("p");
+          loadingMessage.dataset.layerOutput = "loading";
+          loadingMessage.dataset.layerLoading = "true";
+          const strong = document.createElement("strong");
+          strong.textContent = text("layer_loading");
+          loadingMessage.append(strong);
+          fieldset.append(loadingMessage);
+        }
+        if (layerPreview && !layerIsLoading) {
+          const figure = document.createElement("figure");
+          figure.dataset.layerOutput = "preview";
+          const image = document.createElement("img");
+          image.width = 256;
+          image.height = Math.max(1, Math.round(256 * layerData.height / layerData.width));
+          image.src = `data:image/png;base64,${layerPreview}`;
+          image.alt = text("layer_preview_alt", index + 1);
+          figure.append(image);
+          fieldset.append(figure);
+        }
+        if (layerStats && !layerIsLoading) {
+          const count = document.createElement("p");
+          count.dataset.layerOutput = "count";
+          count.textContent = text(
+            "layer_counts",
+            layerStats.source_triangles,
+            layerStats.quad_primitives,
+            layerStats.objects
+          );
+          fieldset.append(count);
+        }
+        item.append(fieldset);
         list.append(item);
       });
     }
 
     function renderResult() {
-      if (!resultData) return;
-      element("mesh-caption").textContent = text(
-        "mesh_caption", resultData.triangles || 0, resultData.blocks, resultData.quality
+      if (!resultData || !layerData) return;
+      element("preview-caption").textContent = text(
+        "preview_caption",
+        resultData.source_triangles,
+        resultData.quad_primitives,
+        resultData.blocks,
+        resultData.active_layers.length
       );
-      status.textContent = text("ready");
+      setStatus(text("ready"));
+    }
+
+    function setControlsDisabled(disabled) {
+      document.querySelectorAll("#layers input[type=range]").forEach(control => {
+        control.disabled = disabled;
+      });
+      nameInput.disabled = disabled;
+    }
+
+    function showLoading(changedLayer = null) {
+      const wasLoading = changedLayer == null
+        ? loadingAll
+        : loadingAll || loadingLayers.has(changedLayer);
+      if (changedLayer == null) loadingAll = true;
+      else loadingLayers.add(changedLayer);
+      document.querySelectorAll("#layers fieldset").forEach(fieldset => {
+        if (changedLayer != null && fieldset.dataset.layer !== changedLayer) return;
+        if (wasLoading) return;
+        const image = fieldset.querySelector('[data-layer-output="preview"] img');
+        const count = fieldset.querySelector('[data-layer-output="count"]');
+        if (image) {
+          const width = image.width || 256;
+          const height = image.height || 256;
+          const label = text("layer_loading").replace(/[<>&]/g, "");
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" fill="white"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="black">${label}</text></svg>`;
+          image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+          image.alt = text("layer_loading");
+        }
+        if (count) count.textContent = text("layer_loading");
+        if (image || count) return;
+        const loadingMessage = document.createElement("p");
+        loadingMessage.dataset.layerOutput = "loading";
+        loadingMessage.dataset.layerLoading = "true";
+        const strong = document.createElement("strong");
+        strong.textContent = text("layer_loading");
+        loadingMessage.append(strong);
+        fieldset.append(loadingMessage);
+      });
+      element("preview").removeAttribute("src");
+      element("preview-caption").textContent = "";
+      element("preview-figure").hidden = true;
+      element("preview-loading").hidden = false;
+      ["download-combined", "download-separated"].forEach(id => {
+        const download = element(id);
+        download.hidden = true;
+        download.href = "#";
+      });
+      element("install").hidden = true;
+      setStatus(text("building"));
     }
 
     async function post(path, body) {
@@ -178,58 +347,91 @@
     }
 
     async function splitLayers() {
-      status.textContent = text("splitting");
-      qualityInput.disabled = true;
-      nameInput.disabled = true;
-      element("download").hidden = true;
-      layerData = await post("/analyze", {
-        filename: fileName,
-        image_b64: fileData,
-      });
+      setStatus(text("splitting"));
+      setControlsDisabled(true);
+      element("download-combined").hidden = true;
+      element("download-separated").hidden = true;
+      layerData = await post("/analyze", {filename: fileName, image_b64: fileData});
+      qualityValues = Object.fromEntries(layerData.layers.map(layer => [layer.name, 70]));
+      includedValues = Object.fromEntries(layerData.layers.map(layer => [layer.name, true]));
       nameInput.value = layerData.name;
       renderLayers();
       element("layer-result").hidden = false;
-      qualityInput.disabled = false;
-      nameInput.disabled = false;
-      status.textContent = text("split_done", layerData.layers.length);
-      await buildMesh();
+      setControlsDisabled(false);
+      setStatus(text("split_done", layerData.layers.length));
+      queuePreview();
     }
 
-    async function buildMesh() {
-      const thisRequest = ++requestNumber;
-      const quality = Number(qualityInput.value);
-      status.textContent = text("building", quality);
-      qualityInput.disabled = true;
-      nameInput.disabled = true;
-      element("download").hidden = true;
+    function queuePreview(changedLayer = null) {
+      if (!fileData || !layerData) return;
+      stateVersion += 1;
+      showLoading(changedLayer);
+      if (queuedLayer === undefined) queuedLayer = changedLayer;
+      else if (queuedLayer !== changedLayer) queuedLayer = null;
+      clearTimeout(updateTimer);
+      updateTimer = setTimeout(runQueuedPreview, 300);
+    }
+
+    async function runQueuedPreview() {
+      if (conversionInFlight || queuedLayer === undefined) return;
+      const changedLayer = queuedLayer;
+      queuedLayer = undefined;
+      conversionInFlight = true;
+      const requestVersion = stateVersion;
       try {
         const data = await post("/convert", {
           filename: fileName,
           image_b64: fileData,
-          params: {quality, name: nameInput.value},
+          params: {
+            name: nameInput.value,
+            layer_qualities: qualityValues,
+            active_layers: Object.entries(includedValues)
+              .filter(([, included]) => included)
+              .map(([layerName]) => layerName),
+            changed_layer: changedLayer,
+          },
         });
-        if (thisRequest !== requestNumber) return;
+        if (requestVersion !== stateVersion) return;
+        loadingAll = false;
+        loadingLayers.clear();
         resultData = data;
-        element("mesh").src = `data:image/svg+xml;base64,${data.mesh}`;
-        element("mesh-figure").hidden = false;
-        const download = element("download");
-        download.href = data.download;
-        download.download = `${data.name}.zip`;
-        download.hidden = false;
+        element("preview").src = `data:image/png;base64,${data.preview}`;
+        element("preview-loading").hidden = true;
+        element("preview-figure").hidden = false;
+        const combinedDownload = element("download-combined");
+        combinedDownload.href = data.download_combined;
+        combinedDownload.download = `${data.name}-combined.zip`;
+        combinedDownload.hidden = false;
+        const separatedDownload = element("download-separated");
+        separatedDownload.href = data.download_separated;
+        separatedDownload.download = `${data.name}-separated.zip`;
+        separatedDownload.hidden = false;
         element("install").hidden = false;
+        renderLayers();
         renderResult();
       } catch (error) {
-        status.textContent = text("failed", error.message);
+        if (requestVersion === stateVersion) {
+          loadingAll = false;
+          loadingLayers.clear();
+          element("preview-loading").hidden = true;
+          renderLayers();
+          setStatus(text("failed", error.message));
+        }
       } finally {
-        if (thisRequest === requestNumber) {
-          qualityInput.disabled = false;
-          nameInput.disabled = false;
+        conversionInFlight = false;
+        if (queuedLayer !== undefined) {
+          clearTimeout(updateTimer);
+          updateTimer = setTimeout(runQueuedPreview, 0);
         }
       }
     }
 
     function loadFile(file) {
       fileName = file.name;
+      layerData = null;
+      qualityValues = {};
+      includedValues = {};
+      showLoading();
       const reader = new FileReader();
       reader.addEventListener("load", async () => {
         fileData = reader.result;
@@ -239,7 +441,8 @@
         try {
           await splitLayers();
         } catch (error) {
-          status.textContent = text("failed", error.message);
+          element("preview-loading").hidden = true;
+          setStatus(text("failed", error.message));
         }
       });
       reader.readAsDataURL(file);
@@ -249,12 +452,7 @@
       const file = fileInput.files[0];
       if (file) loadFile(file);
     });
-
-    qualityInput.addEventListener("input", () => {
-      element("quality-value").value = qualityInput.value;
-    });
-    qualityInput.addEventListener("change", buildMesh);
-    nameInput.addEventListener("change", buildMesh);
+    nameInput.addEventListener("input", () => queuePreview());
     element("language").addEventListener("click", () => {
       language = language === "en" ? "zh" : "en";
       applyLanguage();
@@ -265,7 +463,7 @@
       fetch("/sample")
         .then(response => response.blob())
         .then(blob => loadFile(new File([blob], "nu22.png", {type: "image/png"})))
-        .catch(error => { status.textContent = text("failed", error.message); });
+        .catch(error => { setStatus(text("failed", error.message)); });
     }
   </script>
 </body>
