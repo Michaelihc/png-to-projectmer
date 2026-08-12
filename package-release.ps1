@@ -18,7 +18,6 @@ $stageRoot = Join-Path $distRoot (".package-" + [guid]::NewGuid().ToString("N"))
 $packageRoot = Join-Path $stageRoot "png-to-projectmer"
 
 $releaseFiles = @(
-    "START.bat",
     "run-webapp.bat",
     "package-release.ps1",
     "requirements.txt",

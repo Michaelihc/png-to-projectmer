@@ -8,15 +8,15 @@
 
 ![真实源三角剖分的近景](docs/screenshots/triangulation.png)
 
-本工具完全在本地运行，不使用前端框架，并刻意保持 **零 CSS**。输出只包含原版 ProjectMER 的空物体与四边形基元（`BlockType 0` 和 `BlockType 1`），无需 fork 或魔改插件。
+本工具完全在本地运行，不使用前端框架。输出只包含原版 ProjectMER 的空物体与四边形基元（`BlockType 0` 和 `BlockType 1`），无需 fork 或魔改插件。
 
 ## 30 秒启动
 
 ### Windows
 
 1. 安装 [Python 3.10+](https://www.python.org/downloads/)。
-2. 下载或克隆本仓库。
-3. 解压 ZIP，然后双击 `START.bat`。
+2. 下载 Windows 发布包并解压，或克隆本仓库。
+3. 双击 `run-webapp.bat`。
 
 首次启动会创建独立的 `.venv` 环境、自动安装 Python 依赖，并打开 `http://127.0.0.1:8731/`。后续启动无需重复安装。
 
@@ -101,7 +101,7 @@ ProjectMER 没有原生三角形基元。本工具使用变换层级错切来表
 主要模块：
 
 - `webapp/server.py` — 本地 API、单层/合并预览、两种 ZIP 导出与静态页面服务。
-- `webapp/index.html` — 完整的零 CSS 界面。
+- `webapp/index.html` — 完整的浏览器界面。
 - `tools/trace_svg.py` — 调色板检测与平滑分层轮廓。
 - `tools/layered_emblem_to_mer.py` — 图层堆叠、逐层质量映射、干净预览与图纸生成。
 - `tools/mer_ngon_decomposition.py` — 三角剖分、凸合并与平行四边形输出。

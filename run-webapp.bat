@@ -13,7 +13,7 @@ if not defined BOOTSTRAP_PYTHON (
 if not defined BOOTSTRAP_PYTHON (
   echo Python 3.10 or newer is required.
   echo Download it from https://www.python.org/downloads/
-  echo During setup, enable "Add Python to PATH", then run START.bat again.
+  echo During setup, enable "Add Python to PATH", then run run-webapp.bat again.
   echo.
   pause
   exit /b 1
@@ -64,7 +64,7 @@ exit /b %APP_EXIT%
 
 :setup_failed
 echo.
-echo Setup failed. Check your internet connection, then run START.bat again.
+echo Setup failed. Check your internet connection, then run run-webapp.bat again.
 echo If the problem continues, delete the .venv folder and retry.
 echo.
 pause
