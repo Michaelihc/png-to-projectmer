@@ -214,13 +214,13 @@ def write_layer_previews(out_dir, name, layer_geometry, W, H, width_units):
 def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
             make_mesh_preview=False, layer_qualities=None,
             make_layer_previews=False, only_layer=None):
-    im = np.array(Image.open(image_path).convert("RGB")).astype(float)
+    im = np.array(Image.open(image_path).convert("RGBA"))
     H, W = im.shape[:2]
     cfg = json.loads(Path(config_path).read_text()) if config_path else ts.auto_config(im)
     width_units = cfg.get("width_units", 10.0)
     blur = cfg.get("blur", 1.2)
     centroids = {n: tuple(v) for n, v in cfg["centroids"].items()}
-    background = cfg.get("background", "black")
+    background = cfg.get("background")
     unknown_layers = set(layer_qualities or {}) - set(cfg["layers"])
     if unknown_layers:
         raise ValueError(f"unknown layer quality override(s): {', '.join(sorted(unknown_layers))}")
