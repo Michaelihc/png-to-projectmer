@@ -8,15 +8,15 @@ Turn an emblem image into a stock SCP:SL ProjectMER schematic: **split layers �
 
 ![A close view of the real source triangulation](docs/screenshots/triangulation.png)
 
-The tool runs locally, uses no frontend framework, and deliberately ships with **zero CSS**. The output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin.
+The tool runs locally and uses no frontend framework. The output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin.
 
 ## Start in 30 seconds
 
 ### Windows
 
 1. Install [Python 3.10+](https://www.python.org/downloads/).
-2. Download or clone this repository.
-3. Extract the ZIP, then double-click `START.bat`.
+2. Download and extract the Windows release, or clone this repository.
+3. Double-click `run-webapp.bat`.
 
 The first launch creates an isolated `.venv`, installs the Python packages, and opens `http://127.0.0.1:8731/`. Later launches do not reinstall them.
 
@@ -101,7 +101,7 @@ ProjectMER has no native triangle primitive. The tool represents non-parallelogr
 The main modules are:
 
 - `webapp/server.py` — local API, per-layer/combined previews, both ZIP exports, and static page server.
-- `webapp/index.html` — the complete zero-CSS UI.
+- `webapp/index.html` — the complete browser UI.
 - `tools/trace_svg.py` — palette detection and smooth layered contours.
 - `tools/layered_emblem_to_mer.py` — layer stack, per-layer quality mapping, clean previews, and schematic build.
 - `tools/mer_ngon_decomposition.py` — triangulation, convex merging, and parallelogram emission.
