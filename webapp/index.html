@@ -69,7 +69,7 @@
         export_separated: "Export layers separately (.zip)",
         splitting: "Detecting colour layers…",
         split_done: count => `${count} layers found. Loading preview…`,
-        layer_summary: (count, background) => `${count} layers · background colour ${background}`,
+        layer_summary: count => `${count} colour layers`,
         backing: "backing",
         region: "region",
         detail: "Detail level",
@@ -98,7 +98,7 @@
         export_separated: "分别导出各图层 (.zip)",
         splitting: "正在识别颜色图层…",
         split_done: count => `已识别 ${count} 个图层，正在加载预览…`,
-        layer_summary: (count, background) => `${count} 个图层 · 背景色 ${background}`,
+        layer_summary: count => `${count} 个颜色图层`,
         backing: "底衬",
         region: "区域",
         detail: "细节级别",
@@ -163,9 +163,7 @@
 
     function renderLayers() {
       if (!layerData) return;
-      element("layer-summary").textContent = text(
-        "layer_summary", layerData.layers.length, layerData.background
-      );
+      element("layer-summary").textContent = text("layer_summary", layerData.layers.length);
       const list = element("layers");
       list.replaceChildren();
       layerData.layers.forEach((layer, index) => {

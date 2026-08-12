@@ -24,6 +24,7 @@ OUTPUT_DIR = ROOT / "webapp" / "_output"
 INPUT_DIR = ROOT / "webapp" / "_input"
 MAX_UPLOAD_BYTES = 40 * 1024 * 1024
 NAME_RE = re.compile(r"[^A-Za-z0-9_.-]+")
+CACHE_VERSION = 2
 
 
 def clean_name(raw: str) -> str:
@@ -50,13 +51,13 @@ def analyze_layers(image_bytes: bytes, filename: str) -> dict:
 
     name = clean_name(Path(filename or "emblem").stem)
     image_path = save_upload(image_bytes, filename, name)
-    image = np.array(Image.open(image_path).convert("RGB")).astype(float)
+    image = np.array(Image.open(image_path).convert("RGBA"))
     height, width = image.shape[:2]
     config = trace_svg.auto_config(image, k=4)
     labels, names = trace_svg.classify(image, config["centroids"])
-    counts = np.bincount(labels.ravel(), minlength=len(names))
-    background = config["background"]
-    foreground_total = max(1, sum(int(counts[i]) for i, key in enumerate(names) if key != background))
+    _rgb, visible = trace_svg.image_rgb_and_visible(image)
+    counts = np.bincount(labels[visible], minlength=len(names))
+    visible_total = max(1, int(visible.sum()))
 
     layers = []
     for layer_name, (color, order, _tolerance, mode) in sorted(
@@ -68,14 +69,13 @@ def analyze_layers(image_bytes: bytes, filename: str) -> dict:
             "color": color,
             "order": order,
             "mode": mode,
-            "share": round(100 * int(counts[index]) / foreground_total, 1),
+            "share": round(100 * int(counts[index]) / visible_total, 1),
         })
     return {
         "ok": True,
         "name": name,
         "width": width,
         "height": height,
-        "background": "#%02X%02X%02X" % tuple(config["centroids"][background]),
         "layers": layers,
     }
 
@@ -129,7 +129,12 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
 
     for layer_name, quality in layer_qualities.items():
         cache_name, cache_folder, cache_json, cache_preview, cache_stats, cache_meta = cache_paths(layer_name)
-        expected_meta = {"source": source_hash, "layer": layer_name, "quality": quality}
+        expected_meta = {
+            "version": CACHE_VERSION,
+            "source": source_hash,
+            "layer": layer_name,
+            "quality": quality,
+        }
         actual_meta = None
         if cache_meta.is_file():
             try:

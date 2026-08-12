@@ -33,7 +33,7 @@ Then open `http://127.0.0.1:8731/`.
 
 ## Use it
 
-1. **Split layers:** choose a PNG, JPG, WEBP, or BMP. The colour most common around the image boundary becomes the background; foreground colour layers are detected automatically.
+1. **Split layers:** choose a PNG, JPG, WEBP, or BMP. Every detected visible colour becomes a normal region layer with its holes preserved; transparent pixels do not become a layer. Uncheck any colours you do not need.
 2. **Tune each layer:** every detected colour gets its own detail slider, real triangulation preview, source-triangle count, actual export cost, and **Include in result** checkbox. Export cost shows both visible quad primitives and total ProjectMER objects. Lower values create cheaper geometry; higher values preserve more contour detail. Unchecking a layer excludes it from the combined result and exports without rebuilding geometry.
 3. **Preview combined:** inspect the clean stacked ProjectMER result without construction triangles, plus totals for source triangles, quad primitives, and objects across all included layers. Changing any slider immediately hides stale output and shows **Loading…** until every preview is current.
 4. **Export:** choose one combined schematic or a ZIP containing one independently loadable schematic folder per layer. Extract either into:

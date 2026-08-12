@@ -40,12 +40,32 @@ from shapely.geometry import Polygon
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def image_rgb_and_visible(im):
+    """Return RGB pixels and a mask of pixels that actually exist.
+
+    RGB images have no transparency, so every pixel is visible. For RGBA
+    images, fully transparent pixels are outside the artwork; their stored RGB
+    values must not be mistaken for a colour layer.
+    """
+    array = np.asarray(im)
+    if array.ndim != 3 or array.shape[2] < 3:
+        raise ValueError("expected an RGB or RGBA image")
+    rgb = array[:, :, :3].astype(float)
+    visible = (
+        array[:, :, 3] > 0
+        if array.shape[2] >= 4
+        else np.ones(array.shape[:2], dtype=bool)
+    )
+    return rgb, visible
+
+
 def classify(im, centroids):
     """centroids: dict name -> (r,g,b). Return (label_grid, names)."""
+    rgb, _visible = image_rgb_and_visible(im)
     names = list(centroids)
     C = np.array([centroids[n] for n in names], float)
-    d = ((im.reshape(-1, 1, 3) - C.reshape(1, -1, 3)) ** 2).sum(2)
-    return d.argmin(1).reshape(im.shape[:2]), names
+    d = ((rgb.reshape(-1, 1, 3) - C.reshape(1, -1, 3)) ** 2).sum(2)
+    return d.argmin(1).reshape(rgb.shape[:2]), names
 
 
 def layer_polys(mask, blur, simplify_tol, min_area=6.0):
@@ -119,13 +139,17 @@ def poly_to_svg(p, fill, holes_as_black=True):
 
 
 def auto_config(im, k=4):
-    """k-means an emblem into a palette + a guessed layer stack.
+    """K-means every visible colour into a normal, hole-preserving layer.
 
-    The darkest cluster is treated as background. Of the remaining colours the
-    one with the largest area becomes the solid backing (mode silhouette, z 0);
-    the rest are regions stacked smallest-area-in-front so fine detail wins."""
+    Automatic conversion deliberately does not guess a background and does not
+    promote any colour to a filled silhouette. Users can exclude unwanted
+    layers in the UI; retaining every region avoids destroying enclosed artwork.
+    """
     from numpy.random import default_rng
-    flat = im.reshape(-1, 3)
+    rgb, visible = image_rgb_and_visible(im)
+    flat = rgb[visible]
+    if not len(flat):
+        raise ValueError("image has no visible pixels")
     rng = default_rng(0)
     # Deterministic k-means++ seeding avoids missing a small foreground when a
     # flat background dominates the image. Stop early for truly low-colour art.
@@ -146,28 +170,17 @@ def auto_config(im, k=4):
             if (lab == j).any():
                 C[j] = flat[lab == j].mean(0)
     counts = np.bincount(lab, minlength=k)
-    # The background is the colour seen most often around the image boundary.
-    # This works for black, white, coloured, and transparency-flattened inputs.
-    label_grid = lab.reshape(im.shape[:2])
-    border_labels = np.concatenate((
-        label_grid[0, :], label_grid[-1, :], label_grid[:, 0], label_grid[:, -1]
-    ))
-    bg = int(np.bincount(border_labels, minlength=k).argmax())
-    centroids = {"background": tuple(int(v) for v in C[bg])}
     active = [j for j in range(k) if counts[j] > 0]
-    fg = [j for j in active if j != bg]
-    fg.sort(key=lambda j: -counts[j])
+    active.sort(key=lambda j: -counts[j])
+    centroids = {}
     layers = {}
-    for rank, j in enumerate(fg):
+    for rank, j in enumerate(active):
         r, g, b = (int(v) for v in C[j])
         name = f"c{rank}"
         centroids[name] = (r, g, b)
         fill = f"#{r:02X}{g:02X}{b:02X}"
-        if rank == 0:  # largest area = backing
-            layers[name] = [fill, 0, 1.2, "silhouette"]
-        else:  # smaller regions in front (higher z, finer simplify)
-            layers[name] = [fill, rank, 1.0, "region"]
-    return {"centroids": centroids, "background": "background", "layers": layers}
+        layers[name] = [fill, rank, 1.0, "region"]
+    return {"centroids": centroids, "layers": layers}
 
 
 def load_config(im, config_path=None):
@@ -178,25 +191,26 @@ def load_config(im, config_path=None):
     else:
         cfg = auto_config(im)
     centroids = {n: tuple(v) for n, v in cfg["centroids"].items()}
-    return centroids, cfg.get("background", "black"), cfg["layers"]
+    return centroids, cfg.get("background"), cfg["layers"]
 
 
 def build_layers(im, centroids, background, layers, blur=1.2):
     """Yield (name, fill, z_order, polys) back-to-front."""
+    _rgb, visible = image_rgb_and_visible(im)
     label, names = classify(im, centroids)
     idx = {n: i for i, n in enumerate(names)}
-    emblem = label != idx[background]
+    emblem = visible if background is None else visible & (label != idx[background])
     for name in sorted(layers, key=lambda n: layers[n][1]):  # by z_order back->front
         fill, z_order, tol, mode = layers[name]
         if mode == "silhouette":
             mask = binary_fill_holes(emblem)
         else:  # region: colour's natural mask, holes preserved
-            mask = label == idx[name]
+            mask = visible & (label == idx[name])
         yield name, fill, z_order, layer_polys(mask, blur, tol)
 
 
 def main(src_path, out_svg, config_path=None, blur=1.2):
-    im = np.array(Image.open(src_path).convert("RGB")).astype(float)
+    im = np.array(Image.open(src_path).convert("RGBA"))
     H, W = im.shape[:2]
     centroids, background, layers = load_config(im, config_path)
 
