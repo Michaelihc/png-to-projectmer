@@ -481,10 +481,12 @@ def rings_to_parallelogram_blocks(
 ) -> tuple[list[dict], int, NGonStats, dict]:
     """Decompose polygons (each a list of rings in UNITY coords, shell first)
     into parallelogram quad blocks. The last return value carries preview
-    geometry: {"parallelograms": [(origin, edge_x, edge_y)], "triangles": [...]}."""
+    geometry, including the source earcut triangulation used before convex
+    merging."""
     stats = NGonStats()
     region = RegionMask(mask, image_width, image_height, width_units)
     emitter = _Emitter(name_prefix, start_id, parent_id, z, color, stats)
+    source_triangles: list[tuple[Vec2, Vec2, Vec2]] = []
 
     for rings in unity_polygons:
         rings = [r for r in rings if len(r) >= 3 and abs(_signed_area(r)) > 1e-12]
@@ -503,9 +505,14 @@ def rings_to_parallelogram_blocks(
                 continue
             triangles.append(tri if area > 0 else (tri[0], tri[2], tri[1]))
         stats.source_triangles += len(triangles)
+        source_triangles.extend(
+            (vertices[tri[0]], vertices[tri[1]], vertices[tri[2]])
+            for tri in triangles
+        )
         for piece in _hertel_mehlhorn(vertices, triangles):
             _process_piece([vertices[k] for k in piece], emitter, region)
 
     preview = {"parallelograms": emitter.preview_parallelograms,
-               "triangles": emitter.preview_triangles}
+               "triangles": emitter.preview_triangles,
+               "source_triangles": source_triangles}
     return emitter.blocks, emitter.next_id, stats, preview

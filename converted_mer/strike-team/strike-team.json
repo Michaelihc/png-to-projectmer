@@ -1,0 +1,2711 @@
+{
+ "RootObjectId": 0,
+ "Blocks": [
+  {
+   "Name": "strike-bg-wall",
+   "ObjectId": 41,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.0167,
+    "y": 0.0167,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 60.0,
+    "y": 34.0,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#05070CFF",
+    "ColorRgba": {
+     "r": 0.02,
+     "g": 0.025,
+     "b": 0.045,
+     "a": 1.0
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-outer-circle-outer",
+   "ObjectId": 1,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.016667,
+    "y": 0.016667,
+    "z": -0.001
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 8.133333,
+    "y": 0.01,
+    "z": 8.133333
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#5F95E6FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-outer-circle-cutout",
+   "ObjectId": 2,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.016667,
+    "y": 0.016667,
+    "z": -0.003
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 7.433333,
+    "y": 0.01,
+    "z": 7.433333
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#000000FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-0-0",
+   "ObjectId": 3,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 3.883333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.898952,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 3.331965,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-0-1",
+   "ObjectId": 4,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 3.883333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.016667,
+     "y": 3.383333,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 2.898952,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-1-0",
+   "ObjectId": 5,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 3.331965,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.898952,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 3.331965,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-1-1",
+   "ObjectId": 6,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 3.331965,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.898952,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 2.898952,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-2-0",
+   "ObjectId": 7,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 3.331965,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.016667,
+     "y": -3.35,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": -3.85,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-2-1",
+   "ObjectId": 8,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 3.331965,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.898952,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": -3.35,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-3-0",
+   "ObjectId": 9,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": -3.85,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.932286,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -3.365298,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-3-1",
+   "ObjectId": 10,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": -3.85,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.016667,
+     "y": -3.35,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -2.932286,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-4-0",
+   "ObjectId": 11,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -3.365298,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.932286,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -3.365298,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-4-1",
+   "ObjectId": 12,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -3.365298,
+     "y": -1.916667,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.932286,
+     "y": -1.666667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -2.932286,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-5-0",
+   "ObjectId": 13,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -3.365298,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.016667,
+     "y": 3.383333,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": 3.883333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-hex-side-5-1",
+   "ObjectId": 14,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -3.365298,
+     "y": 1.95,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.932286,
+     "y": 1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": 3.383333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-center-ring-outer",
+   "ObjectId": 15,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.016667,
+    "y": 0.016667,
+    "z": -0.014
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 4.6,
+    "y": 0.01,
+    "z": 4.6
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#22529BFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-center-ring-cutout",
+   "ObjectId": 16,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.016667,
+    "y": 0.016667,
+    "z": -0.016
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 3.666667,
+    "y": 0.01,
+    "z": 3.666667
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#000000FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-ring-separator-0",
+   "ObjectId": 17,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.016667,
+    "y": -2.05,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -180.0
+   },
+   "Scale": {
+    "x": 0.4,
+    "y": 1.133333,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#000000FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-ring-separator-1",
+   "ObjectId": 18,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.806453,
+    "y": 1.05,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -300.0
+   },
+   "Scale": {
+    "x": 0.4,
+    "y": 1.133333,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#000000FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-ring-separator-2",
+   "ObjectId": 19,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.773119,
+    "y": 1.05,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -420.0
+   },
+   "Scale": {
+    "x": 0.4,
+    "y": 1.133333,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#000000FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-0",
+   "ObjectId": 20,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": -0.25,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.866667,
+     "y": 0.016667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": 0.283333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-1",
+   "ObjectId": 21,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 0.214561,
+     "y": -0.116167,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.433333,
+     "y": 0.8,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.247895,
+     "y": 0.1495,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-2",
+   "ObjectId": 22,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 0.214561,
+     "y": 0.1495,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.466667,
+     "y": 0.8,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.247895,
+     "y": -0.116167,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-3",
+   "ObjectId": 23,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 0.283333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.9,
+     "y": 0.016667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": -0.25,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-4",
+   "ObjectId": 24,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.247895,
+     "y": 0.1495,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.466667,
+     "y": -0.766667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.214561,
+     "y": -0.116167,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-star-point-5",
+   "ObjectId": 25,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.03
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.247895,
+     "y": -0.116167,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.433333,
+     "y": -0.766667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.214561,
+     "y": 0.1495,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-0",
+   "ObjectId": 26,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.266667,
+     "y": -3.4,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.233333,
+     "y": -3.4,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.016667,
+     "y": -0.933333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-1",
+   "ObjectId": 27,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -2.850587,
+     "y": 1.941506,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -3.100587,
+     "y": 1.508494,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.839391,
+     "y": 0.491667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-2",
+   "ObjectId": 28,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 3.067253,
+     "y": 1.508494,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.817253,
+     "y": 1.941506,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.806057,
+     "y": 0.491667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-3",
+   "ObjectId": 29,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.1,
+     "y": 1.633333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.016667,
+     "y": 0.966667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.066667,
+     "y": 1.633333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-4",
+   "ObjectId": 30,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -1.4,
+     "y": -0.7,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -1.4,
+     "y": -0.833333,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.966667,
+     "y": -0.533333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-compass-ray-5",
+   "ObjectId": 31,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 1.366667,
+     "y": -0.7,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.933333,
+     "y": -0.533333,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 1.366667,
+     "y": -0.833333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-0-0",
+   "ObjectId": 32,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 3.3,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 0.15,
+     "y": 2.566667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.2,
+     "y": 3.133333,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-0-1",
+   "ObjectId": 33,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 3.3,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.183333,
+     "y": 2.566667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 0.15,
+     "y": 2.566667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-0-2",
+   "ObjectId": 34,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -0.016667,
+     "y": 3.3,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -0.233333,
+     "y": 3.133333,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -0.183333,
+     "y": 2.566667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-1-0",
+   "ObjectId": 35,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -2.833333,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.2,
+     "y": -1.4,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -2.433333,
+     "y": -1.116667,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-1-1",
+   "ObjectId": 36,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -2.833333,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.6,
+     "y": -1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -2.2,
+     "y": -1.4,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-1-2",
+   "ObjectId": 37,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": -2.833333,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": -2.8,
+     "y": -1.6,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": -2.6,
+     "y": -1.7,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-2-0",
+   "ObjectId": 38,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 2.8,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.4,
+     "y": -1.116667,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 2.166667,
+     "y": -1.4,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-2-1",
+   "ObjectId": 39,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 2.8,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.166667,
+     "y": -1.4,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 2.566667,
+     "y": -1.7,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-marker-2-2",
+   "ObjectId": 40,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 2.8,
+     "y": -1.333333,
+     "z": 0.0
+    },
+    "PointB": {
+     "x": 2.566667,
+     "y": -1.7,
+     "z": 0.0
+    },
+    "PointC": {
+     "x": 2.766667,
+     "y": -1.6,
+     "z": 0.0
+    },
+    "Color": "#22529BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-00-P",
+   "ObjectId": 42,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.4667,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>P</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-01-H",
+   "ObjectId": 43,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.0067,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>H</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-02-Y",
+   "ObjectId": 44,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.5467,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>Y</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-03-S",
+   "ObjectId": 45,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.0867,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-04-I",
+   "ObjectId": 46,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.6267,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-05-C",
+   "ObjectId": 47,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.1667,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>C</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-06-S",
+   "ObjectId": 48,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.7067,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-07-D",
+   "ObjectId": 49,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.2133,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>D</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-08-I",
+   "ObjectId": 50,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.6733,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-09-V",
+   "ObjectId": 51,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.1333,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>V</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-10-I",
+   "ObjectId": 52,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.5933,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-11-S",
+   "ObjectId": 53,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.0533,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-12-I",
+   "ObjectId": 54,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.5133,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-13-O",
+   "ObjectId": 55,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.9733,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>O</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-14-N",
+   "ObjectId": 56,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.4333,
+    "y": -4.92,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=56><b><color=#6FA3F0>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-15-A",
+   "ObjectId": 57,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.5267,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-16-s",
+   "ObjectId": 58,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.2567,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-17-s",
+   "ObjectId": 59,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.9867,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-18-e",
+   "ObjectId": 60,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.7167,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-19-s",
+   "ObjectId": 61,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.4467,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-20-s",
+   "ObjectId": 62,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.1767,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-21-m",
+   "ObjectId": 63,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.9067,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>m</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-22-e",
+   "ObjectId": 64,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.6367,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-23-n",
+   "ObjectId": 65,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.3667,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>n</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-24-t",
+   "ObjectId": 66,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.0967,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>t</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-25-a",
+   "ObjectId": 67,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.5567,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>a</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-26-n",
+   "ObjectId": 68,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.2867,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>n</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-27-d",
+   "ObjectId": 69,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.0167,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>d</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-28-S",
+   "ObjectId": 70,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.5233,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-29-t",
+   "ObjectId": 71,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.7933,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>t</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-30-r",
+   "ObjectId": 72,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.0633,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>r</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-31-i",
+   "ObjectId": 73,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.3333,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>i</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-32-k",
+   "ObjectId": 74,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.6033,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>k</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-33-e",
+   "ObjectId": 75,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.8733,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-34-T",
+   "ObjectId": 76,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.4133,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-35-e",
+   "ObjectId": 77,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.6833,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>e</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-36-a",
+   "ObjectId": 78,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.9533,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>a</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-37-m",
+   "ObjectId": 79,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.2233,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>m</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "strike-caption-38-s",
+   "ObjectId": 80,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.4933,
+    "y": -5.52,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=32><b><color=#9DB4D6>s</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  }
+ ]
+}

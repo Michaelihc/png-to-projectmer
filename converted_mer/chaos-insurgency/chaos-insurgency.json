@@ -1,0 +1,10090 @@
+{
+ "RootObjectId": 0,
+ "Blocks": [
+  {
+   "Name": "ci-bg-a",
+   "ObjectId": 1,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.001
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 60.0,
+    "y": 34.0,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#F20D0DFF",
+    "Static": true,
+    "ColorRgba": {
+     "r": 1.8,
+     "g": 0.07,
+     "b": 0.07,
+     "a": 1.0
+    }
+   }
+  },
+  {
+   "Name": "ci-bg-b",
+   "ObjectId": 2,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.009
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 60.0,
+    "y": 34.0,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#F4F1E6FF",
+    "Static": true,
+    "ColorRgba": {
+     "r": 1.15,
+     "g": 1.12,
+     "b": 1.02,
+     "a": 1.0
+    }
+   }
+  },
+  {
+   "Name": "ci-white-ring-outer",
+   "ObjectId": 3,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.01
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 5.0,
+    "y": 0.01,
+    "z": 5.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#FFFFFFFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-white-ring-cutout",
+   "ObjectId": 4,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.012
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 4.35,
+    "y": 0.01,
+    "z": 4.35
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#F20D0DFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-0-shaft",
+   "ObjectId": 5,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.32579,
+    "y": 0.75421,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -45.0
+   },
+   "Scale": {
+    "x": 0.34,
+    "y": 5.97988,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0B0B0BFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-0-head",
+   "ObjectId": 6,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 1,
+    "y": 1,
+    "z": 1
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 0.46055,
+     "y": 3.19594,
+     "z": 0
+    },
+    "PointB": {
+     "x": 1.19594,
+     "y": 2.46055,
+     "z": 0
+    },
+    "PointC": {
+     "x": 1.5,
+     "y": 3.5,
+     "z": 0
+    },
+    "Color": "#0B0B0BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-1-shaft",
+   "ObjectId": 7,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.35588,
+    "y": -0.25588,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -45.0
+   },
+   "Scale": {
+    "x": 0.34,
+    "y": 7.36558,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0B0B0BFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-1-head",
+   "ObjectId": 8,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 1,
+    "y": 1,
+    "z": 1
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 1.88055,
+     "y": 2.71594,
+     "z": 0
+    },
+    "PointB": {
+     "x": 2.61594,
+     "y": 1.98055,
+     "z": 0
+    },
+    "PointC": {
+     "x": 2.92,
+     "y": 3.02,
+     "z": 0
+    },
+    "Color": "#0B0B0BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-2-shaft",
+   "ObjectId": 9,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.70412,
+    "y": -1.37588,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -45.0
+   },
+   "Scale": {
+    "x": 0.34,
+    "y": 5.83823,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0B0B0BFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-arrow-2-head",
+   "ObjectId": 10,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.02
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 1,
+    "y": 1,
+    "z": 1
+   },
+   "BlockType": 11,
+   "Properties": {
+    "PointA": {
+     "x": 2.40055,
+     "y": 1.05594,
+     "z": 0
+    },
+    "PointB": {
+     "x": 3.13594,
+     "y": 0.32055,
+     "z": 0
+    },
+    "PointC": {
+     "x": 3.44,
+     "y": 1.36,
+     "z": 0
+    },
+    "Color": "#0B0B0BFF",
+    "Thickness": 0.01,
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-center-ring-outer",
+   "ObjectId": 11,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.024
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 1.78,
+    "y": 0.01,
+    "z": 1.78
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#0B0B0BFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-center-ring-cutout",
+   "ObjectId": 12,
+   "ParentId": 0,
+   "Position": {
+    "x": 0,
+    "y": 0,
+    "z": -0.026
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0,
+    "z": 0
+   },
+   "Scale": {
+    "x": 1.34,
+    "y": 0.01,
+    "z": 1.34
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#F20D0DFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-outline-outer",
+   "ObjectId": 13,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.00599,
+    "y": -0.00971,
+    "z": -0.035
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 7.22861,
+    "y": 0.02,
+    "z": 7.22861
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-text-band",
+   "ObjectId": 14,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.00599,
+    "y": -0.00971,
+    "z": -0.04
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 7.10292,
+    "y": 0.02,
+    "z": 7.10292
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#F8F8F8FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-outline-inner",
+   "ObjectId": 15,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.00599,
+    "y": -0.00971,
+    "z": -0.045
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 6.46384,
+    "y": 0.02,
+    "z": 6.46384
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-white-disc",
+   "ObjectId": 16,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.00599,
+    "y": -0.00971,
+    "z": -0.05
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 6.30225,
+    "y": 0.02,
+    "z": 6.30225
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#F8F8F8FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-red-dot",
+   "ObjectId": 17,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.01796,
+    "y": 0.0,
+    "z": -0.095
+   },
+   "Rotation": {
+    "x": 90.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 1.03113,
+    "y": 0.02,
+    "z": 1.03113
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 2,
+    "PrimitiveFlags": 2,
+    "Color": "#FA0F14FF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-a-shear",
+   "ObjectId": 18,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.66982,
+    "y": -1.85836,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -139.12759
+   },
+   "Scale": {
+    "x": 0.08816,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-a",
+   "ObjectId": 19,
+   "ParentId": 18,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -74.74231
+   },
+   "Scale": {
+    "x": 1.65446,
+    "y": 0.4513,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-b-shear",
+   "ObjectId": 21,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.2793,
+    "y": -1.43641,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 43.85096
+   },
+   "Scale": {
+    "x": 0.01391,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-b",
+   "ObjectId": 22,
+   "ParentId": 21,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.92154
+   },
+   "Scale": {
+    "x": 2.1349,
+    "y": 2.21682,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-c-shear",
+   "ObjectId": 24,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.65636,
+    "y": -1.81346,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 42.78524
+   },
+   "Scale": {
+    "x": 0.09907,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00001-tile-c",
+   "ObjectId": 25,
+   "ParentId": 24,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -74.30167
+   },
+   "Scale": {
+    "x": 1.53746,
+    "y": 0.43211,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-a-shear",
+   "ObjectId": 27,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.72369,
+    "y": -2.37905,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 127.56859
+   },
+   "Scale": {
+    "x": 0.83999,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-a",
+   "ObjectId": 28,
+   "ParentId": 27,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -41.90555
+   },
+   "Scale": {
+    "x": 0.27318,
+    "y": 0.3044,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-b-shear",
+   "ObjectId": 30,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.8404,
+    "y": -2.39701,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Scale": {
+    "x": 2.09296,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-b",
+   "ObjectId": 31,
+   "ParentId": 30,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -24.09484
+   },
+   "Scale": {
+    "x": 0.12217,
+    "y": 0.27318,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-c-shear",
+   "ObjectId": 33,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.72369,
+    "y": -2.48679,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -98.74616
+   },
+   "Scale": {
+    "x": 1.87827,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00002-tile-c",
+   "ObjectId": 34,
+   "ParentId": 33,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -68.13243
+   },
+   "Scale": {
+    "x": 0.3044,
+    "y": 0.12217,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-a-shear",
+   "ObjectId": 36,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.41845,
+    "y": -1.62494,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -136.89652
+   },
+   "Scale": {
+    "x": 0.00489,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-a",
+   "ObjectId": 37,
+   "ParentId": 36,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -39.2638
+   },
+   "Scale": {
+    "x": 1.68611,
+    "y": 2.06268,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-b-shear",
+   "ObjectId": 39,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.15361,
+    "y": -1.34663,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -137.21476
+   },
+   "Scale": {
+    "x": 0.01417,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-b",
+   "ObjectId": 40,
+   "ParentId": 39,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.8258
+   },
+   "Scale": {
+    "x": 1.30542,
+    "y": 0.91999,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-c-shear",
+   "ObjectId": 42,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.02793,
+    "y": -1.20299,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 42.38665
+   },
+   "Scale": {
+    "x": 0.0087,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00003-tile-c",
+   "ObjectId": 43,
+   "ParentId": 42,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -60.05289
+   },
+   "Scale": {
+    "x": 1.84307,
+    "y": 1.06183,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-a-shear",
+   "ObjectId": 45,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.62494,
+    "y": -2.04688,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 41.63354
+   },
+   "Scale": {
+    "x": 0.17416,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-a",
+   "ObjectId": 46,
+   "ParentId": 45,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.14382
+   },
+   "Scale": {
+    "x": 0.72082,
+    "y": 0.54035,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-b-shear",
+   "ObjectId": 48,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.79102,
+    "y": -2.17706,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -117.64598
+   },
+   "Scale": {
+    "x": 0.18086,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-b",
+   "ObjectId": 49,
+   "ParentId": 48,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.26764
+   },
+   "Scale": {
+    "x": 0.52458,
+    "y": 0.71498,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-c-shear",
+   "ObjectId": 51,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.67432,
+    "y": -2.1591,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -128.08877
+   },
+   "Scale": {
+    "x": 0.39498,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00004-tile-c",
+   "ObjectId": 52,
+   "ParentId": 51,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.29994
+   },
+   "Scale": {
+    "x": 0.40939,
+    "y": 0.41952,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-a-shear",
+   "ObjectId": 54,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.6429,
+    "y": -1.9167,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -133.46839
+   },
+   "Scale": {
+    "x": 0.05017,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-a",
+   "ObjectId": 55,
+   "ParentId": 54,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.50107
+   },
+   "Scale": {
+    "x": 0.98108,
+    "y": 1.32581,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-b-shear",
+   "ObjectId": 57,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.47681,
+    "y": -1.78654,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -136.42027
+   },
+   "Scale": {
+    "x": 0.11505,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-b",
+   "ObjectId": 58,
+   "ParentId": 57,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -47.49444
+   },
+   "Scale": {
+    "x": 0.78672,
+    "y": 0.72104,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-c-shear",
+   "ObjectId": 60,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.37806,
+    "y": -1.6384,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 40.45196
+   },
+   "Scale": {
+    "x": 0.05795,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00005-tile-c",
+   "ObjectId": 61,
+   "ParentId": 60,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -55.82849
+   },
+   "Scale": {
+    "x": 1.28792,
+    "y": 0.87433,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-a-shear",
+   "ObjectId": 63,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.05836,
+    "y": -1.93018,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 179.7487
+   },
+   "Scale": {
+    "x": 0.00271,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-a",
+   "ObjectId": 64,
+   "ParentId": 63,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.71148
+   },
+   "Scale": {
+    "x": 1.8543,
+    "y": 2.15494,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-b-shear",
+   "ObjectId": 66,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.05836,
+    "y": -1.49476,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 179.56264
+   },
+   "Scale": {
+    "x": 0.00928,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-b",
+   "ObjectId": 67,
+   "ParentId": 66,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -59.3698
+   },
+   "Scale": {
+    "x": 1.40555,
+    "y": 0.83224,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-c-shear",
+   "ObjectId": 69,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.05386,
+    "y": -1.34214,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.69446
+   },
+   "Scale": {
+    "x": 0.00634,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00006-tile-c",
+   "ObjectId": 70,
+   "ParentId": 69,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -63.00025
+   },
+   "Scale": {
+    "x": 1.83326,
+    "y": 0.93408,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-a-shear",
+   "ObjectId": 72,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.43092,
+    "y": -2.89975,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 83.29016
+   },
+   "Scale": {
+    "x": 0.84301,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-a",
+   "ObjectId": 73,
+   "ParentId": 72,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.74887
+   },
+   "Scale": {
+    "x": 0.28975,
+    "y": 0.31346,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-b-shear",
+   "ObjectId": 75,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.3591,
+    "y": -2.9985,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -45.0
+   },
+   "Scale": {
+    "x": 2.03929,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-b",
+   "ObjectId": 76,
+   "ParentId": 75,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -24.09484
+   },
+   "Scale": {
+    "x": 0.12958,
+    "y": 0.28975,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-c-shear",
+   "ObjectId": 78,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.51172,
+    "y": -2.98055,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -143.97263
+   },
+   "Scale": {
+    "x": 1.88503,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00007-tile-c",
+   "ObjectId": 79,
+   "ParentId": 78,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -67.5406
+   },
+   "Scale": {
+    "x": 0.31346,
+    "y": 0.12958,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-a-shear",
+   "ObjectId": 81,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.09876,
+    "y": -2.59901,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 176.02062
+   },
+   "Scale": {
+    "x": 0.07736,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-a",
+   "ObjectId": 82,
+   "ParentId": 81,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -73.53925
+   },
+   "Scale": {
+    "x": 1.37847,
+    "y": 0.40729,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-b-shear",
+   "ObjectId": 84,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.0808,
+    "y": -2.12319,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -1.12883
+   },
+   "Scale": {
+    "x": 0.01356,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-b",
+   "ObjectId": 85,
+   "ParentId": 84,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.71884
+   },
+   "Scale": {
+    "x": 1.74968,
+    "y": 1.82973,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-c-shear",
+   "ObjectId": 87,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.0808,
+    "y": -2.55861,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -2.16108
+   },
+   "Scale": {
+    "x": 0.08846,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00008-tile-c",
+   "ObjectId": 88,
+   "ParentId": 87,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -72.92579
+   },
+   "Scale": {
+    "x": 1.26434,
+    "y": 0.38834,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-a-shear",
+   "ObjectId": 90,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.25137,
+    "y": -2.54963,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -4.18492
+   },
+   "Scale": {
+    "x": 0.15895,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-a",
+   "ObjectId": 91,
+   "ParentId": 90,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -52.31757
+   },
+   "Scale": {
+    "x": 0.81134,
+    "y": 0.62667,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-b-shear",
+   "ObjectId": 93,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.22893,
+    "y": -2.78304,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -164.15692
+   },
+   "Scale": {
+    "x": 0.18657,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-b",
+   "ObjectId": 94,
+   "ParentId": 93,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.17876
+   },
+   "Scale": {
+    "x": 0.55258,
+    "y": 0.78395,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-c-shear",
+   "ObjectId": 96,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.30075,
+    "y": -2.68429,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -174.50768
+   },
+   "Scale": {
+    "x": 0.38301,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00009-tile-c",
+   "ObjectId": 97,
+   "ParentId": 96,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.04494
+   },
+   "Scale": {
+    "x": 0.43623,
+    "y": 0.48372,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-a-shear",
+   "ObjectId": 99,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.13915,
+    "y": -2.40599,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -179.63737
+   },
+   "Scale": {
+    "x": 0.04529,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-a",
+   "ObjectId": 100,
+   "ParentId": 99,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.01897
+   },
+   "Scale": {
+    "x": 1.13055,
+    "y": 1.61345,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-b-shear",
+   "ObjectId": 102,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.1616,
+    "y": -2.17257,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 177.83892
+   },
+   "Scale": {
+    "x": 0.09447,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-b",
+   "ObjectId": 103,
+   "ParentId": 102,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.3176
+   },
+   "Scale": {
+    "x": 0.92404,
+    "y": 0.94632,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-c-shear",
+   "ObjectId": 105,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.1212,
+    "y": -1.93018,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -4.64508
+   },
+   "Scale": {
+    "x": 0.04353,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00010-tile-c",
+   "ObjectId": 106,
+   "ParentId": 105,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.34193
+   },
+   "Scale": {
+    "x": 1.62631,
+    "y": 1.16682,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-a-shear",
+   "ObjectId": 108,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.68778,
+    "y": -1.6025,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 132.72955
+   },
+   "Scale": {
+    "x": 0.03311,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-a",
+   "ObjectId": 109,
+   "ParentId": 108,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -67.53473
+   },
+   "Scale": {
+    "x": 1.85098,
+    "y": 0.76539,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-b-shear",
+   "ObjectId": 111,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.24339,
+    "y": -1.17606,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -45.48418
+   },
+   "Scale": {
+    "x": 0.00962,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-b",
+   "ObjectId": 112,
+   "ParentId": 111,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.32987
+   },
+   "Scale": {
+    "x": 2.10779,
+    "y": 2.314,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-c-shear",
+   "ObjectId": 114,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.6025,
+    "y": -1.53965,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -46.18119
+   },
+   "Scale": {
+    "x": 0.0426,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00011-tile-c",
+   "ObjectId": 115,
+   "ParentId": 114,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -65.6071
+   },
+   "Scale": {
+    "x": 1.5581,
+    "y": 0.70655,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-a-shear",
+   "ObjectId": 117,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.37456,
+    "y": -1.72818,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 35.53768
+   },
+   "Scale": {
+    "x": 1.1699,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-a",
+   "ObjectId": 118,
+   "ParentId": 117,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -46.80782
+   },
+   "Scale": {
+    "x": 0.2346,
+    "y": 0.22024,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-b-shear",
+   "ObjectId": 120,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.41945,
+    "y": -1.82694,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -87.70939
+   },
+   "Scale": {
+    "x": 1.25297,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-b",
+   "ObjectId": 121,
+   "ParentId": 120,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -41.23659
+   },
+   "Scale": {
+    "x": 0.20564,
+    "y": 0.2346,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-c-shear",
+   "ObjectId": 123,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.48679,
+    "y": -1.73267,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 155.55605
+   },
+   "Scale": {
+    "x": 1.33464,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00012-tile-c",
+   "ObjectId": 124,
+   "ParentId": 123,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -46.96372
+   },
+   "Scale": {
+    "x": 0.22024,
+    "y": 0.20564,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-a-shear",
+   "ObjectId": 126,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.44539,
+    "y": -1.34663,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 133.98302
+   },
+   "Scale": {
+    "x": 0.0024,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-a",
+   "ObjectId": 127,
+   "ParentId": 126,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.74484
+   },
+   "Scale": {
+    "x": 1.94538,
+    "y": 2.25813,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-b-shear",
+   "ObjectId": 129,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.11771,
+    "y": -1.02793,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 133.81881
+   },
+   "Scale": {
+    "x": 0.00822,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-b",
+   "ObjectId": 130,
+   "ParentId": 129,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -59.4843
+   },
+   "Scale": {
+    "x": 1.47386,
+    "y": 0.86871,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-c-shear",
+   "ObjectId": 132,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.00099,
+    "y": -0.9202,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -46.40863
+   },
+   "Scale": {
+    "x": 0.00563,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00013-tile-c",
+   "ObjectId": 133,
+   "ParentId": 132,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -63.07881
+   },
+   "Scale": {
+    "x": 1.91874,
+    "y": 0.97433,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-a-shear",
+   "ObjectId": 135,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.01995,
+    "y": -1.61596,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.29331
+   },
+   "Scale": {
+    "x": 0.11398,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-a",
+   "ObjectId": 136,
+   "ParentId": 135,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -52.71132
+   },
+   "Scale": {
+    "x": 0.78187,
+    "y": 0.59538,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-b-shear",
+   "ObjectId": 138,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.18604,
+    "y": -1.76858,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 139.99374
+   },
+   "Scale": {
+    "x": 0.13706,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-b",
+   "ObjectId": 139,
+   "ParentId": 138,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -34.35332
+   },
+   "Scale": {
+    "x": 0.51441,
+    "y": 0.75258,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-c-shear",
+   "ObjectId": 141,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.14115,
+    "y": -1.66982,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 132.58049
+   },
+   "Scale": {
+    "x": 0.27211,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00014-tile-c",
+   "ObjectId": 142,
+   "ParentId": 141,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -41.71389
+   },
+   "Scale": {
+    "x": 0.41691,
+    "y": 0.46771,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-a-shear",
+   "ObjectId": 144,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.97955,
+    "y": -1.73716,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 124.11447
+   },
+   "Scale": {
+    "x": 0.25356,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-a",
+   "ObjectId": 145,
+   "ParentId": 144,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -76.59674
+   },
+   "Scale": {
+    "x": 1.36247,
+    "y": 0.32467,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-b-shear",
+   "ObjectId": 147,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.60698,
+    "y": -1.43641,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -48.50353
+   },
+   "Scale": {
+    "x": 0.03327,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-b",
+   "ObjectId": 148,
+   "ParentId": 147,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.33426
+   },
+   "Scale": {
+    "x": 1.81489,
+    "y": 1.85756,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-c-shear",
+   "ObjectId": 150,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.93466,
+    "y": -1.75512,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -51.08853
+   },
+   "Scale": {
+    "x": 0.29262,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00015-tile-c",
+   "ObjectId": 151,
+   "ParentId": 150,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -77.15898
+   },
+   "Scale": {
+    "x": 1.29676,
+    "y": 0.29559,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-a-shear",
+   "ObjectId": 153,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.48578,
+    "y": -1.26583,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -52.21738
+   },
+   "Scale": {
+    "x": 0.01948,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-a",
+   "ObjectId": 154,
+   "ParentId": 153,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.93273
+   },
+   "Scale": {
+    "x": 1.64508,
+    "y": 1.19818,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-b-shear",
+   "ObjectId": 156,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.85836,
+    "y": -1.56658,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 130.0862
+   },
+   "Scale": {
+    "x": 0.02152,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-b",
+   "ObjectId": 157,
+   "ParentId": 156,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -34.4541
+   },
+   "Scale": {
+    "x": 1.10643,
+    "y": 1.61263,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-c-shear",
+   "ObjectId": 159,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.69227,
+    "y": -1.41396,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 128.91147
+   },
+   "Scale": {
+    "x": 0.04349,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00016-tile-c",
+   "ObjectId": 160,
+   "ParentId": 159,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.28685
+   },
+   "Scale": {
+    "x": 0.91193,
+    "y": 0.96816,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-a-shear",
+   "ObjectId": 162,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.41945,
+    "y": -0.10324,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -94.1665
+   },
+   "Scale": {
+    "x": 0.08033,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-a",
+   "ObjectId": 163,
+   "ParentId": 162,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -74.85309
+   },
+   "Scale": {
+    "x": 1.8222,
+    "y": 0.49327,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-b-shear",
+   "ObjectId": 165,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.78654,
+    "y": -0.07631,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 88.5258
+   },
+   "Scale": {
+    "x": 0.01256,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-b",
+   "ObjectId": 166,
+   "ParentId": 165,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.93368
+   },
+   "Scale": {
+    "x": 2.3539,
+    "y": 2.44319,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-c-shear",
+   "ObjectId": 168,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.37456,
+    "y": -0.0808,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 87.56335
+   },
+   "Scale": {
+    "x": 0.09003,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00017-tile-c",
+   "ObjectId": 169,
+   "ParentId": 168,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -74.40197
+   },
+   "Scale": {
+    "x": 1.69489,
+    "y": 0.47316,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-a-shear",
+   "ObjectId": 171,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.91771,
+    "y": -0.46683,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 173.29016
+   },
+   "Scale": {
+    "x": 0.67296,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-a",
+   "ObjectId": 172,
+   "ParentId": 171,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.18644
+   },
+   "Scale": {
+    "x": 0.27545,
+    "y": 0.3261,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-b-shear",
+   "ObjectId": 174,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.9985,
+    "y": -0.38604,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -22.9321
+   },
+   "Scale": {
+    "x": 0.24728,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-b",
+   "ObjectId": 175,
+   "ParentId": 174,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.73021
+   },
+   "Scale": {
+    "x": 0.53717,
+    "y": 0.45507,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-c-shear",
+   "ObjectId": 177,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.98055,
+    "y": -0.53865,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -168.69007
+   },
+   "Scale": {
+    "x": 0.31125,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00018-tile-c",
+   "ObjectId": 178,
+   "ParentId": 177,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.96168
+   },
+   "Scale": {
+    "x": 0.38229,
+    "y": 0.50802,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-a-shear",
+   "ObjectId": 180,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.05586,
+    "y": -0.11222,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -92.22157
+   },
+   "Scale": {
+    "x": 0.00336,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-a",
+   "ObjectId": 181,
+   "ParentId": 180,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -38.77187
+   },
+   "Scale": {
+    "x": 1.81287,
+    "y": 2.25703,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-b-shear",
+   "ObjectId": 183,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.64738,
+    "y": -0.09876,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -92.43665
+   },
+   "Scale": {
+    "x": 0.0093,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-b",
+   "ObjectId": 184,
+   "ParentId": 183,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.4366
+   },
+   "Scale": {
+    "x": 1.41338,
+    "y": 1.04827,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-c-shear",
+   "ObjectId": 186,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.42294,
+    "y": -0.08528,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 87.30219
+   },
+   "Scale": {
+    "x": 0.00551,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00019-tile-c",
+   "ObjectId": 187,
+   "ParentId": 186,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -59.21624
+   },
+   "Scale": {
+    "x": 2.04827,
+    "y": 1.22023,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-a-shear",
+   "ObjectId": 189,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.60349,
+    "y": -0.28728,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 85.36454
+   },
+   "Scale": {
+    "x": 0.19292,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-a",
+   "ObjectId": 190,
+   "ParentId": 189,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -51.41506
+   },
+   "Scale": {
+    "x": 0.72362,
+    "y": 0.57735,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-b-shear",
+   "ObjectId": 192,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.80997,
+    "y": -0.26035,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -69.44395
+   },
+   "Scale": {
+    "x": 0.2344,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-b",
+   "ObjectId": 193,
+   "ParentId": 192,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.61053
+   },
+   "Scale": {
+    "x": 0.49625,
+    "y": 0.69289,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-c-shear",
+   "ObjectId": 195,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.72917,
+    "y": -0.34115,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -82.56859
+   },
+   "Scale": {
+    "x": 0.48591,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00020-tile-c",
+   "ObjectId": 196,
+   "ParentId": 195,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -41.26198
+   },
+   "Scale": {
+    "x": 0.38147,
+    "y": 0.4348,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-a-shear",
+   "ObjectId": 198,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.48229,
+    "y": -0.16608,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -88.74555
+   },
+   "Scale": {
+    "x": 0.0555,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-a",
+   "ObjectId": 199,
+   "ParentId": 198,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.46049
+   },
+   "Scale": {
+    "x": 0.99125,
+    "y": 1.39171,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-b-shear",
+   "ObjectId": 201,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.27581,
+    "y": -0.19302,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -91.88819
+   },
+   "Scale": {
+    "x": 0.11881,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-b",
+   "ObjectId": 202,
+   "ParentId": 201,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -45.15896
+   },
+   "Scale": {
+    "x": 0.80499,
+    "y": 0.80053,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-c-shear",
+   "ObjectId": 204,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.07382,
+    "y": -0.15262,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 84.95755
+   },
+   "Scale": {
+    "x": 0.05602,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00021-tile-c",
+   "ObjectId": 205,
+   "ParentId": 204,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.68781
+   },
+   "Scale": {
+    "x": 1.38914,
+    "y": 0.98401,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-a-shear",
+   "ObjectId": 207,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.89077,
+    "y": 0.41297,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -7.12502
+   },
+   "Scale": {
+    "x": 0.94072,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-a",
+   "ObjectId": 208,
+   "ParentId": 207,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.13041
+   },
+   "Scale": {
+    "x": 0.26974,
+    "y": 0.29821,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-b-shear",
+   "ObjectId": 210,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.99401,
+    "y": 0.34564,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -131.82017
+   },
+   "Scale": {
+    "x": 1.66771,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-b",
+   "ObjectId": 211,
+   "ParentId": 210,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -31.94806
+   },
+   "Scale": {
+    "x": 0.16821,
+    "y": 0.26974,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-c-shear",
+   "ObjectId": 213,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.97606,
+    "y": 0.48928,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 123.11134
+   },
+   "Scale": {
+    "x": 1.5085,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00022-tile-c",
+   "ObjectId": 214,
+   "ParentId": 213,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -60.57369
+   },
+   "Scale": {
+    "x": 0.29821,
+    "y": 0.16821,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-a-shear",
+   "ObjectId": 216,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.96259,
+    "y": 0.08528,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 72.07208
+   },
+   "Scale": {
+    "x": 0.08019,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-a",
+   "ObjectId": 217,
+   "ParentId": 216,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -61.97053
+   },
+   "Scale": {
+    "x": 0.39331,
+    "y": 0.20939,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-b-shear",
+   "ObjectId": 219,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.84139,
+    "y": 0.05386,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -102.01148
+   },
+   "Scale": {
+    "x": 0.03727,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-b",
+   "ObjectId": 220,
+   "ParentId": 219,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.40208
+   },
+   "Scale": {
+    "x": 0.38834,
+    "y": 0.45626,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-c-shear",
+   "ObjectId": 222,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.93117,
+    "y": 0.06733,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -104.53446
+   },
+   "Scale": {
+    "x": 0.12175,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00023-tile-c",
+   "ObjectId": 223,
+   "ParentId": 222,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -58.12087
+   },
+   "Scale": {
+    "x": 0.29533,
+    "y": 0.18368,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-a-shear",
+   "ObjectId": 225,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.79102,
+    "y": 0.02694,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 91.22539
+   },
+   "Scale": {
+    "x": 0.01115,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-a",
+   "ObjectId": 226,
+   "ParentId": 225,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -38.99062
+   },
+   "Scale": {
+    "x": 1.46741,
+    "y": 1.8127,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-b-shear",
+   "ObjectId": 228,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.45885,
+    "y": 0.0404,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 90.50703
+   },
+   "Scale": {
+    "x": 0.03144,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-b",
+   "ObjectId": 229,
+   "ParentId": 228,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.03268
+   },
+   "Scale": {
+    "x": 1.1404,
+    "y": 0.82756,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-c-shear",
+   "ObjectId": 231,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.28379,
+    "y": 0.03142,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -90.37694
+   },
+   "Scale": {
+    "x": 0.01891,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00024-tile-c",
+   "ObjectId": 232,
+   "ParentId": 231,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -59.56167
+   },
+   "Scale": {
+    "x": 1.63408,
+    "y": 0.96018,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-a-shear",
+   "ObjectId": 234,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.56309,
+    "y": 0.24688,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -93.71529
+   },
+   "Scale": {
+    "x": 0.16021,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-a",
+   "ObjectId": 235,
+   "ParentId": 234,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.27496
+   },
+   "Scale": {
+    "x": 0.77115,
+    "y": 0.57533,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-b-shear",
+   "ObjectId": 237,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.78753,
+    "y": 0.22444,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 105.32151
+   },
+   "Scale": {
+    "x": 0.16783,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-b",
+   "ObjectId": 238,
+   "ParentId": 237,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.99663
+   },
+   "Scale": {
+    "x": 0.55469,
+    "y": 0.76356,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-c-shear",
+   "ObjectId": 240,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.68429,
+    "y": 0.29177,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 95.71059
+   },
+   "Scale": {
+    "x": 0.3623,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00025-tile-c",
+   "ObjectId": 241,
+   "ParentId": 240,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.14895
+   },
+   "Scale": {
+    "x": 0.43641,
+    "y": 0.44957,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-a-shear",
+   "ObjectId": 243,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.54065,
+    "y": 0.08528,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 85.08821
+   },
+   "Scale": {
+    "x": 0.06371,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-a",
+   "ObjectId": 244,
+   "ParentId": 243,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -62.44097
+   },
+   "Scale": {
+    "x": 1.42013,
+    "y": 0.74114,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-b-shear",
+   "ObjectId": 246,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.08728,
+    "y": 0.06733,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -90.3274
+   },
+   "Scale": {
+    "x": 0.0285,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-b",
+   "ObjectId": 247,
+   "ParentId": 246,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.55583
+   },
+   "Scale": {
+    "x": 1.41876,
+    "y": 1.65789,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-c-shear",
+   "ObjectId": 249,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.41945,
+    "y": 0.05386,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -92.26795
+   },
+   "Scale": {
+    "x": 0.09512,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00026-tile-c",
+   "ObjectId": 250,
+   "ParentId": 249,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -58.71623
+   },
+   "Scale": {
+    "x": 1.07709,
+    "y": 0.65447,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-a-shear",
+   "ObjectId": 252,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.98404,
+    "y": 0.1212,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -94.8884
+   },
+   "Scale": {
+    "x": 0.0461,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-a",
+   "ObjectId": 253,
+   "ParentId": 252,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.44541
+   },
+   "Scale": {
+    "x": 1.54754,
+    "y": 1.10608,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-b-shear",
+   "ObjectId": 255,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.43741,
+    "y": 0.13915,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 90.37944
+   },
+   "Scale": {
+    "x": 0.0473,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-b",
+   "ObjectId": 256,
+   "ParentId": 255,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.14259
+   },
+   "Scale": {
+    "x": 1.08378,
+    "y": 1.53964,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-c-shear",
+   "ObjectId": 258,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.21297,
+    "y": 0.1616,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 87.73205
+   },
+   "Scale": {
+    "x": 0.09937,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00027-tile-c",
+   "ObjectId": 259,
+   "ParentId": 258,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.55976
+   },
+   "Scale": {
+    "x": 0.88432,
+    "y": 0.89802,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-a-shear",
+   "ObjectId": 261,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.37456,
+    "y": 1.74614,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -142.12502
+   },
+   "Scale": {
+    "x": 0.68416,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-a",
+   "ObjectId": 262,
+   "ParentId": 261,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -41.61313
+   },
+   "Scale": {
+    "x": 0.28324,
+    "y": 0.31887,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-b-shear",
+   "ObjectId": 264,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.37905,
+    "y": 1.85836,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 21.03751
+   },
+   "Scale": {
+    "x": 0.26011,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-b",
+   "ObjectId": 265,
+   "ParentId": 264,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -50.04683
+   },
+   "Scale": {
+    "x": 0.53252,
+    "y": 0.4461,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-c-shear",
+   "ObjectId": 267,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.47332,
+    "y": 1.73716,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -123.99646
+   },
+   "Scale": {
+    "x": 0.30547,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00028-tile-c",
+   "ObjectId": 268,
+   "ParentId": 267,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -37.6567
+   },
+   "Scale": {
+    "x": 0.39509,
+    "y": 0.51198,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-a-shear",
+   "ObjectId": 270,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.77756,
+    "y": 1.65187,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.31603
+   },
+   "Scale": {
+    "x": 0.08338,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-a",
+   "ObjectId": 271,
+   "ParentId": 270,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -75.4103
+   },
+   "Scale": {
+    "x": 1.81403,
+    "y": 0.47217,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-b-shear",
+   "ObjectId": 273,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.31072,
+    "y": 1.22544,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 133.36342
+   },
+   "Scale": {
+    "x": 0.01239,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-b",
+   "ObjectId": 274,
+   "ParentId": 273,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.0184
+   },
+   "Scale": {
+    "x": 2.35974,
+    "y": 2.44201,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-c-shear",
+   "ObjectId": 276,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.73267,
+    "y": 1.6384,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 132.4105
+   },
+   "Scale": {
+    "x": 0.09274,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00029-tile-c",
+   "ObjectId": 277,
+   "ParentId": 276,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -75.02367
+   },
+   "Scale": {
+    "x": 1.69668,
+    "y": 0.45387,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-a-shear",
+   "ObjectId": 279,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.98853,
+    "y": 1.62942,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 129.19327
+   },
+   "Scale": {
+    "x": 0.16415,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-a",
+   "ObjectId": 280,
+   "ParentId": 279,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -50.69866
+   },
+   "Scale": {
+    "x": 0.80923,
+    "y": 0.66238,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-b-shear",
+   "ObjectId": 282,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.13666,
+    "y": 1.80449,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -27.97947
+   },
+   "Scale": {
+    "x": 0.23275,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-b",
+   "ObjectId": 283,
+   "ParentId": 282,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -33.90247
+   },
+   "Scale": {
+    "x": 0.50402,
+    "y": 0.75,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-c-shear",
+   "ObjectId": 285,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.13217,
+    "y": 1.69227,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.23636
+   },
+   "Scale": {
+    "x": 0.44534,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00030-tile-c",
+   "ObjectId": 286,
+   "ParentId": 285,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -38.4225
+   },
+   "Scale": {
+    "x": 0.39587,
+    "y": 0.49906,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-a-shear",
+   "ObjectId": 288,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.49028,
+    "y": 1.3601,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -47.51872
+   },
+   "Scale": {
+    "x": 0.00105,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-a",
+   "ObjectId": 289,
+   "ParentId": 288,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.18692
+   },
+   "Scale": {
+    "x": 1.94194,
+    "y": 2.29904,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-b-shear",
+   "ObjectId": 291,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.15811,
+    "y": 1.05486,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -47.5895
+   },
+   "Scale": {
+    "x": 0.00337,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-b",
+   "ObjectId": 292,
+   "ParentId": 291,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -57.63689
+   },
+   "Scale": {
+    "x": 1.48353,
+    "y": 0.94014,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-c-shear",
+   "ObjectId": 294,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.02344,
+    "y": 0.93367,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 132.31622
+   },
+   "Scale": {
+    "x": 0.00221,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00031-tile-c",
+   "ObjectId": 295,
+   "ParentId": 294,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -61.84047
+   },
+   "Scale": {
+    "x": 1.99213,
+    "y": 1.06636,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-a-shear",
+   "ObjectId": 297,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.47681,
+    "y": 1.30623,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 130.1469
+   },
+   "Scale": {
+    "x": 0.04334,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-a",
+   "ObjectId": 298,
+   "ParentId": 297,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.78037
+   },
+   "Scale": {
+    "x": 1.5325,
+    "y": 1.08185,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-b-shear",
+   "ObjectId": 300,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.80898,
+    "y": 1.61147,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -45.0
+   },
+   "Scale": {
+    "x": 0.04272,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-b",
+   "ObjectId": 301,
+   "ParentId": 300,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.45349
+   },
+   "Scale": {
+    "x": 1.09442,
+    "y": 1.53696,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-c-shear",
+   "ObjectId": 303,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.66085,
+    "y": 1.43641,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -47.41951
+   },
+   "Scale": {
+    "x": 0.09153,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00032-tile-c",
+   "ObjectId": 304,
+   "ParentId": 303,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -45.24961
+   },
+   "Scale": {
+    "x": 0.88993,
+    "y": 0.88221,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-a-shear",
+   "ObjectId": 306,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.75062,
+    "y": 2.45087,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.46232
+   },
+   "Scale": {
+    "x": 0.40316,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-a",
+   "ObjectId": 307,
+   "ParentId": 306,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.1274
+   },
+   "Scale": {
+    "x": 0.24687,
+    "y": 0.3509,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-b-shear",
+   "ObjectId": 309,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.85836,
+    "y": 2.42394,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 116.56505
+   },
+   "Scale": {
+    "x": 0.13487,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-b",
+   "ObjectId": 310,
+   "ParentId": 309,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.87155
+   },
+   "Scale": {
+    "x": 0.55427,
+    "y": 0.46721,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-c-shear",
+   "ObjectId": 312,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.73267,
+    "y": 2.51371,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.2643
+   },
+   "Scale": {
+    "x": 0.23024,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00033-tile-c",
+   "ObjectId": 313,
+   "ParentId": 312,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -31.76044
+   },
+   "Scale": {
+    "x": 0.30644,
+    "y": 0.495,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-a-shear",
+   "ObjectId": 315,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.46683,
+    "y": -0.1616,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 21.37062
+   },
+   "Scale": {
+    "x": 0.0676,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-a",
+   "ObjectId": 316,
+   "ParentId": 315,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -51.05637
+   },
+   "Scale": {
+    "x": 0.47904,
+    "y": 0.38714,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-b-shear",
+   "ObjectId": 318,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.40848,
+    "y": -0.28279,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -149.03624
+   },
+   "Scale": {
+    "x": 0.10917,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-b",
+   "ObjectId": 319,
+   "ParentId": 318,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -31.23591
+   },
+   "Scale": {
+    "x": 0.26392,
+    "y": 0.43516,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-c-shear",
+   "ObjectId": 321,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.44439,
+    "y": -0.24688,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -154.29005
+   },
+   "Scale": {
+    "x": 0.1875,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00034-tile-c",
+   "ObjectId": 322,
+   "ParentId": 321,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.65166
+   },
+   "Scale": {
+    "x": 0.22305,
+    "y": 0.29977,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-a-shear",
+   "ObjectId": 324,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.10324,
+    "y": -0.46234,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 83.92754
+   },
+   "Scale": {
+    "x": 0.11542,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-a",
+   "ObjectId": 325,
+   "ParentId": 324,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -56.43187
+   },
+   "Scale": {
+    "x": 0.49106,
+    "y": 0.32586,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-b-shear",
+   "ObjectId": 327,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.04488,
+    "y": -0.46234,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -84.50768
+   },
+   "Scale": {
+    "x": 0.09011,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-b",
+   "ObjectId": 328,
+   "ParentId": 327,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -37.53604
+   },
+   "Scale": {
+    "x": 0.39685,
+    "y": 0.51652,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-c-shear",
+   "ObjectId": 330,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.0404,
+    "y": -0.48479,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -90.0
+   },
+   "Scale": {
+    "x": 0.22073,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00035-tile-c",
+   "ObjectId": 331,
+   "ParentId": 330,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.35737
+   },
+   "Scale": {
+    "x": 0.31222,
+    "y": 0.26801,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-a-shear",
+   "ObjectId": 333,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.37257,
+    "y": -0.30524,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 145.00798
+   },
+   "Scale": {
+    "x": 0.08402,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-a",
+   "ObjectId": 334,
+   "ParentId": 333,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -56.5239
+   },
+   "Scale": {
+    "x": 0.38086,
+    "y": 0.25186,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-b-shear",
+   "ObjectId": 336,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.43092,
+    "y": -0.20648,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -26.56505
+   },
+   "Scale": {
+    "x": 0.06641,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-b",
+   "ObjectId": 337,
+   "ParentId": 336,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -37.267
+   },
+   "Scale": {
+    "x": 0.30389,
+    "y": 0.39939,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-c-shear",
+   "ObjectId": 339,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.40848,
+    "y": -0.26932,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -30.57923
+   },
+   "Scale": {
+    "x": 0.16041,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00036-tile-c",
+   "ObjectId": 340,
+   "ParentId": 339,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.09394
+   },
+   "Scale": {
+    "x": 0.24081,
+    "y": 0.20864,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-a-shear",
+   "ObjectId": 342,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.3591,
+    "y": 0.1975,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -147.80427
+   },
+   "Scale": {
+    "x": 0.13715,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-a",
+   "ObjectId": 343,
+   "ParentId": 342,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.717
+   },
+   "Scale": {
+    "x": 0.64139,
+    "y": 0.47085,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-b-shear",
+   "ObjectId": 345,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.2379,
+    "y": 0.34115,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 48.21548
+   },
+   "Scale": {
+    "x": 0.14131,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-b",
+   "ObjectId": 346,
+   "ParentId": 345,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.80816
+   },
+   "Scale": {
+    "x": 0.45983,
+    "y": 0.63738,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-c-shear",
+   "ObjectId": 348,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.32768,
+    "y": 0.29626,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 40.156
+   },
+   "Scale": {
+    "x": 0.30399,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00037-tile-c",
+   "ObjectId": 349,
+   "ParentId": 348,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.46068
+   },
+   "Scale": {
+    "x": 0.36566,
+    "y": 0.37261,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-a-shear",
+   "ObjectId": 351,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.66982,
+    "y": 2.10075,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -141.58194
+   },
+   "Scale": {
+    "x": 0.22127,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-a",
+   "ObjectId": 352,
+   "ParentId": 351,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -48.9648
+   },
+   "Scale": {
+    "x": 0.69625,
+    "y": 0.60599,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-b-shear",
+   "ObjectId": 354,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.82694,
+    "y": 2.21746,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 71.27421
+   },
+   "Scale": {
+    "x": 0.32807,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-b",
+   "ObjectId": 355,
+   "ParentId": 354,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.30092
+   },
+   "Scale": {
+    "x": 0.44888,
+    "y": 0.63395,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-c-shear",
+   "ObjectId": 357,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.7192,
+    "y": 2.24439,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 53.39293
+   },
+   "Scale": {
+    "x": 0.65815,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00038-tile-c",
+   "ObjectId": 358,
+   "ParentId": 357,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.85859
+   },
+   "Scale": {
+    "x": 0.3261,
+    "y": 0.43498,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-a-shear",
+   "ObjectId": 360,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.28279,
+    "y": -0.1975,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 47.53356
+   },
+   "Scale": {
+    "x": 0.21056,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-a",
+   "ObjectId": 361,
+   "ParentId": 360,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.85987
+   },
+   "Scale": {
+    "x": 0.80537,
+    "y": 0.58815,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-b-shear",
+   "ObjectId": 363,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.07631,
+    "y": -0.3187,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -108.869
+   },
+   "Scale": {
+    "x": 0.19022,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-b",
+   "ObjectId": 364,
+   "ParentId": 363,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -37.70392
+   },
+   "Scale": {
+    "x": 0.63664,
+    "y": 0.8236,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-c-shear",
+   "ObjectId": 366,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.22444,
+    "y": -0.3187,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -120.41108
+   },
+   "Scale": {
+    "x": 0.452,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00039-tile-c",
+   "ObjectId": 367,
+   "ParentId": 366,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -46.92473
+   },
+   "Scale": {
+    "x": 0.4858,
+    "y": 0.45421,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-a-shear",
+   "ObjectId": 369,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.27382,
+    "y": -0.09876,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -179.24615
+   },
+   "Scale": {
+    "x": 0.27822,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-a",
+   "ObjectId": 370,
+   "ParentId": 369,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -57.59602
+   },
+   "Scale": {
+    "x": 0.80015,
+    "y": 0.50787,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-b-shear",
+   "ObjectId": 372,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.21097,
+    "y": 0.14364,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 25.4892
+   },
+   "Scale": {
+    "x": 0.16206,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-b",
+   "ObjectId": 373,
+   "ParentId": 372,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.69468
+   },
+   "Scale": {
+    "x": 0.77457,
+    "y": 0.90069,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-c-shear",
+   "ObjectId": 375,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.33217,
+    "y": 0.0,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 14.53446
+   },
+   "Scale": {
+    "x": 0.4996,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00040-tile-c",
+   "ObjectId": 376,
+   "ParentId": 375,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -55.34987
+   },
+   "Scale": {
+    "x": 0.57221,
+    "y": 0.39548,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-a-shear",
+   "ObjectId": 378,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.40499,
+    "y": 1.62494,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -140.30733
+   },
+   "Scale": {
+    "x": 0.06052,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-a",
+   "ObjectId": 379,
+   "ParentId": 378,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -54.51162
+   },
+   "Scale": {
+    "x": 1.3194,
+    "y": 0.94072,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-b-shear",
+   "ObjectId": 381,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.66982,
+    "y": 1.90773,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 46.56507
+   },
+   "Scale": {
+    "x": 0.06111,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-b",
+   "ObjectId": 382,
+   "ParentId": 381,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.33085
+   },
+   "Scale": {
+    "x": 0.93341,
+    "y": 1.31681,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-c-shear",
+   "ObjectId": 384,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.51272,
+    "y": 1.79102,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 43.12212
+   },
+   "Scale": {
+    "x": 0.1297,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00041-tile-c",
+   "ObjectId": 385,
+   "ParentId": 384,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.8308
+   },
+   "Scale": {
+    "x": 0.75876,
+    "y": 0.76325,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-a-shear",
+   "ObjectId": 387,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.1975,
+    "y": 0.04488,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -165.46554
+   },
+   "Scale": {
+    "x": 1.04067,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-a",
+   "ObjectId": 388,
+   "ParentId": 387,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -55.27118
+   },
+   "Scale": {
+    "x": 0.57167,
+    "y": 0.39627,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-b-shear",
+   "ObjectId": 390,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.05386,
+    "y": 0.16608,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 59.58892
+   },
+   "Scale": {
+    "x": 1.21334,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-b",
+   "ObjectId": 391,
+   "ParentId": 390,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -30.733
+   },
+   "Scale": {
+    "x": 0.33988,
+    "y": 0.57167,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-c-shear",
+   "ObjectId": 393,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.00898,
+    "y": -0.07631,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.844
+   },
+   "Scale": {
+    "x": 1.75039,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00042-tile-c",
+   "ObjectId": 394,
+   "ParentId": 393,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.38042
+   },
+   "Scale": {
+    "x": 0.39627,
+    "y": 0.33988,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-a-shear",
+   "ObjectId": 396,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.53516,
+    "y": 1.66982,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -134.48384
+   },
+   "Scale": {
+    "x": 0.03324,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-a",
+   "ObjectId": 397,
+   "ParentId": 396,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.16827
+   },
+   "Scale": {
+    "x": 1.31403,
+    "y": 1.45078,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-b-shear",
+   "ObjectId": 399,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.77306,
+    "y": 1.8808,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -136.87788
+   },
+   "Scale": {
+    "x": 0.14152,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-b",
+   "ObjectId": 400,
+   "ParentId": 399,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -64.68636
+   },
+   "Scale": {
+    "x": 0.97289,
+    "y": 0.46017,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-c-shear",
+   "ObjectId": 402,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.8,
+    "y": 1.95262,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 39.44703
+   },
+   "Scale": {
+    "x": 0.10675,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00043-tile-c",
+   "ObjectId": 403,
+   "ParentId": 402,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -66.57572
+   },
+   "Scale": {
+    "x": 1.17048,
+    "y": 0.5071,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-a-shear",
+   "ObjectId": 405,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.10424,
+    "y": 1.19401,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 45.0
+   },
+   "Scale": {
+    "x": 0.0483,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-a",
+   "ObjectId": 406,
+   "ParentId": 405,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -48.18969
+   },
+   "Scale": {
+    "x": 1.1829,
+    "y": 1.05802,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-b-shear",
+   "ObjectId": 408,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.93815,
+    "y": 1.00099,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -136.32198
+   },
+   "Scale": {
+    "x": 0.0249,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-b",
+   "ObjectId": 409,
+   "ParentId": 408,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -56.28706
+   },
+   "Scale": {
+    "x": 1.90736,
+    "y": 1.27268,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-c-shear",
+   "ObjectId": 411,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.34214,
+    "y": 1.40499,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 46.22758
+   },
+   "Scale": {
+    "x": 0.02069,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00044-tile-c",
+   "ObjectId": 412,
+   "ParentId": 411,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.71686
+   },
+   "Scale": {
+    "x": 1.47628,
+    "y": 1.97937,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-a-shear",
+   "ObjectId": 414,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.3591,
+    "y": 0.25586,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 138.21548
+   },
+   "Scale": {
+    "x": 0.14131,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-a",
+   "ObjectId": 415,
+   "ParentId": 414,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -35.80816
+   },
+   "Scale": {
+    "x": 0.45983,
+    "y": 0.63738,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-b-shear",
+   "ObjectId": 417,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.31422,
+    "y": 0.34564,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 130.156
+   },
+   "Scale": {
+    "x": 0.30399,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-b",
+   "ObjectId": 418,
+   "ParentId": 417,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -44.46068
+   },
+   "Scale": {
+    "x": 0.36566,
+    "y": 0.37261,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-c-shear",
+   "ObjectId": 420,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.21546,
+    "y": 0.37706,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -57.80427
+   },
+   "Scale": {
+    "x": 0.13715,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00045-tile-c",
+   "ObjectId": 421,
+   "ParentId": 420,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.717
+   },
+   "Scale": {
+    "x": 0.64139,
+    "y": 0.47085,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-a-shear",
+   "ObjectId": 423,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.44439,
+    "y": 2.91771,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -96.91123
+   },
+   "Scale": {
+    "x": 0.69508,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-a",
+   "ObjectId": 424,
+   "ParentId": 423,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -39.07267
+   },
+   "Scale": {
+    "x": 0.26125,
+    "y": 0.32178,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-b-shear",
+   "ObjectId": 426,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.36359,
+    "y": 2.9985,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 66.66596
+   },
+   "Scale": {
+    "x": 0.24638,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-b",
+   "ObjectId": 427,
+   "ParentId": 426,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -49.25946
+   },
+   "Scale": {
+    "x": 0.52473,
+    "y": 0.45198,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-c-shear",
+   "ObjectId": 429,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.51172,
+    "y": 2.98055,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -78.23171
+   },
+   "Scale": {
+    "x": 0.32616,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00046-tile-c",
+   "ObjectId": 430,
+   "ParentId": 429,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.73475
+   },
+   "Scale": {
+    "x": 0.36566,
+    "y": 0.48995,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-a-shear",
+   "ObjectId": 432,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.08528,
+    "y": 2.94464,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -17.92792
+   },
+   "Scale": {
+    "x": 0.08019,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-a",
+   "ObjectId": 433,
+   "ParentId": 432,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -61.97053
+   },
+   "Scale": {
+    "x": 0.39331,
+    "y": 0.20939,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-b-shear",
+   "ObjectId": 435,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.05386,
+    "y": 2.82344,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 167.98852
+   },
+   "Scale": {
+    "x": 0.03727,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-b",
+   "ObjectId": 436,
+   "ParentId": 435,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -40.40208
+   },
+   "Scale": {
+    "x": 0.38834,
+    "y": 0.45626,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-c-shear",
+   "ObjectId": 438,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.06733,
+    "y": 2.91321,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 165.46554
+   },
+   "Scale": {
+    "x": 0.12175,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00047-tile-c",
+   "ObjectId": 439,
+   "ParentId": 438,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -58.12087
+   },
+   "Scale": {
+    "x": 0.29533,
+    "y": 0.18368,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-a-shear",
+   "ObjectId": 441,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.0404,
+    "y": 1.87631,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 2.44407
+   },
+   "Scale": {
+    "x": 0.03617,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-a",
+   "ObjectId": 442,
+   "ParentId": 441,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -33.95501
+   },
+   "Scale": {
+    "x": 1.1432,
+    "y": 1.69773,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-b-shear",
+   "ObjectId": 444,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.06733,
+    "y": 1.64738,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.50703
+   },
+   "Scale": {
+    "x": 0.07104,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-b",
+   "ObjectId": 445,
+   "ParentId": 444,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -42.23186
+   },
+   "Scale": {
+    "x": 0.94706,
+    "y": 1.04329,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-c-shear",
+   "ObjectId": 447,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.04488,
+    "y": 1.36908,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 178.69061
+   },
+   "Scale": {
+    "x": 0.03079,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00048-tile-c",
+   "ObjectId": 448,
+   "ParentId": 447,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.44374
+   },
+   "Scale": {
+    "x": 1.75323,
+    "y": 1.29999,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-a-shear",
+   "ObjectId": 450,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.2783,
+    "y": 2.63043,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 176.63354
+   },
+   "Scale": {
+    "x": 0.2076,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-a",
+   "ObjectId": 451,
+   "ParentId": 450,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -52.18776
+   },
+   "Scale": {
+    "x": 0.671,
+    "y": 0.52071,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-b-shear",
+   "ObjectId": 453,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.24688,
+    "y": 2.82344,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 22.28559
+   },
+   "Scale": {
+    "x": 0.22418,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-b",
+   "ObjectId": 454,
+   "ParentId": 453,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.64221
+   },
+   "Scale": {
+    "x": 0.49058,
+    "y": 0.65955,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-c-shear",
+   "ObjectId": 456,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.32768,
+    "y": 2.74265,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 9.24611
+   },
+   "Scale": {
+    "x": 0.49229,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00049-tile-c",
+   "ObjectId": 457,
+   "ParentId": 456,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -43.52016
+   },
+   "Scale": {
+    "x": 0.37406,
+    "y": 0.3939,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-a-shear",
+   "ObjectId": 459,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.09876,
+    "y": 2.62593,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -4.35698
+   },
+   "Scale": {
+    "x": 0.07676,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-a",
+   "ObjectId": 460,
+   "ParentId": 459,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -59.29643
+   },
+   "Scale": {
+    "x": 1.12896,
+    "y": 0.67042,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-b-shear",
+   "ObjectId": 462,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.09426,
+    "y": 2.27581,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -177.78034
+   },
+   "Scale": {
+    "x": 0.04584,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-b",
+   "ObjectId": 463,
+   "ParentId": 462,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -39.02997
+   },
+   "Scale": {
+    "x": 1.01366,
+    "y": 1.25043,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-c-shear",
+   "ObjectId": 465,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.06733,
+    "y": 2.50474,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 179.26548
+   },
+   "Scale": {
+    "x": 0.12899,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00050-tile-c",
+   "ObjectId": 466,
+   "ParentId": 465,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -53.89428
+   },
+   "Scale": {
+    "x": 0.78583,
+    "y": 0.57316,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-a-shear",
+   "ObjectId": 468,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.1571,
+    "y": 2.20399,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 175.44623
+   },
+   "Scale": {
+    "x": 0.07114,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-a",
+   "ObjectId": 469,
+   "ParentId": 468,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -55.95747
+   },
+   "Scale": {
+    "x": 1.17121,
+    "y": 0.79125,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-b-shear",
+   "ObjectId": 471,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.1616,
+    "y": 2.55411,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 2.83879
+   },
+   "Scale": {
+    "x": 0.06029,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-b",
+   "ObjectId": 472,
+   "ParentId": 471,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -36.71232
+   },
+   "Scale": {
+    "x": 0.90302,
+    "y": 1.21095,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-c-shear",
+   "ObjectId": 474,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.19302,
+    "y": 2.3611,
+    "z": -0.065
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -0.73452
+   },
+   "Scale": {
+    "x": 0.14009,
+    "y": 0.72,
+    "z": 1.0
+   },
+   "BlockType": 0,
+   "Properties": {
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-plague-petal-tri-00051-tile-c",
+   "ObjectId": 475,
+   "ParentId": 474,
+   "Position": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+   },
+   "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": -47.87195
+   },
+   "Scale": {
+    "x": 0.72136,
+    "y": 0.65244,
+    "z": 1.0
+   },
+   "BlockType": 1,
+   "Properties": {
+    "PrimitiveType": 5,
+    "PrimitiveFlags": 2,
+    "Color": "#0A0A0AFF",
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-00-S",
+   "ObjectId": 477,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.22651,
+    "y": 3.23929,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -4.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-01-H",
+   "ObjectId": 478,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.48825,
+    "y": 3.21028,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -8.64789
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>H</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-02-O",
+   "ObjectId": 479,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.74678,
+    "y": 3.16016,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -13.29577
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>O</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-03-U",
+   "ObjectId": 480,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.0004,
+    "y": 3.08926,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -17.94366
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>U</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-04-L",
+   "ObjectId": 481,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.24744,
+    "y": 2.99803,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -22.59155
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>L</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-05-D",
+   "ObjectId": 482,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.48628,
+    "y": 2.88709,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -27.23944
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>D</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-06-I",
+   "ObjectId": 483,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.93311,
+    "y": 2.6091,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -36.53521
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-07-N",
+   "ObjectId": 484,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.13818,
+    "y": 2.44387,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -41.1831
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-08-T",
+   "ObjectId": 485,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.32918,
+    "y": 2.26258,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -45.83099
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-09-E",
+   "ObjectId": 486,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.50486,
+    "y": 2.0664,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -50.47887
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-10-R",
+   "ObjectId": 487,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.66406,
+    "y": 1.85663,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -55.12676
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>R</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-11-M",
+   "ObjectId": 488,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.80575,
+    "y": 1.63465,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -59.77465
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>M</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-12-I",
+   "ObjectId": 489,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.92898,
+    "y": 1.40192,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -64.42254
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-13-T",
+   "ObjectId": 490,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.03295,
+    "y": 1.15997,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -69.07042
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-14-T",
+   "ObjectId": 491,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.11697,
+    "y": 0.91038,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -73.71831
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-15-E",
+   "ObjectId": 492,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.18049,
+    "y": 0.65482,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -78.3662
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-16-N",
+   "ObjectId": 493,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.22309,
+    "y": 0.39494,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -83.01408
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-17-T",
+   "ObjectId": 494,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.2445,
+    "y": 0.13247,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -87.66197
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-18-V",
+   "ObjectId": 495,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.22329,
+    "y": -0.39336,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -96.95775
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>V</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-19-E",
+   "ObjectId": 496,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.18081,
+    "y": -0.65325,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -101.60563
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-20-N",
+   "ObjectId": 497,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.11742,
+    "y": -0.90885,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -106.25352
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-21-G",
+   "ObjectId": 498,
+   "ParentId": 0,
+   "Position": {
+    "x": 3.03352,
+    "y": -1.15847,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -110.90141
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>G</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-22-E",
+   "ObjectId": 499,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.92967,
+    "y": -1.40048,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -115.5493
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-23-A",
+   "ObjectId": 500,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.80655,
+    "y": -1.63327,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -120.19718
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-24-N",
+   "ObjectId": 501,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.66498,
+    "y": -1.85532,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -124.84507
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-25-C",
+   "ObjectId": 502,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.50587,
+    "y": -2.06517,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -129.49296
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>C</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-26-E",
+   "ObjectId": 503,
+   "ParentId": 0,
+   "Position": {
+    "x": 2.33029,
+    "y": -2.26143,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -134.14085
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-27-A",
+   "ObjectId": 504,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.93439,
+    "y": -2.60815,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -143.43662
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-28-R",
+   "ObjectId": 505,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.71669,
+    "y": -2.75632,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -148.08451
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>R</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-29-M",
+   "ObjectId": 506,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.4877,
+    "y": -2.88636,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -152.73239
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>M</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-30-A",
+   "ObjectId": 507,
+   "ParentId": 0,
+   "Position": {
+    "x": 1.00192,
+    "y": -3.08876,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -162.02817
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-31-G",
+   "ObjectId": 508,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.74834,
+    "y": -3.15979,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -166.67606
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>G</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-32-A",
+   "ObjectId": 509,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.48983,
+    "y": -3.21004,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -171.32394
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-33-I",
+   "ObjectId": 510,
+   "ParentId": 0,
+   "Position": {
+    "x": 0.22811,
+    "y": -3.23918,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -175.97183
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-34-N",
+   "ObjectId": 511,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.03512,
+    "y": -3.24701,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -180.61972
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-35-H",
+   "ObjectId": 512,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.55915,
+    "y": -3.1987,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -189.91549
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>H</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-36-I",
+   "ObjectId": 513,
+   "ParentId": 0,
+   "Position": {
+    "x": -0.81651,
+    "y": -3.14287,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -194.56338
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-37-S",
+   "ObjectId": 514,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.0685,
+    "y": -3.06637,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -199.21127
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-38-R",
+   "ObjectId": 515,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.54978,
+    "y": -2.8535,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -208.50704
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>R</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-39-E",
+   "ObjectId": 516,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.77591,
+    "y": -2.71854,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -213.15493
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-40-D",
+   "ObjectId": 517,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.99036,
+    "y": -2.56569,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -217.80282
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>D</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-41-R",
+   "ObjectId": 518,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.37866,
+    "y": -2.2105,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -227.09859
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>R</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-42-I",
+   "ObjectId": 519,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.54996,
+    "y": -2.01048,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -231.74648
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>I</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-43-G",
+   "ObjectId": 520,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.70449,
+    "y": -1.79724,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -236.39437
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>G</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-44-H",
+   "ObjectId": 521,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.84123,
+    "y": -1.57218,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -241.04225
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>H</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-45-T",
+   "ObjectId": 522,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.95928,
+    "y": -1.33678,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -245.69014
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-46-H",
+   "ObjectId": 523,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.13635,
+    "y": -0.84121,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -254.98592
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>H</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-47-A",
+   "ObjectId": 524,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.1942,
+    "y": -0.5843,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -259.6338
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-48-N",
+   "ObjectId": 525,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.23104,
+    "y": -0.32354,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -264.28169
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>N</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-49-D",
+   "ObjectId": 526,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.24663,
+    "y": -0.06066,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -268.92958
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>D</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-50-T",
+   "ObjectId": 527,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.2138,
+    "y": 0.46457,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -278.22535
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>T</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-51-O",
+   "ObjectId": 528,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.16558,
+    "y": 0.72346,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -282.87324
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>O</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-52-P",
+   "ObjectId": 529,
+   "ParentId": 0,
+   "Position": {
+    "x": -3.00715,
+    "y": 1.2253,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -292.16901
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>P</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-53-L",
+   "ObjectId": 530,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.89797,
+    "y": 1.46494,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -296.8169
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>L</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-54-A",
+   "ObjectId": 531,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.76974,
+    "y": 1.69496,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -301.46479
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>A</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-55-G",
+   "ObjectId": 532,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.62328,
+    "y": 1.91382,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -306.11268
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>G</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-56-U",
+   "ObjectId": 533,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.45957,
+    "y": 2.12009,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -310.76056
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>U</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-57-E",
+   "ObjectId": 534,
+   "ParentId": 0,
+   "Position": {
+    "x": -2.27969,
+    "y": 2.31243,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -315.40845
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>E</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-58-U",
+   "ObjectId": 535,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.87622,
+    "y": 2.6503,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -324.70423
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>U</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-59-S",
+   "ObjectId": 536,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.65529,
+    "y": 2.79362,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -329.35211
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>S</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  },
+  {
+   "Name": "ci-text-60-q",
+   "ObjectId": 537,
+   "ParentId": 0,
+   "Position": {
+    "x": -1.42348,
+    "y": 2.91856,
+    "z": -0.11
+   },
+   "Rotation": {
+    "x": 0,
+    "y": 0,
+    "z": -334.0
+   },
+   "Scale": {
+    "x": 0.08,
+    "y": 0.08,
+    "z": 0.08
+   },
+   "BlockType": 8,
+   "Properties": {
+    "Text": "<align=center><size=30><b><color=#111111>?</color></b></size></align>",
+    "DisplaySize": {
+     "x": 1.5,
+     "y": 0.4
+    },
+    "Static": true
+   }
+  }
+ ]
+}

@@ -1,6 +1,10 @@
 # --- web app working directories ---
 webapp/_output/
 webapp/_input/
+webapp/_chrome_screenshot*/
+docs/screenshots/workflow-*.png
+/dist/
+/.venv/
 
 # --- python ---
 __pycache__/
@@ -29,3 +33,8 @@ merbench-*.png
 /converted_mer/*
 !/converted_mer/scarletking-opt/
 !/converted_mer/nu22-opt/
+!/converted_mer/global-occult-coalition/
+!/converted_mer/strike-team/
+!/converted_mer/intro-anim-preview.html
+!/converted_mer/chaos-insurgency/
+!/converted_mer/ci-plague-opt/
