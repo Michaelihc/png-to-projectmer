@@ -127,16 +127,35 @@ def auto_config(im, k=4):
     from numpy.random import default_rng
     flat = im.reshape(-1, 3)
     rng = default_rng(0)
-    C = flat[rng.choice(len(flat), k, replace=False)].astype(float)
+    # Deterministic k-means++ seeding avoids missing a small foreground when a
+    # flat background dominates the image. Stop early for truly low-colour art.
+    centers = [flat[rng.integers(len(flat))].astype(float)]
+    for _ in range(1, k):
+        distance = np.min(
+            ((flat[:, None] - np.array(centers)[None]) ** 2).sum(2), axis=1
+        )
+        total = float(distance.sum())
+        if total <= 1e-9:
+            break
+        centers.append(flat[rng.choice(len(flat), p=distance / total)].astype(float))
+    C = np.array(centers)
+    k = len(C)
     for _ in range(40):
         lab = ((flat[:, None] - C[None]) ** 2).sum(2).argmin(1)
         for j in range(k):
             if (lab == j).any():
                 C[j] = flat[lab == j].mean(0)
     counts = np.bincount(lab, minlength=k)
-    bg = int(C.sum(1).argmin())  # darkest = background
+    # The background is the colour seen most often around the image boundary.
+    # This works for black, white, coloured, and transparency-flattened inputs.
+    label_grid = lab.reshape(im.shape[:2])
+    border_labels = np.concatenate((
+        label_grid[0, :], label_grid[-1, :], label_grid[:, 0], label_grid[:, -1]
+    ))
+    bg = int(np.bincount(border_labels, minlength=k).argmax())
     centroids = {"background": tuple(int(v) for v in C[bg])}
-    fg = [j for j in range(k) if j != bg]
+    active = [j for j in range(k) if counts[j] > 0]
+    fg = [j for j in active if j != bg]
     fg.sort(key=lambda j: -counts[j])
     layers = {}
     for rank, j in enumerate(fg):

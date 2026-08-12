@@ -1,6 +1,8 @@
 # --- web app working directories ---
 webapp/_output/
 webapp/_input/
+webapp/_chrome_screenshot*/
+docs/screenshots/workflow-*.png
 
 # --- python ---
 __pycache__/

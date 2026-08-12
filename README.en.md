@@ -1,147 +1,126 @@
-# Emblem → ProjectMER schematic
+# Meshmark
 
-[简体中文](README.md) · **English**
+**English** · [简体中文](README.md)
 
-Turn a high-contrast emblem image (PNG/JPG/WEBP) into a **SCP:SL ProjectMER**
-schematic built entirely from **vanilla quad primitives**. The output uses only
-`BlockType 0` (Empty) and `BlockType 1` (Primitive), so it loads on **stock
-ProjectMER** — no modded/fork plugin required.
+Turn an emblem image into a stock SCP:SL ProjectMER schematic: **split layers → choose triangulation quality → export ZIP**.
 
-Triangles are represented as sheared quads using the TRS-hierarchy trick
-(a rotated child under a non-uniformly scaled empty parent produces a sheared
-world matrix), and the `ngon` fill mode merges triangles into convex pieces so
-organic art needs far fewer objects.
+![Meshmark's complete three-step browser workflow](docs/screenshots/workflow.png)
 
-## Quick start — web UI
+![A close view of the real source triangulation](docs/screenshots/triangulation.png)
 
-Double-click **`run-webapp.bat`**. On first run it installs the Python
-dependencies, then opens `http://127.0.0.1:8731/`. Once deps are installed you
-can use **`serve.bat`** to skip the check and start immediately.
+Meshmark runs locally, uses no frontend framework, and deliberately ships with **zero CSS**. The output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin.
 
-1. Drop in an emblem image.
-2. Pick the fill colour, what to trace (light/dark shapes), fill mode, and the
-   detail (simplify) slider. Advanced options are tucked in a panel.
-3. **Convert** — you get a live preview and the runtime object count.
-4. **Download** the `<name>.zip`, then unzip into
-   `LabAPI-beta/configs/ProjectMER/Schematics/` so you have
-   `<name>/<name>.json`.
+## Start in 30 seconds
 
-The UI has a **中文 / English toggle** (defaults to Chinese). Requires Python
-3.10+ on PATH (the `py` launcher or `python`).
+### Windows
 
-## Quick start — command line
+1. Install [Python 3.10+](https://www.python.org/downloads/).
+2. Download or clone this repository.
+3. Double-click `run-webapp.bat`.
+
+The first launch installs the Python packages and opens `http://127.0.0.1:8731/`.
+
+### macOS / Linux
 
 ```bash
-py -m pip install -r requirements.txt
-
-py tools/png_to_mer_schematic.py scarletking.png \
-    --name scarletking-opt --output converted_mer \
-    --fill-mode ngon --simplify 1.5 --min-area 8 \
-    --foreground light --threshold 128 --width 10 \
-    --color "#D0021BFF" --preview
+python3 -m pip install -r requirements.txt
+python3 webapp/server.py
 ```
 
-`--preview` also writes `<name>.preview.png` / `.svg` next to the JSON.
-Run `py tools/png_to_mer_schematic.py --help` for every option.
+Then open `http://127.0.0.1:8731/`.
 
-## Multi-colour / layered emblems
+## Use it
 
-`png_to_mer_schematic.py` traces **one** silhouette, so it's built for single-
-colour art (linework shows as gaps). For an emblem with **stacked colours** —
-e.g. white figures on a green disc on a blue border — use the layered tool
-instead. It splits the image into one region per colour, traces each as a
-**smooth sub-pixel contour** (no pixel-grid staircase), and stacks the layers
-by Z into one vanilla schematic.
+1. **Split layers:** choose a PNG, JPG, WEBP, or BMP. The colour most common around the image boundary becomes the background; foreground colour layers are detected automatically.
+2. **Triangulate:** drag the quality slider. Lower values create cheaper schematics; higher values preserve more contour detail. The preview shows the actual earcut triangles before convex merging.
+3. **Export:** download the ZIP and extract it into:
+
+```text
+LabAPI-beta/configs/ProjectMER/Schematics/
+```
+
+For the bundled Nu-22 example, quality 30 creates 501 source triangles; quality 95 creates 1,883. The final runtime geometry is smaller because Meshmark merges triangles into convex regions and covers them with vanilla parallelogram primitives.
+
+Everything stays on your computer. The server binds to `127.0.0.1` by default and does not upload images to a third party.
+
+## Command line
+
+Automatic layered conversion:
 
 ```bash
-py tools/layered_emblem_to_mer.py nu22.png \
-    --config examples/nu22.layers.json \
-    --name nu22-opt --output converted_mer --preview
+python tools/layered_emblem_to_mer.py nu22.png \
+  --name nu22 \
+  --output converted_mer \
+  --quality 70 \
+  --preview \
+  --mesh-preview
 ```
 
-Omit `--config` to auto-detect a palette and stack with k-means (quick, but a
-hand-tuned config is smaller and cleaner). The bundled **`nu22`** MTF badge is a
-worked example: 3 colours → **1,326** vanilla primitives, gap-free.
-
-### Writing a layer config
-
-See [`examples/nu22.layers.json`](examples/nu22.layers.json). Each layer is
-`[fill "#RRGGBB", z_order, simplify_px, mode]`:
-
-| Field | Meaning |
-| --- | --- |
-| `centroids` | RGB of each palette colour (measured from the source). |
-| `background` | Which centroid is empty (not emitted). |
-| `z_order` | `0` = back; higher = drawn in front. |
-| `mode "region"` | Trace this colour's own area, holes preserved. Use for solid fills. |
-| `mode "silhouette"` | Fill the **whole emblem** solid — no holes. |
-| `layer_z` | Optional exact Z per layer (more negative = front-facing). |
-
-**The primitive-saving trick:** put the colour that is mostly thin detail
-(figures, stars, linework) as a **`silhouette` backing at `z_order` 0**, then
-draw the big solid colours on top as `region` layers. The detail then appears
-wherever the top layers have holes/gaps — at **zero geometry cost** — and no
-seam can reveal the background, because there's always backing behind it. In
-`nu22` this collapsed the white layer from ~250 traced vertices to a single
-41-vertex blob.
-
-### Verify before you build
-
-`check_trace.py` rasterizes the layer stack (antialiased) and reports seam
-coverage and colour agreement, so you can tune the config before generating the
-schematic:
+Use a hand-tuned palette and layer order when you need exact art direction:
 
 ```bash
-py tools/check_trace.py nu22.png examples/nu22.layers.json
-# -> seams 0.09%, colour agreement 96.3%
+python tools/layered_emblem_to_mer.py nu22.png \
+  --config examples/nu22.layers.json \
+  --name nu22 \
+  --output converted_mer \
+  --preview
 ```
 
-### Key options
+Single-colour silhouettes can use the lower-level converter:
 
-| Option | Meaning |
-| --- | --- |
-| `--fill-mode {triangle,ngon}` | `ngon` merges triangles into convex pieces — fewer objects on fills. |
-| `--simplify PX` | Contour tolerance. Lower = more faithful & more objects; higher = smoother & cheaper. |
-| `--foreground {light,dark}` | Trace the bright pixels or the dark pixels. |
-| `--threshold 0-255` | Foreground/background cutoff. |
-| `--color #RRGGBB[AA]` | Flat emblem colour. Linework stays as gaps (the wall shows through). |
-| `--color-source {flat,image}` | `image` samples each primitive's colour from the source, preserving the original colours in one pass (web UI: "Keep original colours"). |
-| `--min-area PX` | Ignore contours smaller than this (drop lower to keep fine detail). |
-| `--width UNITS` | Final schematic width in Unity units. |
-| `--border-cylinders` | Convert a detected circular border into 2 cheap cylinders. |
-| `--trace-mode rectangle-first` | Stroke-based tracing (`--trace-source centerline` for skeletons). |
+```bash
+python tools/png_to_mer_schematic.py scarletking.png \
+  --name scarletking \
+  --output converted_mer \
+  --fill-mode ngon \
+  --simplify 1.5 \
+  --preview
+```
 
-## Toolchain
+Run either script with `--help` for all options.
 
-Core pipeline in `tools/`:
+## How it works
 
-- **`png_to_mer_schematic.py`** — CLI entry point: image → contours → triangles
-  (or n-gon pieces) → vanilla quad-primitive schematic JSON, with SVG/PNG preview.
-- **`mer_triangle_primitives.py`** — geometry: expands each triangle into
-  standard MER quads via TRS-hierarchy shear (medial parallelograms, with a
-  rectangle-tile fast path).
-- **`mer_ngon_decomposition.py`** — merges earcut triangles into convex polygons
-  and covers them with the fewest parallelograms (2D port of TriangleScpSl's
-  NGonDecomposition).
+```text
+image
+  → boundary-aware palette detection
+  → smooth sub-pixel contours per colour layer
+  → earcut triangulation
+  → convex region merging
+  → parallelogram cover
+  → vanilla ProjectMER JSON
+```
 
-Layered multi-colour front-end:
+ProjectMER has no native triangle primitive. Meshmark represents non-parallelogram pieces with a transform-hierarchy shear: a rotated child quad under a non-uniformly scaled empty parent produces the required world-space shape. The n-gon path reduces runtime objects by merging adjacent triangles before emitting those quads.
 
-- **`layered_emblem_to_mer.py`** — CLI: split by colour → smooth per-layer trace
-  → stack into one schematic. Config-driven (`examples/*.layers.json`).
-- **`trace_svg.py`** — the smooth tracer: k-means palette, sub-pixel
-  marching-squares contours, hole-nesting rebuild → layered SVG.
-- **`check_trace.py`** — QA the layer stack (seam %, colour agreement) before building.
+The main modules are:
 
-`webapp/` holds the local UI (`server.py`, standard-library only, + `index.html`).
-`tools/circular_crop_tool.html` is a standalone helper for pre-cropping circular
-logos. Converted schematics live in `converted_mer/<name>/`.
+- `webapp/server.py` — local API, ZIP export, and static page server.
+- `webapp/index.html` — the complete zero-CSS UI.
+- `tools/trace_svg.py` — palette detection and smooth layered contours.
+- `tools/layered_emblem_to_mer.py` — layer stack, quality mapping, mesh preview, and schematic build.
+- `tools/mer_ngon_decomposition.py` — triangulation, convex merging, and parallelogram emission.
 
-## Licensing
+## Layer configuration
 
-- **Source code:** MIT — see [LICENSE](LICENSE).
-- **Example emblems** (`scarletking.png`, `nu22.png`, and their converted
-  output): from the SCP Foundation, licensed **CC BY-SA 3.0**. See
-  [NOTICE.md](NOTICE.md). Artwork you convert yourself stays under its own license.
+[`examples/nu22.layers.json`](examples/nu22.layers.json) documents the config format. Each layer is:
 
-> The fork-only `BlockType 11` triangle path and the one-off logo drivers were
-> removed — this repo now targets vanilla ProjectMER exclusively.
+```json
+"green": ["#6D9A57", 2, 0.8, "region"]
+```
+
+The values are fill colour, back-to-front order, contour tolerance in pixels, and mode. `region` traces that colour naturally. `silhouette` fills the entire emblem and is useful as a cheap backing layer: detail can show through holes in front layers without requiring its own geometry.
+
+## Development
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python -m py_compile webapp/server.py tools/*.py
+```
+
+Contributions and reproducible bug reports are welcome. Please include the source image or a minimal synthetic replacement, the quality value, and the generated object counts.
+
+## License
+
+Source code is [MIT licensed](LICENSE). The bundled SCP-derived example emblems and their converted outputs are available under **CC BY-SA 3.0**; see [NOTICE.md](NOTICE.md). Images you convert keep their original licenses.

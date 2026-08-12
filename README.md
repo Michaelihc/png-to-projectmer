@@ -1,132 +1,126 @@
-# 纹章 → ProjectMER 图纸
+# Meshmark
 
 **简体中文** · [English](README.en.md)
 
-把高对比度的纹章图片（PNG / JPG / WEBP）转换成 **SCP:SL ProjectMER** 图纸，
-且完全由**原版四边形基元**（`BlockType 0` Empty + `BlockType 1` Primitive）构成。
-输出可直接加载于**原版 ProjectMER**，**无需任何魔改 / fork 插件**。
+把纹章图片转换成原版 SCP:SL ProjectMER 图纸：**拆分图层 → 调整三角剖分质量 → 导出 ZIP**。
 
-三角形通过 TRS 层级错切技巧表示为错切四边形（在非均匀缩放的空父物体下旋转子物体，
-即可得到错切的世界矩阵）；`ngon` 填充模式会把三角形合并为凸多边形，让复杂纹章所需
-的对象数量大幅下降。
+![Meshmark 完整的三步浏览器流程](docs/screenshots/workflow.png)
 
-## 快速开始 — 网页界面
+![真实源三角剖分的近景](docs/screenshots/triangulation.png)
 
-双击 **`run-webapp.bat`**。首次运行会自动安装 Python 依赖，然后在浏览器打开
-`http://127.0.0.1:8731/`。若依赖已装好，用 **`serve.bat`** 可跳过检查、直接启动。
+Meshmark 完全在本地运行，不使用前端框架，并刻意保持 **零 CSS**。输出只包含原版 ProjectMER 的空物体与四边形基元（`BlockType 0` 和 `BlockType 1`），无需 fork 或魔改插件。
 
-1. 拖入一张纹章图片。
-2. 选择填充颜色、描摹亮部/暗部、填充方式，以及细节（简化）滑杆。高级选项收在折叠面板里。
-3. 点 **生成图纸** — 得到实时预览与运行时对象数量。
-4. **下载** `<name>.zip`，解压到
-   `LabAPI-beta/configs/ProjectMER/Schematics/`，即得 `<name>/<name>.json`。
+## 30 秒启动
 
-界面支持**中英文切换**（默认中文）。需要 PATH 中有 Python 3.10+（`py` 启动器或 `python`）。
+### Windows
 
-## 快速开始 — 命令行
+1. 安装 [Python 3.10+](https://www.python.org/downloads/)。
+2. 下载或克隆本仓库。
+3. 双击 `run-webapp.bat`。
+
+首次启动会自动安装 Python 依赖，并打开 `http://127.0.0.1:8731/`。
+
+### macOS / Linux
 
 ```bash
-py -m pip install -r requirements.txt
-
-py tools/png_to_mer_schematic.py scarletking.png \
-    --name scarletking-opt --output converted_mer \
-    --fill-mode ngon --simplify 1.5 --min-area 8 \
-    --foreground light --threshold 128 --width 10 \
-    --color "#D0021BFF" --preview
+python3 -m pip install -r requirements.txt
+python3 webapp/server.py
 ```
 
-加 `--preview` 会在 JSON 旁边额外生成 `<name>.preview.png` / `.svg`。
-运行 `py tools/png_to_mer_schematic.py --help` 查看全部参数。
+然后打开 `http://127.0.0.1:8731/`。
 
-## 多色 / 分层纹章
+## 使用方法
 
-`png_to_mer_schematic.py` 只描摹**一个**剪影，适合单色图案（线条会留空）。
-若纹章是**多色叠加**——例如白色小人叠在绿色圆盘、再叠在蓝色边框上——请改用分层工具。
-它把图片按颜色拆成若干区域，各自描摹为**平滑的亚像素轮廓**（不会出现像素锯齿），
-再按 Z 轴堆叠成一个原版图纸。
+1. **拆分图层：** 选择 PNG、JPG、WEBP 或 BMP。程序把图片边缘最常见的颜色识别为背景，并自动提取前景颜色图层。
+2. **三角剖分：** 拖动质量滑杆。较低数值生成更轻量的图纸；较高数值保留更多轮廓细节。预览展示凸合并前真实的 earcut 三角形。
+3. **导出：** 下载 ZIP，并解压至：
+
+```text
+LabAPI-beta/configs/ProjectMER/Schematics/
+```
+
+以仓库自带的 Nu-22 示例为例，质量 30 生成 501 个源三角形，质量 95 生成 1,883 个。最终运行时几何会更少，因为 Meshmark 会先把三角形合并为凸区域，再用原版平行四边形基元覆盖。
+
+图片始终留在你的电脑上。服务器默认只绑定 `127.0.0.1`，不会把图片上传给第三方。
+
+## 命令行
+
+自动分层转换：
 
 ```bash
-py tools/layered_emblem_to_mer.py nu22.png \
-    --config examples/nu22.layers.json \
-    --name nu22-opt --output converted_mer --preview
+python tools/layered_emblem_to_mer.py nu22.png \
+  --name nu22 \
+  --output converted_mer \
+  --quality 70 \
+  --preview \
+  --mesh-preview
 ```
 
-不加 `--config` 会用 k-means 自动识别调色板并猜测堆叠顺序（快速，但手写配置更省更干净）。
-随仓库附带的 **`nu22`** MTF 徽章即为示例：3 种颜色 → **1,326** 个原版基元，且无缝隙。
-
-### 编写分层配置
-
-参见 [`examples/nu22.layers.json`](examples/nu22.layers.json)。每层格式为
-`[填充色 "#RRGGBB", z_order, 简化容差px, mode]`：
-
-| 字段 | 含义 |
-| --- | --- |
-| `centroids` | 每种调色板颜色的 RGB（从原图量取）。 |
-| `background` | 哪个颜色视为空（不生成）。 |
-| `z_order` | `0` = 最底层；越大越靠前。 |
-| `mode "region"` | 描摹该颜色自身区域，保留孔洞。用于实心填充。 |
-| `mode "silhouette"` | 把**整个纹章**填成实心——无孔洞。 |
-| `layer_z` | 可选，每层的精确 Z（越负越朝前）。 |
-
-**省基元的关键技巧：** 把主要以细节呈现的颜色（小人、星星、线条）设为
-**`z_order` 0 的 `silhouette` 底衬**，再把大块实色作为 `region` 层叠在上面。
-细节就会从上层的孔洞/缝隙里透出来——**零几何成本**——且任何缝隙都不会露出背景，
-因为背后始终有底衬。在 `nu22` 里，这让白色层从约 250 个描摹顶点压成了单个 41 顶点的块。
-
-### 生成前先验证
-
-`check_trace.py` 会把分层堆叠光栅化（带抗锯齿），报告缝隙占比与颜色吻合度，
-方便你在生成图纸前调好配置：
+需要精确控制配色与层级时，可使用手工配置：
 
 ```bash
-py tools/check_trace.py nu22.png examples/nu22.layers.json
-# -> 缝隙 0.09%，颜色吻合 96.3%
+python tools/layered_emblem_to_mer.py nu22.png \
+  --config examples/nu22.layers.json \
+  --name nu22 \
+  --output converted_mer \
+  --preview
 ```
 
-### 主要参数
+单色剪影可以使用底层转换器：
 
-| 参数 | 含义 |
-| --- | --- |
-| `--fill-mode {triangle,ngon}` | `ngon` 把三角形合并成凸多边形——填充区域对象更少。 |
-| `--simplify PX` | 轮廓容差。越低越还原、对象越多；越高越平滑、越省。 |
-| `--foreground {light,dark}` | 描摹亮部像素还是暗部像素。 |
-| `--threshold 0-255` | 前景/背景分界阈值。 |
-| `--color #RRGGBB[AA]` | 纯色填充。线条会留空（透出墙面）。 |
-| `--color-source {flat,image}` | `image` 按原图对每个基元取色，一次生成即保留原图颜色（网页界面：“保留原图颜色”）。 |
-| `--min-area PX` | 忽略小于该面积的轮廓（调低以保留细节）。 |
-| `--width UNITS` | 图纸最终宽度（Unity 单位）。 |
-| `--border-cylinders` | 把检测到的圆形边框转成 2 个廉价圆柱。 |
-| `--trace-mode rectangle-first` | 基于描边的描摹（`--trace-source centerline` 走骨架中线）。 |
+```bash
+python tools/png_to_mer_schematic.py scarletking.png \
+  --name scarletking \
+  --output converted_mer \
+  --fill-mode ngon \
+  --simplify 1.5 \
+  --preview
+```
 
-## 工具链
+为任一脚本添加 `--help` 可查看完整参数。
 
-核心流水线在 `tools/`：
+## 原理
 
-- **`png_to_mer_schematic.py`** — 命令行入口：图片 → 轮廓 → 三角形（或 n 边形块）
-  → 原版四边形基元图纸 JSON，并输出 SVG/PNG 预览。
-- **`mer_triangle_primitives.py`** — 几何：用 TRS 层级错切把每个三角形展开为标准
-  MER 四边形（中位平行四边形，附带矩形快速路径）。
-- **`mer_ngon_decomposition.py`** — 把 earcut 三角形合并为凸多边形，并用尽量少的
-  平行四边形覆盖（TriangleScpSl NGonDecomposition 的 2D 移植）。
+```text
+图片
+  → 感知边界的调色板检测
+  → 每个颜色图层的平滑亚像素轮廓
+  → earcut 三角剖分
+  → 凸区域合并
+  → 平行四边形覆盖
+  → 原版 ProjectMER JSON
+```
 
-多色分层前端：
+ProjectMER 没有原生三角形基元。Meshmark 使用变换层级错切来表示非平行四边形：把旋转后的子四边形放在非均匀缩放的空父物体下，即可得到所需的世界空间形状。n-gon 路径会在输出四边形前合并相邻三角形，从而减少运行时对象。
 
-- **`layered_emblem_to_mer.py`** — 命令行：按颜色拆分 → 各层平滑描摹 → 堆叠成一个图纸。
-  由配置驱动（`examples/*.layers.json`）。
-- **`trace_svg.py`** — 平滑描摹器：k-means 调色板、亚像素 marching-squares 轮廓、
-  孔洞嵌套重建 → 分层 SVG。
-- **`check_trace.py`** — 生成前对分层堆叠做 QA（缝隙占比、颜色吻合度）。
+主要模块：
 
-`webapp/` 是本地网页界面（`server.py`，仅用标准库；`index.html`）。
-`tools/circular_crop_tool.html` 是一个独立的圆形裁剪小工具。
+- `webapp/server.py` — 本地 API、ZIP 导出与静态页面服务。
+- `webapp/index.html` — 完整的零 CSS 界面。
+- `tools/trace_svg.py` — 调色板检测与平滑分层轮廓。
+- `tools/layered_emblem_to_mer.py` — 图层堆叠、质量映射、网格预览与图纸生成。
+- `tools/mer_ngon_decomposition.py` — 三角剖分、凸合并与平行四边形输出。
 
-转换结果放在 `converted_mer/<name>/`。
+## 图层配置
+
+[`examples/nu22.layers.json`](examples/nu22.layers.json) 说明了配置格式。每层写法如下：
+
+```json
+"green": ["#6D9A57", 2, 0.8, "region"]
+```
+
+四个值依次为填充色、从后向前的顺序、以像素为单位的轮廓容差和模式。`region` 按颜色的自然区域描摹；`silhouette` 填满整个纹章，可作为低成本底衬，让细节从前层孔洞中显示，而无需单独生成几何。
+
+## 开发
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python -m py_compile webapp/server.py tools/*.py
+```
+
+欢迎贡献代码和可复现的问题报告。请附上源图片或最小合成替代图、质量数值以及生成的对象数量。
 
 ## 授权
 
-- **源代码**：MIT，见 [LICENSE](LICENSE)。
-- **示例纹章**（`scarletking.png`、`nu22.png` 及其转换输出）：源自 SCP 基金会，按
-  **CC BY-SA 3.0** 授权。详见 [NOTICE.md](NOTICE.md)。你自己转换的图像仍归其原有授权。
-
-> 仅面向原版 ProjectMER：fork 专用的 `BlockType 11` 三角形路径与一次性 logo 脚本
-> 已被移除。
+源代码采用 [MIT 许可证](LICENSE)。仓库自带的 SCP 衍生示例纹章及其转换输出采用 **CC BY-SA 3.0**；详见 [NOTICE.md](NOTICE.md)。你转换的图片仍保留其原始许可证。
