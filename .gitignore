@@ -14,6 +14,7 @@ __pycache__/
 .playwright-mcp/
 merbench-*.png
 .claude/
+webapp/_chrome_screenshot*/
 
 # --- local workspace assets that are NOT part of this tool ---
 # third-party forks (their own repos), kept locally only
