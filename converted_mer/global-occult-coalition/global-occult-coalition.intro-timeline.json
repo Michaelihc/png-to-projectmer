@@ -2,7 +2,7 @@
  "format": "emblem-intro-timeline",
  "version": 1,
  "source": "global-occult-coalition.json",
- "duration": 6.9,
+ "duration": 6.033,
  "groups": {
   "map": {
    "pivot": [
@@ -20,18 +20,6 @@
    "pivot": [
     0.00145,
     0.00374
-   ]
-  },
-  "laurelL": {
-   "pivot": [
-    0.00145,
-    -2.1
-   ]
-  },
-  "laurelR": {
-   "pivot": [
-    0.00145,
-    -2.1
    ]
   },
   "ring0": {
@@ -149,7 +137,7 @@
  "tweens": [
   {
    "group": "ring2",
-   "t0": 0.0,
+   "t0": 0.2,
    "dur": 0.8,
    "ease": "outCubic",
    "kind": "scale",
@@ -158,7 +146,7 @@
   },
   {
    "group": "ring1",
-   "t0": 0.25,
+   "t0": 0.48000000000000004,
    "dur": 0.8,
    "ease": "outCubic",
    "kind": "scale",
@@ -167,7 +155,7 @@
   },
   {
    "group": "ring0",
-   "t0": 0.5,
+   "t0": 0.76,
    "dur": 0.8,
    "ease": "outCubic",
    "kind": "scale",
@@ -176,7 +164,7 @@
   },
   {
    "group": "mer0",
-   "t0": 0.85,
+   "t0": 0.76,
    "dur": 0.6,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -185,7 +173,7 @@
   },
   {
    "group": "mer0",
-   "t0": 0.85,
+   "t0": 0.76,
    "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
@@ -194,7 +182,7 @@
   },
   {
    "group": "mer2",
-   "t0": 1.0,
+   "t0": 0.9,
    "dur": 0.6,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -203,7 +191,7 @@
   },
   {
    "group": "mer2",
-   "t0": 1.0,
+   "t0": 0.9,
    "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
@@ -212,7 +200,7 @@
   },
   {
    "group": "mer1",
-   "t0": 1.15,
+   "t0": 1.04,
    "dur": 0.6,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -221,7 +209,7 @@
   },
   {
    "group": "mer1",
-   "t0": 1.15,
+   "t0": 1.04,
    "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
@@ -230,7 +218,7 @@
   },
   {
    "group": "mer3",
-   "t0": 1.2999999999999998,
+   "t0": 1.1800000000000002,
    "dur": 0.6,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -239,7 +227,7 @@
   },
   {
    "group": "mer3",
-   "t0": 1.2999999999999998,
+   "t0": 1.1800000000000002,
    "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
@@ -248,7 +236,7 @@
   },
   {
    "group": "map",
-   "t0": 1.55,
+   "t0": 1.3,
    "dur": 1.0,
    "ease": "outCubic",
    "kind": "scale",
@@ -257,7 +245,7 @@
   },
   {
    "group": "map",
-   "t0": 1.55,
+   "t0": 1.3,
    "dur": 1.0,
    "ease": "outCubic",
    "kind": "opacity",
@@ -265,44 +253,8 @@
    "to": 1.0
   },
   {
-   "group": "laurelL",
-   "t0": 2.3,
-   "dur": 1.15,
-   "ease": "outBack:1.1",
-   "kind": "rotate",
-   "from": -55.0,
-   "to": 0.0
-  },
-  {
-   "group": "laurelL",
-   "t0": 2.3,
-   "dur": 0.3,
-   "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "laurelR",
-   "t0": 2.48,
-   "dur": 1.15,
-   "ease": "outBack:1.1",
-   "kind": "rotate",
-   "from": 55.0,
-   "to": 0.0
-  },
-  {
-   "group": "laurelR",
-   "t0": 2.48,
-   "dur": 0.3,
-   "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
    "group": "bar0",
-   "t0": 3.65,
+   "t0": 2.4,
    "dur": 0.31,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -311,7 +263,7 @@
   },
   {
    "group": "bar0",
-   "t0": 3.65,
+   "t0": 2.4,
    "dur": 0.05,
    "ease": "outCubic",
    "kind": "opacity",
@@ -320,7 +272,7 @@
   },
   {
    "group": "bar1",
-   "t0": 3.9299999999999997,
+   "t0": 2.67,
    "dur": 0.31,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -329,7 +281,7 @@
   },
   {
    "group": "bar1",
-   "t0": 3.9299999999999997,
+   "t0": 2.67,
    "dur": 0.05,
    "ease": "outCubic",
    "kind": "opacity",
@@ -338,7 +290,7 @@
   },
   {
    "group": "bar2",
-   "t0": 4.21,
+   "t0": 2.94,
    "dur": 0.31,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -347,7 +299,7 @@
   },
   {
    "group": "bar2",
-   "t0": 4.21,
+   "t0": 2.94,
    "dur": 0.05,
    "ease": "outCubic",
    "kind": "opacity",
@@ -356,7 +308,7 @@
   },
   {
    "group": "bar3",
-   "t0": 4.49,
+   "t0": 3.21,
    "dur": 0.31,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -365,7 +317,7 @@
   },
   {
    "group": "bar3",
-   "t0": 4.49,
+   "t0": 3.21,
    "dur": 0.05,
    "ease": "outCubic",
    "kind": "opacity",
@@ -374,7 +326,7 @@
   },
   {
    "group": "bar4",
-   "t0": 4.77,
+   "t0": 3.48,
    "dur": 0.31,
    "ease": "inOutCubic",
    "kind": "scaleAxis",
@@ -383,7 +335,7 @@
   },
   {
    "group": "bar4",
-   "t0": 4.77,
+   "t0": 3.48,
    "dur": 0.05,
    "ease": "outCubic",
    "kind": "opacity",
@@ -392,7 +344,7 @@
   },
   {
    "group": "cap0",
-   "t0": 3.65,
+   "t0": 2.4,
    "dur": 0.3,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -401,7 +353,7 @@
   },
   {
    "group": "cap1",
-   "t0": 3.96,
+   "t0": 2.71,
    "dur": 0.3,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -410,7 +362,7 @@
   },
   {
    "group": "cap2",
-   "t0": 4.239999999999999,
+   "t0": 2.98,
    "dur": 0.3,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -419,7 +371,7 @@
   },
   {
    "group": "cap3",
-   "t0": 4.52,
+   "t0": 3.25,
    "dur": 0.3,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -428,7 +380,7 @@
   },
   {
    "group": "cap4",
-   "t0": 4.8,
+   "t0": 3.52,
    "dur": 0.3,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -437,7 +389,7 @@
   },
   {
    "group": "text",
-   "t0": 5.3,
+   "t0": 4.42,
    "dur": 0.2,
    "ease": "outBack:1.5",
    "kind": "scale",
@@ -501,7 +453,7 @@
   },
   {
    "group": "text",
-   "t0": 5.3,
+   "t0": 4.42,
    "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",

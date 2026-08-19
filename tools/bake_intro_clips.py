@@ -61,9 +61,30 @@ GOC_CENTER_X = 0.00145
 # Emissive color pass: the emblems render self-lit (raw ColorRgba overrides)
 # so they read vivid under a dim fill light; pure black parts stay (0,0,0) and
 # melt into the void skybox instead of graying under a bright light.
-# Channels are copied 1:1 -- boosting past 1.0 clips per-channel and shifts
-# hue (the blues went green-cyan in game).
+# The DEFAULT pass copies channels 1:1 with a normalize boost capped below 1.0
+# -- pushing an ordinary block past 1.0 clips per-channel and shifts hue (the
+# blues went green-cyan in game).
 BLACK_CHANNEL_SUM = 0.05
+
+# ...with a deliberate EXCEPTION per artwork family (2026-08-19 round 2). The
+# GOC seal's two canonical hues are mid-tones, so obeying them literally in the
+# hex would render dull; the brightness is delivered through the emissive
+# channel instead. These gains push the brightest channel PAST 1.0, which is
+# what marks a primitive emissive / bloom-eligible in game (AGENTS: "raw
+# ColorRgba above 1.0 is what marks a primitive emissive"). Keyed on the base
+# hex, so both emblems' shared hues get one consistent lift, and the triangle
+# expansion (which carries only the hex forward) is covered automatically.
+# The gains stay modest: far enough over 1.0 to bloom, near enough that the two
+# hues do not converge on the same washed-out cyan.
+EMISSIVE_GAIN = {
+    # pentagram + all strike-card linework: 1:1 max channel 0.573 -> 1.260
+    "#265192FF": 2.20,
+    # world map + seal graticule + strike frame ring: 0.875 -> 1.181. Held BELOW
+    # the star's peak on purpose: this hue is already light, and matching gains
+    # washed the map out against the ~1.0 white wall and cost the hero mark its
+    # place as the brightest thing in frame.
+    "#5990DFFF": 1.35,
+}
 
 
 # ---- easing (must match the preview JS engine) ------------------------------
@@ -268,6 +289,12 @@ def apply_emissive_colors(blocks: list[dict]) -> None:
         if r + g + bl <= BLACK_CHANNEL_SUM:
             props["ColorRgba"] = {"r": 0.0, "g": 0.0, "b": 0.0, "a": round(a, 4)}
             continue
+        gain = EMISSIVE_GAIN.get(col.upper())
+        if gain is not None:
+            # Authored emissive family: deliberately over 1.0 (see EMISSIVE_GAIN).
+            props["ColorRgba"] = {"r": round(r * gain, 4), "g": round(g * gain, 4),
+                                  "b": round(bl * gain, 4), "a": round(a, 4)}
+            continue
         # Modest brightness boost, capped below channel clipping (clipped
         # channels shift hue -- the earlier green-cyan blues).
         boost = min(1.45, 1.0 / max(r, g, bl, 0.01))
@@ -402,10 +429,16 @@ def main() -> None:
         raw = json.loads(Path(src_json).read_text(encoding="utf-8"))
         decimate = None
         bindings_override = None
+        raw_blocks = raw["Blocks"]
         if stem == "goc-seal":
             decimate = {"map-tri": MAP_MIN_TRI_AREA,
                         "laurel-tri": LAUREL_MIN_TRI_AREA}
-        compiled, tri_summary = compile_blocks(raw["Blocks"], None, decimate)
+            # 2026-08-19: the laurels are dropped from the seal build (the air-intro
+            # music retime needs the shorter draw), so their geometry must not ride
+            # into the compiled MER either — an ungrouped block would just sit on
+            # screen at full opacity from frame 0.
+            raw_blocks = [b for b in raw_blocks if "laurel" not in b.get("Name", "")]
+        compiled, tri_summary = compile_blocks(raw_blocks, None, decimate)
         mer_out = OUT_LOGOS / f"{stem}-emblem.mer.json"
         mer_out.write_text(json.dumps(
             {"RootObjectId": raw.get("RootObjectId", 0), "Blocks": compiled},

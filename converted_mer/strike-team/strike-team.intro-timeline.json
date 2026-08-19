@@ -2,7 +2,7 @@
  "format": "emblem-intro-timeline",
  "version": 1,
  "source": "strike-team.json",
- "duration": 6.7,
+ "duration": 5.604,
  "groups": {
   "outer": {
    "pivot": [
@@ -188,8 +188,8 @@
  "tweens": [
   {
    "group": "centerRing",
-   "t0": 0.0,
-   "dur": 0.85,
+   "t0": 0.21,
+   "dur": 0.7,
    "ease": "outBack:1.4",
    "kind": "scale",
    "from": 0.0,
@@ -197,8 +197,8 @@
   },
   {
    "group": "sep0",
-   "t0": 0.1,
-   "dur": 1.9,
+   "t0": 0.28,
+   "dur": 1.6,
    "ease": "outQuint",
    "kind": "rotate",
    "from": 210.0,
@@ -210,8 +210,8 @@
   },
   {
    "group": "sep1",
-   "t0": 0.1,
-   "dur": 1.9,
+   "t0": 0.28,
+   "dur": 1.6,
    "ease": "outQuint",
    "kind": "rotate",
    "from": 245.0,
@@ -223,8 +223,8 @@
   },
   {
    "group": "sep2",
-   "t0": 0.1,
-   "dur": 1.9,
+   "t0": 0.28,
+   "dur": 1.6,
    "ease": "outQuint",
    "kind": "rotate",
    "from": 280.0,
@@ -236,8 +236,8 @@
   },
   {
    "group": "hex0",
-   "t0": 0.55,
-   "dur": 0.78,
+   "t0": 0.79,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -251,8 +251,8 @@
   },
   {
    "group": "hex0",
-   "t0": 0.55,
-   "dur": 0.78,
+   "t0": 0.79,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -260,8 +260,8 @@
   },
   {
    "group": "hex0",
-   "t0": 0.55,
-   "dur": 0.78,
+   "t0": 0.79,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -269,8 +269,8 @@
   },
   {
    "group": "hex0",
-   "t0": 0.55,
-   "dur": 0.24,
+   "t0": 0.79,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -278,8 +278,8 @@
   },
   {
    "group": "hex1",
-   "t0": 0.7200000000000001,
-   "dur": 0.78,
+   "t0": 0.92,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -293,8 +293,8 @@
   },
   {
    "group": "hex1",
-   "t0": 0.7200000000000001,
-   "dur": 0.78,
+   "t0": 0.92,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -302,8 +302,8 @@
   },
   {
    "group": "hex1",
-   "t0": 0.7200000000000001,
-   "dur": 0.78,
+   "t0": 0.92,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -311,8 +311,8 @@
   },
   {
    "group": "hex1",
-   "t0": 0.7200000000000001,
-   "dur": 0.24,
+   "t0": 0.92,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -320,8 +320,8 @@
   },
   {
    "group": "hex2",
-   "t0": 0.8900000000000001,
-   "dur": 0.78,
+   "t0": 1.05,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -335,8 +335,8 @@
   },
   {
    "group": "hex2",
-   "t0": 0.8900000000000001,
-   "dur": 0.78,
+   "t0": 1.05,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -344,8 +344,8 @@
   },
   {
    "group": "hex2",
-   "t0": 0.8900000000000001,
-   "dur": 0.78,
+   "t0": 1.05,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -353,8 +353,8 @@
   },
   {
    "group": "hex2",
-   "t0": 0.8900000000000001,
-   "dur": 0.24,
+   "t0": 1.05,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -362,8 +362,8 @@
   },
   {
    "group": "hex3",
-   "t0": 1.06,
-   "dur": 0.78,
+   "t0": 1.1800000000000002,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -377,8 +377,8 @@
   },
   {
    "group": "hex3",
-   "t0": 1.06,
-   "dur": 0.78,
+   "t0": 1.1800000000000002,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -386,8 +386,8 @@
   },
   {
    "group": "hex3",
-   "t0": 1.06,
-   "dur": 0.78,
+   "t0": 1.1800000000000002,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -395,8 +395,8 @@
   },
   {
    "group": "hex3",
-   "t0": 1.06,
-   "dur": 0.24,
+   "t0": 1.1800000000000002,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -404,8 +404,8 @@
   },
   {
    "group": "hex4",
-   "t0": 1.23,
-   "dur": 0.78,
+   "t0": 1.31,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -419,8 +419,8 @@
   },
   {
    "group": "hex4",
-   "t0": 1.23,
-   "dur": 0.78,
+   "t0": 1.31,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -428,8 +428,8 @@
   },
   {
    "group": "hex4",
-   "t0": 1.23,
-   "dur": 0.78,
+   "t0": 1.31,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -437,8 +437,8 @@
   },
   {
    "group": "hex4",
-   "t0": 1.23,
-   "dur": 0.24,
+   "t0": 1.31,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -446,8 +446,8 @@
   },
   {
    "group": "hex5",
-   "t0": 1.4000000000000001,
-   "dur": 0.78,
+   "t0": 1.44,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "translate",
    "from": [
@@ -461,8 +461,8 @@
   },
   {
    "group": "hex5",
-   "t0": 1.4000000000000001,
-   "dur": 0.78,
+   "t0": 1.44,
+   "dur": 0.65,
    "ease": "outBack:1.2",
    "kind": "rotate",
    "from": 26.0,
@@ -470,8 +470,8 @@
   },
   {
    "group": "hex5",
-   "t0": 1.4000000000000001,
-   "dur": 0.78,
+   "t0": 1.44,
+   "dur": 0.65,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.15,
@@ -479,8 +479,8 @@
   },
   {
    "group": "hex5",
-   "t0": 1.4000000000000001,
-   "dur": 0.24,
+   "t0": 1.44,
+   "dur": 0.2,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
@@ -488,8 +488,8 @@
   },
   {
    "group": "outer",
-   "t0": 2.1,
-   "dur": 1.0,
+   "t0": 1.78,
+   "dur": 0.8,
    "ease": "outCubic",
    "kind": "scale",
    "from": 1.32,
@@ -497,79 +497,79 @@
   },
   {
    "group": "outer",
-   "t0": 2.1,
+   "t0": 1.78,
+   "dur": 0.3,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray0",
+   "t0": 2.24,
+   "dur": 0.5,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray0",
+   "t0": 2.24,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray1",
+   "t0": 2.37,
+   "dur": 0.5,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray1",
+   "t0": 2.37,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray2",
+   "t0": 2.5,
+   "dur": 0.5,
+   "ease": "outQuint",
+   "kind": "scaleAxis",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray2",
+   "t0": 2.5,
+   "dur": 0.15,
+   "ease": "outCubic",
+   "kind": "opacity",
+   "from": 0.0,
+   "to": 1.0
+  },
+  {
+   "group": "ray3",
+   "t0": 2.77,
    "dur": 0.35,
    "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray0",
-   "t0": 2.85,
-   "dur": 0.55,
-   "ease": "outQuint",
-   "kind": "scaleAxis",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray0",
-   "t0": 2.85,
-   "dur": 0.15,
-   "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray1",
-   "t0": 3.0,
-   "dur": 0.55,
-   "ease": "outQuint",
-   "kind": "scaleAxis",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray1",
-   "t0": 3.0,
-   "dur": 0.15,
-   "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray2",
-   "t0": 3.15,
-   "dur": 0.55,
-   "ease": "outQuint",
-   "kind": "scaleAxis",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray2",
-   "t0": 3.15,
-   "dur": 0.15,
-   "ease": "outCubic",
-   "kind": "opacity",
-   "from": 0.0,
-   "to": 1.0
-  },
-  {
-   "group": "ray3",
-   "t0": 3.45,
-   "dur": 0.4,
-   "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
    "to": 1.0
   },
   {
    "group": "ray3",
-   "t0": 3.45,
+   "t0": 2.77,
    "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
@@ -578,8 +578,8 @@
   },
   {
    "group": "ray4",
-   "t0": 3.5700000000000003,
-   "dur": 0.4,
+   "t0": 2.87,
+   "dur": 0.35,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
@@ -587,7 +587,7 @@
   },
   {
    "group": "ray4",
-   "t0": 3.5700000000000003,
+   "t0": 2.87,
    "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
@@ -596,8 +596,8 @@
   },
   {
    "group": "ray5",
-   "t0": 3.6900000000000004,
-   "dur": 0.4,
+   "t0": 2.97,
+   "dur": 0.35,
    "ease": "outCubic",
    "kind": "scaleAxis",
    "from": 0.0,
@@ -605,7 +605,7 @@
   },
   {
    "group": "ray5",
-   "t0": 3.6900000000000004,
+   "t0": 2.97,
    "dur": 0.15,
    "ease": "outCubic",
    "kind": "opacity",
@@ -614,8 +614,8 @@
   },
   {
    "group": "marker0",
-   "t0": 3.9,
-   "dur": 0.32,
+   "t0": 3.26,
+   "dur": 0.3,
    "ease": "outBack:1.8",
    "kind": "scale",
    "from": 0.0,
@@ -623,8 +623,8 @@
   },
   {
    "group": "marker1",
-   "t0": 4.08,
-   "dur": 0.32,
+   "t0": 3.4099999999999997,
+   "dur": 0.3,
    "ease": "outBack:1.8",
    "kind": "scale",
    "from": 0.0,
@@ -632,8 +632,8 @@
   },
   {
    "group": "marker2",
-   "t0": 4.26,
-   "dur": 0.32,
+   "t0": 3.5599999999999996,
+   "dur": 0.3,
    "ease": "outBack:1.8",
    "kind": "scale",
    "from": 0.0,
@@ -641,8 +641,8 @@
   },
   {
    "group": "star",
-   "t0": 4.45,
-   "dur": 0.9,
+   "t0": 3.74,
+   "dur": 0.75,
    "ease": "outBack:1.35",
    "kind": "scale",
    "from": 0.0,
@@ -650,8 +650,8 @@
   },
   {
    "group": "star",
-   "t0": 4.45,
-   "dur": 0.9,
+   "t0": 3.74,
+   "dur": 0.75,
    "ease": "outQuint",
    "kind": "rotate",
    "from": -120.0,
@@ -659,7 +659,7 @@
   },
   {
    "group": "caption",
-   "t0": 5.0,
+   "t0": 4.23,
    "dur": 0.18,
    "ease": "outBack:1.6",
    "kind": "scale",
@@ -667,7 +667,7 @@
    "to": 1.0,
    "pivot": "block",
    "stagger": {
-    "per": 0.03,
+    "per": 0.025,
     "order": [
      "strike-caption-00-P",
      "strike-caption-01-H",
@@ -713,14 +713,14 @@
   },
   {
    "group": "caption",
-   "t0": 5.0,
+   "t0": 4.23,
    "dur": 0.12,
    "ease": "outCubic",
    "kind": "opacity",
    "from": 0.0,
    "to": 1.0,
    "stagger": {
-    "per": 0.03,
+    "per": 0.025,
     "order": [
      "strike-caption-00-P",
      "strike-caption-01-H",

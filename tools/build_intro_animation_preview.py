@@ -36,6 +36,8 @@ OUT_HTML = MER / "intro-anim-preview.html"
 
 TEXT_COLOR_RE = re.compile(r"<color=(#[0-9A-Fa-f]{6})>(.*?)</color>")
 TEXT_SIZE_RE = re.compile(r"<size=(\d+)>")
+# Block scale the preview's units-per-TMP-point figure was calibrated against.
+TEXT_BASE_BLOCK_SCALE = 0.08
 
 
 def load(path: Path) -> list[dict]:
@@ -107,7 +109,11 @@ def shape_for(block: dict, by_id: dict | None = None) -> dict | None:
         fill = m.group(1) if m else "#FFFFFF"
         char = m.group(2) if m else "?"
         sm = TEXT_SIZE_RE.search(pr.get("Text", ""))
-        size = int(sm.group(1)) * 0.0075 if sm else 0.15
+        # The runtime spawns the toy at block Scale * merScale * TextScale, so a
+        # glyph's world size tracks BOTH its TMP size tag and its block scale.
+        # 0.0075 units/point was calibrated at the authored 0.08 block scale.
+        scale_ratio = block["Scale"]["x"] / TEXT_BASE_BLOCK_SCALE
+        size = (int(sm.group(1)) * 0.0075 if sm else 0.15) * scale_ratio
         return {"kind": "text", "x": block["Position"]["x"],
                 "y": block["Position"]["y"], "size": round(size, 4),
                 # authored z is the pure in-plane angle (in-game the rig adds
@@ -222,54 +228,61 @@ def build_strike() -> dict:
 
     tweens: list[dict] = []
 
+    # 2026-08-19 music retime: the strike card is the AIR INTRO's second scored
+    # section (track 6.033 -> 11.637 s, 5.604 s — faster than the 6.7 s original
+    # because the seal has already carried the identity beat). Phase starts sit on
+    # the section's measured beats, local seconds: 0.207 / 0.794 / 1.775 / 2.244 /
+    # 2.767 / 3.258 / 3.738, and the caption types on at 4.228 — the strongest
+    # onset of the whole first eleven seconds of the track.
+
     # Phase 1 -- ring ignition: center ring pops from nothing, its three gap
     # separators spin decelerating around it (the reference "arc spinner").
-    tweens.append({"group": "centerRing", "t0": 0.0, "dur": 0.85,
+    tweens.append({"group": "centerRing", "t0": 0.21, "dur": 0.7,
                    "ease": "outBack:1.4", "kind": "scale", "from": 0.0, "to": 1.0})
     for i in range(3):
-        tweens.append({"group": f"sep{i}", "t0": 0.10, "dur": 1.9,
+        tweens.append({"group": f"sep{i}", "t0": 0.28, "dur": 1.6,
                        "ease": "outQuint", "kind": "rotate",
                        "from": 210.0 + i * 35.0, "to": 0.0, "pivot": C})
 
     # Phase 2 -- hexagon assembly: each side floats outside, tilted and short;
     # it lengthens, un-tilts and falls into place (clockwise, staggered).
     for order, i in enumerate(range(6)):
-        t0 = 0.55 + order * 0.17
+        t0 = 0.79 + order * 0.13
         g = groups[f"hex{i}"]
         nx, ny = g["normal"]
         tweens += [
-            {"group": f"hex{i}", "t0": t0, "dur": 0.78, "ease": "outCubic",
+            {"group": f"hex{i}", "t0": t0, "dur": 0.65, "ease": "outCubic",
              "kind": "translate", "from": [nx * 1.5, ny * 1.5], "to": [0, 0]},
-            {"group": f"hex{i}", "t0": t0, "dur": 0.78, "ease": "outBack:1.2",
+            {"group": f"hex{i}", "t0": t0, "dur": 0.65, "ease": "outBack:1.2",
              "kind": "rotate", "from": 26.0, "to": 0.0},
-            {"group": f"hex{i}", "t0": t0, "dur": 0.78, "ease": "outCubic",
+            {"group": f"hex{i}", "t0": t0, "dur": 0.65, "ease": "outCubic",
              "kind": "scaleAxis", "from": 0.15, "to": 1.0},
-            {"group": f"hex{i}", "t0": t0, "dur": 0.24, "ease": "outCubic",
+            {"group": f"hex{i}", "t0": t0, "dur": 0.20, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
 
     # Phase 3 -- outer perimeter contracts into fit around the hexagon.
     tweens += [
-        {"group": "outer", "t0": 2.10, "dur": 1.0, "ease": "outCubic",
+        {"group": "outer", "t0": 1.78, "dur": 0.8, "ease": "outCubic",
          "kind": "scale", "from": 1.32, "to": 1.0},
-        {"group": "outer", "t0": 2.10, "dur": 0.35, "ease": "outCubic",
+        {"group": "outer", "t0": 1.78, "dur": 0.30, "ease": "outCubic",
          "kind": "opacity", "from": 0.0, "to": 1.0},
     ]
 
     # Phase 4 -- spikes expand in: the long needles thrust inward from the
     # hexagon corners toward the core, then the short ticks flick outward.
     for order, i in enumerate([0, 1, 2]):
-        t0 = 2.85 + order * 0.15
+        t0 = 2.24 + order * 0.13
         tweens += [
-            {"group": f"ray{i}", "t0": t0, "dur": 0.55, "ease": "outQuint",
+            {"group": f"ray{i}", "t0": t0, "dur": 0.50, "ease": "outQuint",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
             {"group": f"ray{i}", "t0": t0, "dur": 0.15, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
     for order, i in enumerate([3, 4, 5]):
-        t0 = 3.45 + order * 0.12
+        t0 = 2.77 + order * 0.10
         tweens += [
-            {"group": f"ray{i}", "t0": t0, "dur": 0.4, "ease": "outCubic",
+            {"group": f"ray{i}", "t0": t0, "dur": 0.35, "ease": "outCubic",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
             {"group": f"ray{i}", "t0": t0, "dur": 0.15, "ease": "outCubic",
              "kind": "opacity", "from": 0.0, "to": 1.0},
@@ -277,33 +290,37 @@ def build_strike() -> dict:
 
     # Phase 5 -- corner markers pop in sequence (status lights).
     for order, i in enumerate([0, 1, 2]):
-        t0 = 3.90 + order * 0.18
-        tweens.append({"group": f"marker{i}", "t0": t0, "dur": 0.32,
+        t0 = 3.26 + order * 0.15
+        tweens.append({"group": f"marker{i}", "t0": t0, "dur": 0.30,
                        "ease": "outBack:1.8", "kind": "scale",
                        "from": 0.0, "to": 1.0})
 
     # Phase 6 -- star ignition: the core star spins up out of nothing.
     tweens += [
-        {"group": "star", "t0": 4.45, "dur": 0.9, "ease": "outBack:1.35",
+        {"group": "star", "t0": 3.74, "dur": 0.75, "ease": "outBack:1.35",
          "kind": "scale", "from": 0.0, "to": 1.0},
-        {"group": "star", "t0": 4.45, "dur": 0.9, "ease": "outQuint",
+        {"group": "star", "t0": 3.74, "dur": 0.75, "ease": "outQuint",
          "kind": "rotate", "from": -120.0, "to": 0.0},
     ]
 
-    # Phase 7 -- division caption types on under the logo, char by char.
+    # Phase 7 -- division caption types on under the logo, char by char, opening
+    # on the 4.228 hit and finishing into the 5.338 beat.
     if caption_letters:
-        tweens.append({"group": "caption", "t0": 5.0, "dur": 0.18,
+        tweens.append({"group": "caption", "t0": 4.23, "dur": 0.18,
                        "ease": "outBack:1.6", "kind": "scale", "from": 0.0,
                        "to": 1.0, "pivot": "block",
-                       "stagger": {"per": 0.03, "order": caption_letters}})
-        tweens.append({"group": "caption", "t0": 5.0, "dur": 0.12,
+                       "stagger": {"per": 0.025, "order": caption_letters}})
+        tweens.append({"group": "caption", "t0": 4.23, "dur": 0.12,
                        "ease": "outCubic", "kind": "opacity", "from": 0.0,
                        "to": 1.0,
-                       "stagger": {"per": 0.03, "order": caption_letters}})
+                       "stagger": {"per": 0.025, "order": caption_letters}})
 
-    emblem = build_emblem(blocks, group_of, groups, tweens, 6.7,
+    # Preview card framing only (the runtime fits from the clip's declared
+    # viewHeightMeters, not from this). Widened for the 1.8x caption, whose
+    # lockup is now wider than the emblem disc.
+    emblem = build_emblem(blocks, group_of, groups, tweens, 5.604,
                           "GOC Physics Strike Division",
-                          view=[-0.0167, -0.55, 4.75, 5.75])
+                          view=[-0.0167, -1.05, 6.9, 5.9])
     for s in emblem["shapes"]:
         if s["kind"] == "text":
             s["pivot"] = [s["x"], s["y"]]
@@ -315,9 +332,13 @@ def build_strike() -> dict:
 # --------------------------------------------------------------------------
 
 def build_goc() -> dict:
-    blocks = load(GOC_JSON)
+    # 2026-08-19 music retime: the seal opens the GOC air intro against the scored
+    # track's first section (0 -> 6.033 s, ~110.3 BPM), so the two laurel branches
+    # are DROPPED from the build entirely (user direction: "rm the 2 leaf ... so we
+    # have enough time") and every phase start sits on a measured beat of that
+    # section (0.203 / 0.757 / 1.301 / 2.400 / 2.944 / 3.445 / 4.416 / 5.600).
+    blocks = [b for b in load(GOC_JSON) if "laurel" not in b["Name"]]
     C = (0.00145, 0.00374)  # emblem center
-    LAUREL_PIVOT = (0.00145, -2.1)
 
     letters = [b["Name"] for b in blocks if b["BlockType"] == 8]
 
@@ -339,15 +360,11 @@ def build_goc() -> dict:
             return "text"
         if "map-tri" in bname:
             return "map"
-        return "laurel"  # split L/R below by geometry
+        raise ValueError(f"unexpected seal block {bname!r} (laurels are dropped)")
 
-    # laurel needs a geometric split -> patch group ids after shape build
-    tri_centroids = {}
     meridian_axis = {}
     bar_meta = {}
     for b in blocks:
-        if "laurel-tri" in b["Name"]:
-            tri_centroids[b["Name"]] = centroid(tri_pts(b))
         m = re.match(r"goc-globe-meridian-(\d)", b["Name"])
         if m:
             # quad long axis = local +y rotated by rot.z
@@ -367,8 +384,6 @@ def build_goc() -> dict:
         "map": {"pivot": C},
         "text": {"pivot": C},
         "wall": {"pivot": C},
-        "laurelL": {"pivot": LAUREL_PIVOT},
-        "laurelR": {"pivot": LAUREL_PIVOT},
     }
     for i in range(3):
         groups[f"ring{i}"] = {"pivot": C}
@@ -384,15 +399,17 @@ def build_goc() -> dict:
 
     tweens: list[dict] = []
 
-    # Phase 1 -- broadcast rings radiate from the center, inner first.
+    # Phase 1 -- broadcast rings radiate from the center, inner first, the first
+    # pop on the track's first beat and the outer ring on the second.
     for order, i in enumerate([2, 1, 0]):
-        tweens.append({"group": f"ring{i}", "t0": 0.0 + order * 0.25,
+        tweens.append({"group": f"ring{i}", "t0": 0.20 + order * 0.28,
                        "dur": 0.8, "ease": "outCubic", "kind": "scale",
                        "from": 0.0, "to": 1.0})
 
-    # Phase 2 -- graticule draws through the center; the world map resolves.
+    # Phase 2 -- graticule draws through the center; the world map resolves on
+    # the 1.301 beat.
     for order, gid in enumerate(["mer0", "mer2", "mer1", "mer3"]):
-        t0 = 0.85 + order * 0.15
+        t0 = 0.76 + order * 0.14
         tweens += [
             {"group": gid, "t0": t0, "dur": 0.6, "ease": "inOutCubic",
              "kind": "scaleAxis", "from": 0.0, "to": 1.0},
@@ -400,29 +417,21 @@ def build_goc() -> dict:
              "kind": "opacity", "from": 0.0, "to": 1.0},
         ]
     tweens += [
-        {"group": "map", "t0": 1.55, "dur": 1.0, "ease": "outCubic",
+        {"group": "map", "t0": 1.30, "dur": 1.0, "ease": "outCubic",
          "kind": "scale", "from": 0.86, "to": 1.0},
-        {"group": "map", "t0": 1.55, "dur": 1.0, "ease": "outCubic",
+        {"group": "map", "t0": 1.30, "dur": 1.0, "ease": "outCubic",
          "kind": "opacity", "from": 0.0, "to": 1.0},
     ]
 
-    # Phase 3 -- laurels swing up around the emblem like honors being raised.
-    tweens += [
-        {"group": "laurelL", "t0": 2.30, "dur": 1.15, "ease": "outBack:1.1",
-         "kind": "rotate", "from": -55.0, "to": 0.0},
-        {"group": "laurelL", "t0": 2.30, "dur": 0.30, "ease": "outCubic",
-         "kind": "opacity", "from": 0.0, "to": 1.0},
-        {"group": "laurelR", "t0": 2.48, "dur": 1.15, "ease": "outBack:1.1",
-         "kind": "rotate", "from": 55.0, "to": 0.0},
-        {"group": "laurelR", "t0": 2.48, "dur": 0.30, "ease": "outCubic",
-         "kind": "opacity", "from": 0.0, "to": 1.0},
-    ]
+    # (The laurel phase is gone with the laurels; the stroke starts where the
+    # honors used to rise, a full music bar earlier than the 6.9 s cut.)
 
     # Phase 4 -- the pentagram is drawn as one continuous stroke, tip to tip
     # (bars 0..4 chain start->end). Each corner's tip cap blots in the moment
     # the stroke first touches that vertex (top at draw start, then each
-    # corner as the pen arrives), not all at once at the end.
-    BAR_T0, BAR_STAGGER, BAR_DUR = 3.65, 0.28, 0.31
+    # corner as the pen arrives), not all at once at the end. Stroke start and
+    # every second corner ride the 2.400 / 2.944 / 3.445 beats.
+    BAR_T0, BAR_STAGGER, BAR_DUR = 2.40, 0.27, 0.31
     for i in range(5):
         t0 = BAR_T0 + i * BAR_STAGGER
         tweens += [
@@ -437,25 +446,23 @@ def build_goc() -> dict:
                        "ease": "outBack:1.6", "kind": "scale", "from": 0.0,
                        "to": 1.0})
 
-    # Phase 5 -- motto letters cascade around the seal.
-    tweens.append({"group": "text", "t0": 5.30, "dur": 0.20, "ease": "outBack:1.5",
+    # Phase 5 -- motto letters cascade around the seal, opening on the 4.416
+    # beat and finishing into the 5.600 one.
+    tweens.append({"group": "text", "t0": 4.42, "dur": 0.20, "ease": "outBack:1.5",
                    "kind": "scale", "from": 0.0, "to": 1.0, "pivot": "block",
                    "stagger": {"per": 0.022, "order": letters}})
-    tweens.append({"group": "text", "t0": 5.30, "dur": 0.15, "ease": "outCubic",
+    tweens.append({"group": "text", "t0": 4.42, "dur": 0.15, "ease": "outCubic",
                    "kind": "opacity", "from": 0.0, "to": 1.0,
                    "stagger": {"per": 0.022, "order": letters}})
 
-    emblem = build_emblem(blocks, group_of, groups, tweens, 6.9,
+    emblem = build_emblem(blocks, group_of, groups, tweens, 6.033,
                           "Global Occult Coalition",
                           view=[0.00145, 0.00374, 3.1, 2.75])
-    # split laurel group by centroid x; caps by nearest pentagram corner
+    # caps by nearest pentagram corner
     cap_centroids = {b["Name"]: centroid(tri_pts(b)) for b in blocks
                      if b["Name"].startswith("goc-star-cap")}
     for s in emblem["shapes"]:
-        if s["group"] == "laurel":
-            cx = tri_centroids[s["id"]][0]
-            s["group"] = "laurelL" if cx < C[0] else "laurelR"
-        elif s["group"] == "caps":
+        if s["group"] == "caps":
             cc = cap_centroids[s["id"]]
             nearest = min(range(5), key=lambda i: (
                 (chain_vertices[i][0] - cc[0]) ** 2 +
