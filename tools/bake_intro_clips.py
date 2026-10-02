@@ -5,8 +5,9 @@ Two outputs per emblem:
     quad / shear-pair blocks via mer_triangle_primitives, BT8 TextToys and
     BT1 primitives passed through) written to
     reinforcements-system/generated/logos/<out>-emblem.mer.json
-  * a baked clip (reinforcements.emblem-intro-clip v1) with per-group
-    fixed-rate sample channels written to
+  * a baked clip (reinforcements.clip v3, emitted through the vendored
+    clip_schema_v3.py canonical writer) with per-group fixed-rate sample
+    channels written to
     reinforcements-system/generated/animations/<out>-intro.clip.json
 
 Clip model (mirrors the preview engine's group math exactly):
@@ -34,6 +35,7 @@ ROOT = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 
 import build_intro_animation_preview as preview  # noqa: E402
+import clip_schema_v3  # noqa: E402  (vendored copy; primary lives in reinforcements-system/tools)
 import mer_triangle_primitives as tri_prims  # noqa: E402
 
 RS = ROOT.parent / "reinforcements-system"
@@ -443,7 +445,8 @@ def main() -> None:
         mer_out.write_text(json.dumps(
             {"RootObjectId": raw.get("RootObjectId", 0), "Blocks": compiled},
             indent=1), encoding="utf-8")
-        sha = hashlib.sha256(mer_out.read_bytes()).hexdigest().upper()
+        # ClipAsset folds CRLF to LF so asset pins survive Git newline conversion.
+        sha = hashlib.sha256(mer_out.read_bytes().replace(b"\r\n", b"\n")).hexdigest().upper()
 
         duration = emblem["duration"]
         sample_count = int(math.ceil(duration * SAMPLE_RATE_HZ)) + 1
@@ -451,20 +454,45 @@ def main() -> None:
                         for i in range(sample_count)]
         groups = bake_emblem(emblem, sample_times, bindings_override)
 
+        # reinforcements.clip v3: targets carry the group structure, channels carry
+        # only the sampled numbers (clip default interpolation: linear).
+        targets = []
+        channels = []
+        for group in groups:
+            target = {
+                "id": group["id"],
+                "kind": "group",
+                "pivot": group["pivot"],
+                "axisDeg": group["axisDeg"],
+            }
+            if "parent" in group:
+                target["parent"] = group["parent"]
+            target["bind"] = {"names": group["bindings"]}
+            targets.append(target)
+            for path, samples in group["channels"].items():
+                channels.append({"target": group["id"], "path": path, "samples": samples})
+
         clip_out = OUT_ANIMS / f"{stem}-intro.clip.json"
-        clip_out.write_text(json.dumps({
-            "format": "reinforcements.emblem-intro-clip",
-            "version": 1,
+        clip_schema_v3.write_clip(clip_out, {
+            "format": clip_schema_v3.FORMAT,
+            "version": clip_schema_v3.VERSION,
             "name": f"{stem}-intro",
-            "sourceGenerator": "Embel-conversion-fr/tools/bake_intro_clips.py",
-            "asset": {"path": f"generated/logos/{stem}-emblem.mer.json",
-                      "sha256": sha},
-            "sampleRateHz": SAMPLE_RATE_HZ,
-            "sampleCount": sample_count,
-            "durationSeconds": round(duration, 3),
-            "viewHeightMeters": view_height,
-            "groups": groups,
-        }, indent=1), encoding="utf-8")
+            "generator": {"tool": "Embel-conversion-fr/tools/bake_intro_clips.py"},
+            "time": {
+                "fps": SAMPLE_RATE_HZ,
+                "startFrame": 0,
+                "sampleCount": sample_count,
+                "durationSeconds": round(duration, 3),
+                "interpolation": "linear",
+            },
+            "view": {"heightMeters": view_height},
+            "assets": [{"role": "emblem",
+                        "path": f"generated/logos/{stem}-emblem.mer.json",
+                        "sha256": sha}],
+            "targets": targets,
+            "channels": channels,
+            "cues": [],
+        })
 
         n_blocks = len(compiled)
         print(f"{stem}: {n_blocks} blocks ({tri_summary}), "
