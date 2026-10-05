@@ -53,7 +53,51 @@
     </section>
   </main>
 
+  <dialog id="compatibility-warning" aria-labelledby="compatibility-title">
+    <h2 id="compatibility-title">ProjectMER compatibility warning</h2>
+    <p>The schematic cannot be safely exported. Accept rebuilds it from the source image. Ignore cancels this export.</p>
+    <ul id="compatibility-details"></ul>
+    <form method="dialog">
+      <button value="accept">Accept</button>
+      <button value="ignore" autofocus>Ignore</button>
+    </form>
+  </dialog>
+
   <script>
+    let rebuildExports = false;
+    let warningOpen = false;
+
+    async function offerRebuild(warnings, version) {
+      if (warningOpen || version !== stateVersion) return;
+      warningOpen = true;
+      const dialog = document.getElementById("compatibility-warning");
+      const details = document.getElementById("compatibility-details");
+      details.replaceChildren();
+      for (const warning of warnings.slice(0, 12)) {
+        const item = document.createElement("li");
+        item.textContent = warning;
+        details.append(item);
+      }
+      if (warnings.length > 12) {
+        const item = document.createElement("li");
+        item.textContent = `${warnings.length - 12} more issues. Rebuild and validate all exports.`;
+        details.append(item);
+      }
+      dialog.returnValue = "ignore";
+      const accepted = await new Promise(resolve => {
+        dialog.addEventListener("close", () => resolve(dialog.returnValue === "accept"), {once: true});
+        dialog.showModal();
+      });
+      warningOpen = false;
+      if (version !== stateVersion) return;
+      if (accepted) {
+        rebuildExports = true;
+        queuePreview();
+      } else {
+        setStatus("Export cancelled. No invalid schematic was downloaded.");
+      }
+    }
+
     const copy = {
       en: {
         brand: "Image to PMer",
@@ -340,7 +384,11 @@
         body: JSON.stringify(body),
       });
       const data = await response.json();
-      if (!response.ok || !data.ok) throw new Error(data.error || response.statusText);
+      if (!response.ok || !data.ok) {
+        const error = new Error(data.error || response.statusText);
+        error.compatibilityWarnings = data.compatibility_warnings;
+        throw error;
+      }
       return data;
     }
 
@@ -376,6 +424,8 @@
       queuedLayer = undefined;
       conversionInFlight = true;
       const requestVersion = stateVersion;
+      const rebuild = rebuildExports;
+      rebuildExports = false;
       try {
         const data = await post("/convert", {
           filename: fileName,
@@ -387,6 +437,7 @@
               .filter(([, included]) => included)
               .map(([layerName]) => layerName),
             changed_layer: changedLayer,
+            rebuild_exports: rebuild,
           },
         });
         if (requestVersion !== stateVersion) return;
@@ -414,6 +465,7 @@
           element("preview-loading").hidden = true;
           renderLayers();
           setStatus(text("failed", error.message));
+          if (error.compatibilityWarnings) await offerRebuild(error.compatibilityWarnings, requestVersion);
         }
       } finally {
         conversionInFlight = false;
@@ -422,6 +474,39 @@
           updateTimer = setTimeout(runQueuedPreview, 0);
         }
       }
+    }
+
+    for (const id of ["download-combined", "download-separated"]) {
+      element(id).addEventListener("click", async event => {
+        event.preventDefault();
+        const link = event.currentTarget;
+        const version = stateVersion;
+        const filename = link.download;
+        try {
+          const response = await fetch(link.href);
+          if (!response.ok) {
+            const data = await response.json();
+            if (data.compatibility_warnings) {
+              if (version !== stateVersion) return;
+              element("download-combined").hidden = true;
+              element("download-separated").hidden = true;
+              await offerRebuild(data.compatibility_warnings, version);
+              return;
+            }
+            throw new Error(data.error || "Export unavailable; regenerate the preview.");
+          }
+          const blob = await response.blob();
+          if (version !== stateVersion) return;
+          const url = URL.createObjectURL(blob);
+          const download = document.createElement("a");
+          download.href = url;
+          download.download = filename;
+          download.click();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        } catch (error) {
+          if (version === stateVersion) setStatus(error.message);
+        }
+      });
     }
 
     function loadFile(file) {

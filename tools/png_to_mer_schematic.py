@@ -16,6 +16,8 @@ vanilla BlockType 0 (Empty) and 1 (Primitive), so it loads on stock ProjectMER.
 
 from __future__ import annotations
 
+from mer_validation import validate_schematic
+
 import argparse
 import json
 import math
@@ -1903,7 +1905,7 @@ def main() -> None:
         )
         recolored = recolor_fill_blocks(schematic, color_fn, name)
 
-    json_path.write_text(json.dumps(schematic, separators=(",", ":")), encoding="utf-8")
+    json_path.write_text(json.dumps(validate_schematic(schematic), separators=(",", ":")), encoding="utf-8")
 
     if args.preview:
         preview_triangle_arg = triangles + preview_triangles

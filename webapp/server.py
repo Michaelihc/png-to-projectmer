@@ -19,6 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 TOOLS = ROOT / "tools"
 CONVERTER = TOOLS / "layered_emblem_to_mer.py"
+sys.path.insert(0, str(TOOLS))
+from mer_validation import ExportValidationError, read_schematic, validate_schematic
+
 INDEX = ROOT / "webapp" / "index.html"
 OUTPUT_DIR = ROOT / "webapp" / "_output"
 INPUT_DIR = ROOT / "webapp" / "_input"
@@ -142,11 +145,13 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
             except Exception:
                 pass
         if (
-            actual_meta == expected_meta
+            not params.get("rebuild_exports", False)
+            and actual_meta == expected_meta
             and cache_json.is_file()
             and cache_preview.is_file()
             and cache_stats.is_file()
         ):
+            read_schematic(cache_json)
             continue
         argv = [
             sys.executable,
@@ -161,6 +166,8 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
         proc = subprocess.run(argv, capture_output=True, text=True, cwd=str(ROOT))
         if proc.returncode != 0:
             message = (proc.stderr.strip() or proc.stdout.strip() or "conversion failed").splitlines()
+            if any("ExportValidationError:" in line for line in message):
+                raise ExportValidationError([message[-1]])
             return {"ok": False, "error": "\n".join(message[-8:])}
         cache_meta.write_text(json.dumps(expected_meta, separators=(",", ":")), "utf-8")
         rebuilt_layers.append(layer_name)
@@ -172,7 +179,7 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
     next_object_id = 1
     for layer_name in layer_qualities:
         _cache_name, _cache_folder, cache_json, cache_preview, cache_stats, _cache_meta = cache_paths(layer_name)
-        layer_blocks = json.loads(cache_json.read_text("utf-8")).get("Blocks", [])
+        layer_blocks = read_schematic(cache_json)["Blocks"]
         stored_stats = json.loads(cache_stats.read_text("utf-8")).get("layers", {}).get(layer_name, {})
         layer_stats[layer_name] = {
             "source_triangles": int(stored_stats.get("source_triangles", 0)),
@@ -183,7 +190,7 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
 
     for layer_number, layer_name in enumerate(active_layers, 1):
         _cache_name, _cache_folder, cache_json, _cache_preview, _cache_stats, _cache_meta = cache_paths(layer_name)
-        layer_blocks = json.loads(cache_json.read_text("utf-8")).get("Blocks", [])
+        layer_blocks = read_schematic(cache_json)["Blocks"]
         id_map = {}
         for block in layer_blocks:
             old_id = int(block.get("ObjectId", 0))
@@ -204,14 +211,14 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
         export_folder.mkdir(parents=True, exist_ok=True)
         export_path = export_folder / f"{export_name}.json"
         export_path.write_text(
-            json.dumps({"RootObjectId": 0, "Blocks": layer_blocks}, separators=(",", ":")),
+            json.dumps(validate_schematic({"RootObjectId": 0, "Blocks": layer_blocks}), separators=(",", ":")),
             encoding="utf-8",
         )
         separate_exports.append(str(export_path.relative_to(folder)))
 
     json_path = folder / f"{name}.json"
     json_path.write_text(
-        json.dumps({"RootObjectId": 0, "Blocks": combined_blocks}, separators=(",", ":")),
+        json.dumps(validate_schematic({"RootObjectId": 0, "Blocks": combined_blocks}), separators=(",", ":")),
         encoding="utf-8",
     )
     preview_path = folder / f"{name}.preview.png"
@@ -251,7 +258,7 @@ def make_zip(name: str, mode: str = "combined") -> bytes | None:
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as archive:
         if mode == "combined":
-            archive.write(json_path, arcname=f"{name}/{name}.json")
+            archive.writestr(f"{name}/{name}.json", json.dumps(read_schematic(json_path)))
         elif mode == "separated":
             manifest_path = folder / f"{name}.exports.json"
             if not manifest_path.is_file():
@@ -261,7 +268,7 @@ def make_zip(name: str, mode: str = "combined") -> bytes | None:
                 export_path = (folder / relative_path).resolve()
                 if folder not in export_path.parents or not export_path.is_file():
                     return None
-                archive.write(export_path, arcname=str(Path(relative_path)).replace("\\", "/"))
+                archive.writestr(str(Path(relative_path)).replace("\\", "/"), json.dumps(read_schematic(export_path)))
         else:
             return None
     return buffer.getvalue()
@@ -313,7 +320,11 @@ class Handler(BaseHTTPRequestHandler):
             query = parse_qs(urlparse(self.path).query)
             name = clean_name((query.get("name") or [""])[0])
             mode = (query.get("mode") or ["combined"])[0]
-            data = make_zip(name, mode)
+            try:
+                data = make_zip(name, mode)
+            except ExportValidationError as error:
+                self.send_json(409, {"ok": False, "error": str(error), "compatibility_warnings": error.warnings})
+                return
             if data is None:
                 self.send_bytes(404, b"not found", "text/plain")
                 return
@@ -339,6 +350,8 @@ class Handler(BaseHTTPRequestHandler):
                 else convert_layered(image_bytes, filename, payload.get("params", {}))
             )
             self.send_json(200 if result.get("ok") else 400, result)
+        except ExportValidationError as error:
+            self.send_json(409, {"ok": False, "error": str(error), "compatibility_warnings": error.warnings})
         except Exception as error:
             self.send_json(400, {"ok": False, "error": f"{type(error).__name__}: {error}"})
 

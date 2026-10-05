@@ -42,6 +42,8 @@ Then open `http://127.0.0.1:8731/`.
 LabAPI-beta/configs/ProjectMER/Schematics/
 ```
 
+Exports are validated before writing and again before download. Invalid cached or generated schematics show a compatibility warning: **Accept** rebuilds from the source image, and **Ignore** cancels the export. After rebuilding, inspect the preview and export again. The command-line converters stop with a validation error rather than writing an invalid schematic.
+
 Each layer can spend geometry where it matters. A detailed figure layer can stay near 95 while a smooth backing sits near 20. The tool merges source triangles into convex regions and covers them with vanilla parallelogram primitives, reducing the final runtime object count.
 
 Everything stays on your computer. The server binds to `127.0.0.1` by default and does not upload images to a third party.

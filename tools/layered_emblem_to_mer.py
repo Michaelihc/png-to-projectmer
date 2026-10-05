@@ -21,6 +21,8 @@ Usage:
 
 Omit --config to auto-detect the palette and stack with k-means.
 """
+from mer_validation import validate_schematic
+
 import argparse
 import importlib.util
 import json
@@ -259,7 +261,7 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
     schematic = {"RootObjectId": 0, "Blocks": all_blocks}
     out_dir.mkdir(parents=True, exist_ok=True)
     out_json = out_dir / f"{name}.json"
-    out_json.write_text(json.dumps(schematic, separators=(",", ":")), encoding="utf-8")
+    out_json.write_text(json.dumps(validate_schematic(schematic), separators=(",", ":")), encoding="utf-8")
     (out_dir / f"{name}.stats.json").write_text(
         json.dumps({"layers": export_stats}, separators=(",", ":")),
         encoding="utf-8",
