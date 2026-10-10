@@ -215,7 +215,15 @@ def write_layer_previews(out_dir, name, layer_geometry, W, H, width_units):
 
 def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
             make_mesh_preview=False, layer_qualities=None,
-            make_layer_previews=False, only_layer=None):
+            make_layer_previews=False, only_layer=None,
+            fill_strategy="ngon", strip_tolerance=0.25):
+    if fill_strategy not in ("ngon", "strips"):
+        raise ValueError(f"unknown fill strategy: {fill_strategy}")
+    if fill_strategy == "strips":
+        import math
+        if not math.isfinite(strip_tolerance) or strip_tolerance < 0:
+            raise ValueError("Strip tolerance must be a finite, non-negative pixel distance.")
+        strip_converter = _load("mer_strip_cover").rings_to_strip_blocks
     im = np.array(Image.open(image_path).convert("RGBA"))
     H, W = im.shape[:2]
     cfg = json.loads(Path(config_path).read_text()) if config_path else ts.auto_config(im)
@@ -244,9 +252,11 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
         z = layer_z(cfg, lname, z_order, n_layers)
         region_mask = rasterize(polys, W, H)
         unity_polys = polys_to_unity(polys, W, H, width_units)
-        blocks, next_id, stats, geometry = ngon.rings_to_parallelogram_blocks(
+        converter = strip_converter if fill_strategy == "strips" else ngon.rings_to_parallelogram_blocks
+        options = {"tolerance_px": strip_tolerance} if fill_strategy == "strips" else {}
+        blocks, next_id, stats, geometry = converter(
             unity_polys, region_mask, W, H, width_units, z, color,
-            f"{name}-{lname}", start_id=next_id, parent_id=0,
+            f"{name}-{lname}", start_id=next_id, parent_id=0, **options,
         )
         all_blocks.extend(blocks)
         summary.append((lname, len(polys), len(blocks), stats.line()))
@@ -301,6 +311,10 @@ def main():
                     help="Also write one clean PNG preview for each tuned layer.")
     ap.add_argument("--only-layer", metavar="NAME",
                     help="Build only one named layer (used by the incremental web UI).")
+    ap.add_argument("--fill-strategy", choices=("ngon", "strips"), default="ngon",
+                    help="strips tries overlapping inward rectangles with residual filling; keeps ngon if cheaper.")
+    ap.add_argument("--strip-tolerance", type=float, default=0.25, metavar="PIXELS",
+                    help="Allowed strip overhang in input-image pixels (default 0.25); smaller preserves edges better.")
     args = ap.parse_args()
 
     image_path = Path(args.image)
@@ -310,7 +324,7 @@ def main():
     out_dir = Path(args.output) / name
     convert(image_path, args.config, name, out_dir, args.preview, args.quality,
             args.mesh_preview, parse_layer_qualities(args.layer_quality),
-            args.layer_previews, args.only_layer)
+            args.layer_previews, args.only_layer, args.fill_strategy, args.strip_tolerance)
 
 
 if __name__ == "__main__":

@@ -86,6 +86,15 @@ python tools/png_to_mer_schematic.py scarletking.png \
 
 Run either script with `--help` for all options.
 
+For rectangle-strip fitting, add `--fill-strategy strips --strip-tolerance 0.25`
+to the layered converter command. It fits overlapping rectangles along boundary
+edges and fills the remaining regions, comparing several covers against the
+ordinary n-gon export by total object count, including Empty parents. The
+tolerance is measured in input-image pixels; larger values can roughen edges or
+narrow small cutouts. This optional search takes longer and can increase visible
+quad count even when it reduces total objects. Inspect both counts and the preview.
+The default converter and browser workflow continue to use n-gon filling.
+
 ## How it works
 
 ```text
