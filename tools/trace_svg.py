@@ -59,13 +59,26 @@ def image_rgb_and_visible(im):
     return rgb, visible
 
 
+def nearest_palette(flat, centers):
+    """Bound distance scratch memory independently of the image dimensions."""
+    labels = np.empty(len(flat), dtype=np.intp)
+    distances = np.empty(len(flat), dtype=float)
+    for start in range(0, len(flat), 65536):
+        stop = min(start + 65536, len(flat))
+        d = ((flat[start:stop, None] - centers[None]) ** 2).sum(2)
+        nearest = d.argmin(1)
+        labels[start:stop] = nearest
+        distances[start:stop] = d[np.arange(stop - start), nearest]
+    return labels, distances
+
+
 def classify(im, centroids):
     """centroids: dict name -> (r,g,b). Return (label_grid, names)."""
     rgb, _visible = image_rgb_and_visible(im)
     names = list(centroids)
     C = np.array([centroids[n] for n in names], float)
-    d = ((rgb.reshape(-1, 1, 3) - C.reshape(1, -1, 3)) ** 2).sum(2)
-    return d.argmin(1).reshape(rgb.shape[:2]), names
+    labels, _ = nearest_palette(rgb.reshape(-1, 3), C)
+    return labels.reshape(rgb.shape[:2]), names
 
 
 def layer_polys(mask, blur, simplify_tol, min_area=6.0):
@@ -75,12 +88,15 @@ def layer_polys(mask, blur, simplify_tol, min_area=6.0):
     loops with no nesting info, so we reconstruct containment: a ring nested
     at odd depth is a hole, even depth is solid fill (even-odd rule).
     """
-    soft = gaussian_filter(mask.astype(float), blur)
+    # Close contours at the image boundary, including fully opaque images.
+    # The halo also keeps the Gaussian kernel away from its reflected boundary.
+    padding = max(1, int(np.ceil(4 * blur)) + 1)
+    soft = gaussian_filter(np.pad(mask.astype(float), padding), blur)
     contours = measure.find_contours(soft, 0.5)
     rings = []
     for c in contours:
         # find_contours yields (row, col) = (y, x); flip to (x, y)
-        ring = [(x, y) for y, x in c]
+        ring = [(x - padding, y - padding) for y, x in c]
         if len(ring) < 4:
             continue
         p = Polygon(ring)
@@ -155,9 +171,7 @@ def auto_config(im, k=4):
     # flat background dominates the image. Stop early for truly low-colour art.
     centers = [flat[rng.integers(len(flat))].astype(float)]
     for _ in range(1, k):
-        distance = np.min(
-            ((flat[:, None] - np.array(centers)[None]) ** 2).sum(2), axis=1
-        )
+        _, distance = nearest_palette(flat, np.array(centers))
         total = float(distance.sum())
         if total <= 1e-9:
             break
@@ -165,10 +179,13 @@ def auto_config(im, k=4):
     C = np.array(centers)
     k = len(C)
     for _ in range(40):
-        lab = ((flat[:, None] - C[None]) ** 2).sum(2).argmin(1)
+        lab, _ = nearest_palette(flat, C)
+        previous = C.copy()
         for j in range(k):
             if (lab == j).any():
                 C[j] = flat[lab == j].mean(0)
+        if np.array_equal(C, previous):
+            break
     counts = np.bincount(lab, minlength=k)
     active = [j for j in range(k) if counts[j] > 0]
     active.sort(key=lambda j: -counts[j])

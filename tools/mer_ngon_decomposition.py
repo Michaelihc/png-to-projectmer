@@ -44,6 +44,7 @@ class NGonStats:
     convex_pieces: int = 0
     whole_quads: int = 0
     rect_covers: int = 0
+    symmetric_covers: int = 0
     peeled: int = 0
     hidden_tails: int = 0
     medial_tails: int = 0
@@ -52,7 +53,7 @@ class NGonStats:
     def line(self) -> str:
         return (f"{self.source_triangles} triangles -> {self.convex_pieces} convex pieces "
                 f"({self.whole_quads} whole quads, {self.rect_covers} rect covers, "
-                f"{self.peeled} peels, {self.hidden_tails} hidden tails, "
+                f"{self.symmetric_covers} symmetric covers, {self.peeled} peels, {self.hidden_tails} hidden tails, "
                 f"{self.medial_tails} medial tails) -> {self.toys} toys")
 
 
@@ -423,6 +424,9 @@ def _construction_peel(poly: list[Vec2], emitter: _Emitter, region: RegionMask) 
 
 
 def _emit_tail_triangle(a: Vec2, b: Vec2, c: Vec2, emitter: _Emitter, region: RegionMask) -> None:
+    if _try_bounding_rect([a, b, c], emitter, region):
+        emitter.stats.rect_covers += 1
+        return
     for v, e1, e2 in ((a, b, c), (b, a, c), (c, a, b)):
         p = (e1[0] + e2[0] - v[0], e1[1] + e2[1] - v[1])
         if region.contains_polygon([e1, p, e2]):
@@ -451,6 +455,9 @@ def _process_piece(points: list[Vec2], emitter: _Emitter, region: RegionMask) ->
     if _try_bounding_rect(poly, emitter, region):
         emitter.stats.rect_covers += 1
         return
+    if _try_symmetric_cover(poly, emitter):
+        emitter.stats.symmetric_covers += 1
+        return
     while len(poly) > 3:
         if _try_parallel_sides_peel(poly, emitter):
             emitter.stats.peeled += 1
@@ -462,6 +469,31 @@ def _process_piece(points: list[Vec2], emitter: _Emitter, region: RegionMask) ->
             _emit_tail_triangle(poly[0], poly[i], poly[i + 1], emitter, region)
         return
     _emit_tail_triangle(poly[0], poly[1], poly[2], emitter, region)
+
+
+def _try_symmetric_cover(poly: list[Vec2], emitter: _Emitter) -> bool:
+    """Cover a centrally symmetric convex polygon with opposite-edge quads.
+
+    Each quad lies inside the polygon and contains the center. Together they
+    cover every center-to-edge triangle. Regular even-sided discs produce
+    rectangles, avoiding shear parents as well as the peeling tail.
+    """
+    n = len(poly)
+    if n < 6 or n % 2:
+        return False
+    half = n // 2
+    center = ((poly[0][0] + poly[half][0]) / 2,
+              (poly[0][1] + poly[half][1]) / 2)
+    extent = max(_len(_sub(p, center)) for p in poly)
+    tolerance = max(1e-10, extent * 1e-9)
+    if any(_len((poly[i][0] + poly[i + half][0] - 2 * center[0],
+                 poly[i][1] + poly[i + half][1] - 2 * center[1])) > tolerance
+           for i in range(half)):
+        return False
+    for i in range(half):
+        emitter.emit_parallelogram(center, _sub(poly[i], center),
+                                  _sub(poly[(i + 1) % n], center))
+    return True
 
 
 # ---------- public entry point ----------
