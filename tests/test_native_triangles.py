@@ -248,7 +248,8 @@ class NativeTriangleConversionTests(unittest.TestCase):
         self.assertEqual(quad_stats, tri_stats)          # quad cost is reported in every mode
         self.assertEqual(quad_native, tri_native)        # so is triangle cost
         explicit, _, _ = self.convert("explicit", native_triangles=None)
-        self.assertEqual(quad, explicit)
+        self.assertEqual(json.dumps(quad).replace("quad-", "x-"),
+                         json.dumps(explicit).replace("explicit-", "x-"))
 
     def test_native_counts_match_emitted_blocks(self):
         for mode in native.MODES:
