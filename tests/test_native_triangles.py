@@ -274,5 +274,21 @@ class NativeTriangleConversionTests(unittest.TestCase):
         self.assertAlmostEqual(areas["split"], areas["shear"], delta=1e-3)
 
 
+class NativeTriangleWebTests(unittest.TestCase):
+    def test_ui_offers_the_modes_and_shows_both_cost_sets(self):
+        html = (ROOT / "webapp" / "index.html").read_text("utf-8")
+        for needle in ('id="primitive-mode"', 'id="triangle-sides"', 'value="split"',
+                       'value="shear"', 'value="solid"', "layerStats.native", "resultData.native"):
+            self.assertIn(needle, html)
+
+    def test_server_rejects_unknown_modes(self):
+        sys.path.insert(0, str(ROOT / "webapp"))
+        import server
+
+        for params in ({"primitive_mode": "hexagons"}, {"triangle_sides": "three-sided"}):
+            with self.assertRaises(ValueError):
+                server.convert_layered(b"x", "a.png", {"layer_qualities": {"c0": 70}, **params})
+
+
 if __name__ == "__main__":
     unittest.main()
