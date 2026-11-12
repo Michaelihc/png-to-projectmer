@@ -95,6 +95,22 @@ narrow small cutouts. This optional search takes longer and can increase visible
 quad count even when it reduces total objects. Inspect both counts and the preview.
 The default converter and browser workflow continue to use n-gon filling.
 
+## Native triangles (SCP:SL 15.0)
+
+SCP:SL 15.0 adds triangle primitives (`Triangle90` is a right isosceles triangle, `Triangle90Solid` its two-sided variant). They need a ProjectMER port that knows these types, so quads stay the default and the export is opt-in:
+
+```bash
+python tools/layered_emblem_to_mer.py nu22.png --name nu22 --quality 70   --native-triangles split --triangle-sides solid --preview
+```
+
+- `--native-triangles split` cuts every source triangle along its altitude into two right triangles, each one `Triangle90` with non-uniform scale and no helper empties (2 primitives, 2 objects per triangle; 1 if it already has a right angle).
+- `--native-triangles shear` emits one `Triangle90` under a sheared Empty parent (1 primitive, 2 objects per triangle).
+- `--triangle-sides one-sided` (default) matches the quads, which show only one face; `solid` writes the two-sided `Triangle90Solid`.
+
+Native modes triangulate with the same earcut step as the quads and skip convex merging and the parallelogram cover. The converter always prints and stores both costs (`<name>.stats.json` for quads, `<name>.native-stats.json` for both triangle modes) so the browser UI shows them next to each other; its **Output primitives** selector picks what is exported.
+
+Everything the tool assumes about the 15.0 meshes is in [`tools/mer_native_triangle_calibration.py`](tools/mer_native_triangle_calibration.py): the type names written to the schematic (as strings; set `WRITE_AS = "number"` and fill `NUMERIC_VALUES` if the port needs numbers), the unit mesh vertices and which side is visible. Correct that table after inspecting the real mesh; the geometry and tests follow it.
+
 ## How it works
 
 ```text
@@ -107,7 +123,7 @@ image
   → vanilla ProjectMER JSON
 ```
 
-ProjectMER has no native triangle primitive. The tool represents non-parallelogram pieces with a transform-hierarchy shear: a rotated child quad under a non-uniformly scaled empty parent produces the required world-space shape. The n-gon path reduces runtime objects by merging adjacent triangles before emitting those quads.
+Stock ProjectMER has no triangle primitive. The default quad output represents non-parallelogram pieces with a transform-hierarchy shear: a rotated child quad under a non-uniformly scaled empty parent produces the required world-space shape. The n-gon path reduces runtime objects by merging adjacent triangles before emitting those quads.
 
 The main modules are:
 
