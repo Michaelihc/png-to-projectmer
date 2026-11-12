@@ -498,6 +498,29 @@ def _try_symmetric_cover(poly: list[Vec2], emitter: _Emitter) -> bool:
 
 # ---------- public entry point ----------
 
+def triangulate_polygons(unity_polygons: list[list[list[Vec2]]],
+                         min_triangle_area: float = 0.000002):
+    """Earcut each polygon (shell first, then holes) into counter-clockwise
+    triangles. Yields (vertices, [(i, j, k), ...]) per polygon."""
+    for rings in unity_polygons:
+        rings = [r for r in rings if len(r) >= 3 and abs(_signed_area(r)) > 1e-12]
+        if not rings:
+            continue
+        vertices = [point for ring in rings for point in ring]
+        ring_ends = np.cumsum([len(r) for r in rings], dtype=np.uint32)
+        flat = np.array(vertices, dtype=np.float64)
+        indices = earcut.triangulate_float64(flat, ring_ends)
+        triangles = []
+        for i in range(0, len(indices), 3):
+            tri = (int(indices[i]), int(indices[i + 1]), int(indices[i + 2]))
+            pts = [vertices[k] for k in tri]
+            area = _signed_area(pts)
+            if abs(area) < min_triangle_area:
+                continue
+            triangles.append(tri if area > 0 else (tri[0], tri[2], tri[1]))
+        yield vertices, triangles
+
+
 def rings_to_parallelogram_blocks(
     unity_polygons: list[list[list[Vec2]]],
     mask: np.ndarray,
@@ -520,22 +543,7 @@ def rings_to_parallelogram_blocks(
     emitter = _Emitter(name_prefix, start_id, parent_id, z, color, stats)
     source_triangles: list[tuple[Vec2, Vec2, Vec2]] = []
 
-    for rings in unity_polygons:
-        rings = [r for r in rings if len(r) >= 3 and abs(_signed_area(r)) > 1e-12]
-        if not rings:
-            continue
-        vertices = [point for ring in rings for point in ring]
-        ring_ends = np.cumsum([len(r) for r in rings], dtype=np.uint32)
-        flat = np.array(vertices, dtype=np.float64)
-        indices = earcut.triangulate_float64(flat, ring_ends)
-        triangles = []
-        for i in range(0, len(indices), 3):
-            tri = (int(indices[i]), int(indices[i + 1]), int(indices[i + 2]))
-            pts = [vertices[k] for k in tri]
-            area = _signed_area(pts)
-            if abs(area) < min_triangle_area:
-                continue
-            triangles.append(tri if area > 0 else (tri[0], tri[2], tri[1]))
+    for vertices, triangles in triangulate_polygons(unity_polygons, min_triangle_area):
         stats.source_triangles += len(triangles)
         source_triangles.extend(
             (vertices[tri[0]], vertices[tri[1]], vertices[tri[2]])
