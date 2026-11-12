@@ -8,7 +8,7 @@ Turn an emblem image into a stock SCP:SL ProjectMER schematic: **split layers â†
 
 ![A close view of the real source triangulation](docs/screenshots/triangulation.png)
 
-The tool runs locally and uses no frontend framework. The output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin.
+The tool runs locally and uses no frontend framework. By default the output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin; [native triangles](#native-triangles-scpsl-150) are opt-in.
 
 ## Start in 30 seconds
 
