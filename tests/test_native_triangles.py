@@ -2,10 +2,12 @@ import copy
 import json
 import random
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 import numpy as np
+from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
@@ -209,6 +211,66 @@ class NativeTriangleGeometryTests(unittest.TestCase):
         bad[0]["Properties"]["PrimitiveType"] = "Hexagon"
         with self.assertRaises(ExportValidationError):
             validate_schematic({"RootObjectId": 0, "Blocks": bad})
+
+
+class NativeTriangleConversionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import layered_emblem_to_mer
+
+        cls.convert_module = layered_emblem_to_mer
+        cls.tmp = tempfile.TemporaryDirectory()
+        root = Path(cls.tmp.name)
+        image = Image.new("RGBA", (160, 160), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(image)
+        draw.ellipse((10, 10, 150, 150), fill=(30, 70, 140, 255))
+        draw.polygon([(40, 110), (80, 30), (122, 112)], fill=(240, 240, 240, 255))
+        cls.image_path = root / "emblem.png"
+        image.save(cls.image_path)
+        cls.root = root
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def convert(self, name, **options):
+        out = self.root / name
+        path = self.convert_module.convert(self.image_path, None, name, out, False, 70, **options)
+        stats = json.loads((out / f"{name}.stats.json").read_text())
+        native_stats = json.loads((out / f"{name}.native-stats.json").read_text())
+        return json.loads(path.read_text()), stats, native_stats
+
+    def test_default_output_is_quads_and_stats_are_mode_independent(self):
+        quad, quad_stats, quad_native = self.convert("quad")
+        self.assertTrue(all(b["Properties"].get("PrimitiveType") == 5
+                            for b in quad["Blocks"] if b["BlockType"] == 1))
+        tri, tri_stats, tri_native = self.convert("tri", native_triangles="split")
+        self.assertEqual(quad_stats, tri_stats)          # quad cost is reported in every mode
+        self.assertEqual(quad_native, tri_native)        # so is triangle cost
+        explicit, _, _ = self.convert("explicit", native_triangles=None)
+        self.assertEqual(quad, explicit)
+
+    def test_native_counts_match_emitted_blocks(self):
+        for mode in native.MODES:
+            for sides, name in (("one-sided", "Triangle90"), ("solid", "Triangle90Solid")):
+                document, _, native_stats = self.convert(
+                    f"{mode}-{sides}", native_triangles=mode, triangle_sides=sides)
+                validate_schematic(document)
+                blocks = document["Blocks"]
+                visible = [b for b in blocks if b["BlockType"] == 1]
+                self.assertEqual({b["Properties"]["PrimitiveType"] for b in visible}, {name})
+                expected = native_stats["layers"]
+                self.assertEqual(len(visible), sum(l[mode]["primitives"] for l in expected.values()))
+                self.assertEqual(len(blocks), sum(l[mode]["objects"] for l in expected.values()))
+
+    def test_native_triangles_tile_the_source_area(self):
+        areas = {}
+        for mode in native.MODES:
+            document, _, _ = self.convert(f"area-{mode}", native_triangles=mode)
+            areas[mode] = sum(
+                area(tuple(map(tuple, verts[:, :2])))
+                for _b, verts in native.native_triangle_world_vertices(document["Blocks"]))
+        self.assertAlmostEqual(areas["split"], areas["shear"], delta=1e-3)
 
 
 if __name__ == "__main__":
