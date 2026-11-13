@@ -84,6 +84,21 @@ python tools/png_to_mer_schematic.py scarletking.png \
 
 为任一脚本添加 `--help` 可查看完整参数。
 
+## 原生三角形（SCP:SL 15.0）
+
+SCP:SL 15.0 新增三角形基元（`Triangle90` 为直角等腰三角形，`Triangle90Solid` 为其双面版本）。它们需要认识这些类型的 ProjectMER 版本，因此默认仍输出四边形，原生三角形需主动开启：
+
+```bash
+python tools/layered_emblem_to_mer.py nu22.png --name nu22 --quality 70   --native-triangles --preview
+```
+
+- `--native-triangles` 单独使用即为 `shear`：一个 `Triangle90` 放在错切的空父物体下（每个三角形 1 个基元、2 个对象）。
+- `--native-triangles split`：沿高把每个源三角形切成两个直角三角形，各用一个非均匀缩放的 `Triangle90`，无辅助空物体（每个三角形 2 个基元、2 个对象）。
+- 两种模式都会把本身带直角的三角形输出为单个 `Triangle90`（1 个对象）。其余情况对象数相同，`shear` 的基元数减半，因此为默认。
+- `--triangle-sides one-sided`（默认）与四边形一样只显示一面；`solid` 输出双面的 `Triangle90Solid`。
+
+网页界面会并排显示四边形与两种三角形模式的基元数和对象数，并可通过“输出基元”选择导出内容。对 15.0 网格的所有假设都集中在 [`tools/mer_native_triangle_calibration.py`](tools/mer_native_triangle_calibration.py)。
+
 ## 原理
 
 ```text

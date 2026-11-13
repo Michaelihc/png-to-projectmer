@@ -2,6 +2,8 @@
 
 Draws every BlockType 1 (Quad) primitive as a filled polygon, resolving world
 position through its parent TRS (shear parents give children local coords).
+SCP:SL 15.0 native triangle primitives (see mer_native_triangle_calibration.py)
+are drawn as triangles using the calibrated unit mesh and the full parent chain.
 Back-to-front by Z so front layers occlude, matching the runtime.
 
 Usage: python tools/render_preview.py <schematic.json> [out_stem] [width_px]
@@ -15,6 +17,9 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageDraw
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mer_native_triangle_calibration as native_calibration
 
 
 def vec(d):
@@ -48,10 +53,21 @@ def collect_quads(path):
     by_id = {b["ObjectId"]: b for b in blocks}
     quads = []
     unit = np.array([[-0.5, -0.5, 0], [0.5, -0.5, 0], [0.5, 0.5, 0], [-0.5, 0.5, 0]], float)
+    native_world = None
     for b in blocks:
         if b.get("BlockType") != 1:
             continue
         color = (b.get("Properties") or {}).get("Color", "#FFFFFFFF")
+        if native_calibration.type_from_schematic_value(
+                (b.get("Properties") or {}).get("PrimitiveType")) is not None:
+            if native_world is None:
+                import mer_native_triangles
+                native_world = {id(block): verts for block, verts in
+                                mer_native_triangles.native_triangle_world_vertices(blocks)}
+            verts = native_world[id(b)]
+            quads.append((float(verts[:, 2].mean()), hexcol(color),
+                          [(float(v[0]), float(v[1])) for v in verts]))
+            continue
         pos, rot, scale = vec(b["Position"]), vec(b["Rotation"]), vec(b["Scale"])
         parent = by_id.get(b["ParentId"])
         world = []

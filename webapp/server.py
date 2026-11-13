@@ -27,7 +27,9 @@ OUTPUT_DIR = ROOT / "webapp" / "_output"
 INPUT_DIR = ROOT / "webapp" / "_input"
 MAX_UPLOAD_BYTES = 40 * 1024 * 1024
 NAME_RE = re.compile(r"[^A-Za-z0-9_.-]+")
-CACHE_VERSION = 2
+CACHE_VERSION = 3
+PRIMITIVE_MODES = ("quads", "split", "shear")
+TRIANGLE_SIDES = ("one-sided", "solid")
 
 
 def clean_name(raw: str) -> str:
@@ -96,6 +98,13 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
         layer_qualities[layer_name] = max(1, min(100, int(value)))
     if not layer_qualities:
         raise ValueError("No layers were supplied.")
+    primitive_mode = params.get("primitive_mode") or "quads"
+    triangle_sides = params.get("triangle_sides") or "one-sided"
+    if primitive_mode not in PRIMITIVE_MODES:
+        raise ValueError(f"primitive_mode must be one of {', '.join(PRIMITIVE_MODES)}")
+    if triangle_sides not in TRIANGLE_SIDES:
+        raise ValueError(f"triangle_sides must be one of {', '.join(TRIANGLE_SIDES)}")
+    native_mode = None if primitive_mode == "quads" else primitive_mode
     raw_active_layers = params.get("active_layers")
     if raw_active_layers is None:
         active_layers = list(layer_qualities)
@@ -128,15 +137,18 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
             cache_folder / f"{cache_name}.{safe_layer}.layer.png",
             cache_folder / f"{cache_name}.stats.json",
             cache_folder / "cache.json",
+            cache_folder / f"{cache_name}.native-stats.json",
         )
 
     for layer_name, quality in layer_qualities.items():
-        cache_name, cache_folder, cache_json, cache_preview, cache_stats, cache_meta = cache_paths(layer_name)
+        cache_name, cache_folder, cache_json, cache_preview, cache_stats, cache_meta, cache_native = cache_paths(layer_name)
         expected_meta = {
             "version": CACHE_VERSION,
             "source": source_hash,
             "layer": layer_name,
             "quality": quality,
+            "primitive_mode": primitive_mode,
+            "triangle_sides": triangle_sides if native_mode else None,
         }
         actual_meta = None
         if cache_meta.is_file():
@@ -150,6 +162,7 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
             and cache_json.is_file()
             and cache_preview.is_file()
             and cache_stats.is_file()
+            and cache_native.is_file()
         ):
             read_schematic(cache_json)
             continue
@@ -163,6 +176,8 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
             "--layer-quality", f"{layer_name}={quality}",
             "--layer-previews",
         ]
+        if native_mode:
+            argv += ["--native-triangles", native_mode, "--triangle-sides", triangle_sides]
         proc = subprocess.run(argv, capture_output=True, text=True, cwd=str(ROOT))
         if proc.returncode != 0:
             message = (proc.stderr.strip() or proc.stdout.strip() or "conversion failed").splitlines()
@@ -178,18 +193,28 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
     separate_exports = []
     next_object_id = 1
     for layer_name in layer_qualities:
-        _cache_name, _cache_folder, cache_json, cache_preview, cache_stats, _cache_meta = cache_paths(layer_name)
+        _cache_name, _cache_folder, cache_json, cache_preview, cache_stats, _cache_meta, cache_native = cache_paths(layer_name)
         layer_blocks = read_schematic(cache_json)["Blocks"]
         stored_stats = json.loads(cache_stats.read_text("utf-8")).get("layers", {}).get(layer_name, {})
+        native_stored = json.loads(cache_native.read_text("utf-8")).get("layers", {}).get(layer_name, {})
+        # Quad and triangle costs both come from the converter, whichever mode was exported;
+        # "exported" describes the blocks that will actually be written.
         layer_stats[layer_name] = {
             "source_triangles": int(stored_stats.get("source_triangles", 0)),
-            "quad_primitives": sum(block.get("BlockType") == 1 for block in layer_blocks),
-            "objects": len(layer_blocks),
+            "quad_primitives": int(stored_stats.get("quad_primitives", 0)),
+            "objects": int(stored_stats.get("objects", 0)),
+            "native": {mode: {"primitives": int(native_stored.get(mode, {}).get("primitives", 0)),
+                              "objects": int(native_stored.get(mode, {}).get("objects", 0))}
+                       for mode in ("split", "shear")},
+            "exported": {
+                "primitives": sum(block.get("BlockType") == 1 for block in layer_blocks),
+                "objects": len(layer_blocks),
+            },
         }
         layer_previews[layer_name] = base64.b64encode(cache_preview.read_bytes()).decode("ascii")
 
     for layer_number, layer_name in enumerate(active_layers, 1):
-        _cache_name, _cache_folder, cache_json, _cache_preview, _cache_stats, _cache_meta = cache_paths(layer_name)
+        cache_json = cache_paths(layer_name)[2]
         layer_blocks = read_schematic(cache_json)["Blocks"]
         id_map = {}
         for block in layer_blocks:
@@ -244,6 +269,19 @@ def convert_layered(image_bytes: bytes, filename: str, params: dict) -> dict:
         "source_triangles": sum(layer_stats[layer_name]["source_triangles"] for layer_name in active_layers),
         "quad_primitives": sum(layer_stats[layer_name]["quad_primitives"] for layer_name in active_layers),
         "blocks": sum(layer_stats[layer_name]["objects"] for layer_name in active_layers),
+        "primitive_mode": primitive_mode,
+        "triangle_sides": triangle_sides,
+        "native": {
+            mode: {
+                "primitives": sum(layer_stats[n]["native"][mode]["primitives"] for n in active_layers),
+                "objects": sum(layer_stats[n]["native"][mode]["objects"] for n in active_layers),
+            }
+            for mode in ("split", "shear")
+        },
+        "exported": {
+            "primitives": sum(layer_stats[n]["exported"]["primitives"] for n in active_layers),
+            "objects": sum(layer_stats[n]["exported"]["objects"] for n in active_layers),
+        },
         "preview": base64.b64encode(preview_path.read_bytes()).decode("ascii"),
         "download_combined": f"/download?name={name}&mode=combined",
         "download_separated": f"/download?name={name}&mode=separated",

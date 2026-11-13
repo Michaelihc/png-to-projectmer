@@ -5,11 +5,20 @@ import json
 import math
 from pathlib import Path
 
+import mer_native_triangle_calibration as native_calibration
+
 
 class ExportValidationError(ValueError):
     def __init__(self, warnings):
         self.warnings = warnings
         super().__init__("ProjectMER export validation failed: " + "; ".join(warnings))
+
+
+def _valid_primitive_type(value):
+    """Vanilla primitives 0-5, plus the calibrated 15.0 native triangle types."""
+    if type(value) is int and value in range(6):
+        return True
+    return native_calibration.type_from_schematic_value(value) is not None
 
 
 def validate_schematic(document):
@@ -52,8 +61,7 @@ def validate_schematic(document):
         if not isinstance(properties, dict):
             issues.append(f"{label} is missing Properties.")
         elif kind == 1 and (
-            type(properties.get("PrimitiveType")) is not int
-            or properties["PrimitiveType"] not in range(6)
+            not _valid_primitive_type(properties.get("PrimitiveType"))
             or not isinstance(properties.get("Color"), str)
         ):
             issues.append(f"{label} is missing valid primitive properties.")

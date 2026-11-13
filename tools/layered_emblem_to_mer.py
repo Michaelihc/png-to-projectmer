@@ -49,6 +49,7 @@ def _load(mod_name):
 ts = _load("trace_svg")
 p2m = _load("png_to_mer_schematic")
 ngon = _load("mer_ngon_decomposition")
+native = _load("mer_native_triangles")
 
 
 def rasterize(polys, W, H):
@@ -215,7 +216,22 @@ def write_layer_previews(out_dir, name, layer_geometry, W, H, width_units):
 
 def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
             make_mesh_preview=False, layer_qualities=None,
-            make_layer_previews=False, only_layer=None):
+            make_layer_previews=False, only_layer=None,
+            fill_strategy="ngon", strip_tolerance=0.25,
+            native_triangles=None, triangle_sides="one-sided"):
+    """`native_triangles` (None, "split" or "shear") writes SCP:SL 15.0 native
+    triangle primitives instead of quads; None keeps the quad output."""
+    if fill_strategy not in ("ngon", "strips"):
+        raise ValueError(f"unknown fill strategy: {fill_strategy}")
+    if native_triangles not in (None, *native.MODES):
+        raise ValueError(f"unknown native triangle mode: {native_triangles}")
+    if triangle_sides not in ("one-sided", "solid"):
+        raise ValueError(f"unknown triangle sides: {triangle_sides}")
+    if fill_strategy == "strips":
+        import math
+        if not math.isfinite(strip_tolerance) or strip_tolerance < 0:
+            raise ValueError("Strip tolerance must be a finite, non-negative pixel distance.")
+        strip_converter = _load("mer_strip_cover").rings_to_strip_blocks
     im = np.array(Image.open(image_path).convert("RGBA"))
     H, W = im.shape[:2]
     cfg = json.loads(Path(config_path).read_text()) if config_path else ts.auto_config(im)
@@ -237,6 +253,7 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
     next_id = 1
     summary = []
     export_stats = {}
+    native_stats = {}
     layer_geometry = []
     source_triangles = []
     for lname, fill, z_order, polys in ts.build_layers(im, centroids, background, layers, blur):
@@ -244,17 +261,31 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
         z = layer_z(cfg, lname, z_order, n_layers)
         region_mask = rasterize(polys, W, H)
         unity_polys = polys_to_unity(polys, W, H, width_units)
-        blocks, next_id, stats, geometry = ngon.rings_to_parallelogram_blocks(
+        block_start_id = next_id
+        converter = strip_converter if fill_strategy == "strips" else ngon.rings_to_parallelogram_blocks
+        options = {"tolerance_px": strip_tolerance} if fill_strategy == "strips" else {}
+        blocks, next_id, stats, geometry = converter(
             unity_polys, region_mask, W, H, width_units, z, color,
-            f"{name}-{lname}", start_id=next_id, parent_id=0,
+            f"{name}-{lname}", start_id=next_id, parent_id=0, **options,
         )
-        all_blocks.extend(blocks)
-        summary.append((lname, len(polys), len(blocks), stats.line()))
         export_stats[lname] = {
             "source_triangles": stats.source_triangles,
             "quad_primitives": sum(block.get("BlockType") == 1 for block in blocks),
             "objects": len(blocks),
         }
+        native_stats[lname] = {
+            "source_triangles": stats.source_triangles,
+            **native.native_counts(geometry["source_triangles"]),
+        }
+        if native_triangles is not None:
+            # Same source triangulation, emitted as native triangles instead.
+            blocks, next_id, stats, _native_geometry = native.rings_to_native_triangle_blocks(
+                unity_polys, region_mask, W, H, width_units, z, color,
+                f"{name}-{lname}", start_id=block_start_id, parent_id=0,
+                mode=native_triangles, solid=triangle_sides == "solid",
+            )
+        all_blocks.extend(blocks)
+        summary.append((lname, len(polys), len(blocks), stats.line()))
         layer_geometry.append((lname, fill, polys, geometry["source_triangles"]))
         source_triangles.extend(geometry["source_triangles"])
 
@@ -266,10 +297,19 @@ def convert(image_path, config_path, name, out_dir, make_preview, quality=None,
         json.dumps({"layers": export_stats}, separators=(",", ":")),
         encoding="utf-8",
     )
+    # Triangle-mode costs for the same triangulation, whichever mode was written.
+    (out_dir / f"{name}.native-stats.json").write_text(
+        json.dumps({"layers": native_stats}, separators=(",", ":")),
+        encoding="utf-8",
+    )
 
     for lname, npoly, nblk, line in summary:
         print(f"  {lname}: {npoly} polys -> {nblk} blocks | {line}")
     print(f"Wrote {out_json}: {len(all_blocks)} total primitives")
+    for mode in native.MODES:
+        visible = sum(layer[mode]["primitives"] for layer in native_stats.values())
+        objects = sum(layer[mode]["objects"] for layer in native_stats.values())
+        print(f"  native triangles ({mode}): {visible} visible primitives / {objects} objects")
 
     if make_preview:
         rp = _load("render_preview")
@@ -301,6 +341,19 @@ def main():
                     help="Also write one clean PNG preview for each tuned layer.")
     ap.add_argument("--only-layer", metavar="NAME",
                     help="Build only one named layer (used by the incremental web UI).")
+    ap.add_argument("--fill-strategy", choices=("ngon", "strips"), default="ngon",
+                    help="strips tries overlapping inward rectangles with residual filling; keeps ngon if cheaper.")
+    ap.add_argument("--strip-tolerance", type=float, default=0.25, metavar="PIXELS",
+                    help="Allowed strip overhang in input-image pixels (default 0.25); smaller preserves edges better.")
+    ap.add_argument("--native-triangles", choices=native.MODES, metavar="{shear,split}",
+                    nargs="?", const="shear",
+                    help="Opt in to SCP:SL 15.0 native triangle primitives instead of quads: "
+                         "shear (the default when given alone) uses one Triangle90 under a sheared "
+                         "Empty; split cuts each triangle along its altitude into two Triangle90 "
+                         "primitives. Both cost the same objects, so shear draws fewer primitives.")
+    ap.add_argument("--triangle-sides", choices=("one-sided", "solid"), default="one-sided",
+                    help="With --native-triangles: Triangle90 (visible from the front only, like "
+                         "the quads) or Triangle90Solid (two-sided). Default one-sided.")
     args = ap.parse_args()
 
     image_path = Path(args.image)
@@ -310,7 +363,8 @@ def main():
     out_dir = Path(args.output) / name
     convert(image_path, args.config, name, out_dir, args.preview, args.quality,
             args.mesh_preview, parse_layer_qualities(args.layer_quality),
-            args.layer_previews, args.only_layer)
+            args.layer_previews, args.only_layer, args.fill_strategy, args.strip_tolerance,
+            args.native_triangles, args.triangle_sides)
 
 
 if __name__ == "__main__":

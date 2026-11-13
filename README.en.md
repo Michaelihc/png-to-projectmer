@@ -8,7 +8,7 @@ Turn an emblem image into a stock SCP:SL ProjectMER schematic: **split layers â†
 
 ![A close view of the real source triangulation](docs/screenshots/triangulation.png)
 
-The tool runs locally and uses no frontend framework. The output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin.
+The tool runs locally and uses no frontend framework. By default the output uses only vanilla ProjectMER empty objects and quad primitives (`BlockType 0` and `BlockType 1`), so it does not require a forked plugin; [native triangles](#native-triangles-scpsl-150) are opt-in.
 
 ## Start in 30 seconds
 
@@ -86,6 +86,32 @@ python tools/png_to_mer_schematic.py scarletking.png \
 
 Run either script with `--help` for all options.
 
+For rectangle-strip fitting, add `--fill-strategy strips --strip-tolerance 0.25`
+to the layered converter command. It fits overlapping rectangles along boundary
+edges and fills the remaining regions, comparing several covers against the
+ordinary n-gon export by total object count, including Empty parents. The
+tolerance is measured in input-image pixels; larger values can roughen edges or
+narrow small cutouts. This optional search takes longer and can increase visible
+quad count even when it reduces total objects. Inspect both counts and the preview.
+The default converter and browser workflow continue to use n-gon filling.
+
+## Native triangles (SCP:SL 15.0)
+
+SCP:SL 15.0 adds triangle primitives (`Triangle90` is a right isosceles triangle, `Triangle90Solid` its two-sided variant). They need a ProjectMER port that knows these types, so quads stay the default and the export is opt-in:
+
+```bash
+python tools/layered_emblem_to_mer.py nu22.png --name nu22 --quality 70   --native-triangles --preview
+```
+
+- `--native-triangles` on its own means `shear`: one `Triangle90` under a sheared Empty parent (1 primitive, 2 objects per triangle).
+- `--native-triangles split` cuts every source triangle along its altitude into two right triangles, each one `Triangle90` with non-uniform scale and no helper empties (2 primitives, 2 objects per triangle).
+- Both modes emit a triangle that already has a right angle as a single `Triangle90` (1 object). They cost the same objects otherwise, so `shear` draws half the primitives and is the default.
+- `--triangle-sides one-sided` (default) matches the quads, which show only one face; `solid` writes the two-sided `Triangle90Solid`.
+
+Native modes triangulate with the same earcut step as the quads and skip convex merging and the parallelogram cover. The converter always prints and stores both costs (`<name>.stats.json` for quads, `<name>.native-stats.json` for both triangle modes) so the browser UI shows them next to each other; its **Output primitives** selector picks what is exported.
+
+Everything the tool assumes about the 15.0 meshes is in [`tools/mer_native_triangle_calibration.py`](tools/mer_native_triangle_calibration.py): the type names written to the schematic (as strings; set `WRITE_AS = "number"` and fill `NUMERIC_VALUES` if the port needs numbers), the unit mesh vertices and which side is visible. Correct that table after inspecting the real mesh; the geometry and tests follow it.
+
 ## How it works
 
 ```text
@@ -98,7 +124,7 @@ image
   â†’ vanilla ProjectMER JSON
 ```
 
-ProjectMER has no native triangle primitive. The tool represents non-parallelogram pieces with a transform-hierarchy shear: a rotated child quad under a non-uniformly scaled empty parent produces the required world-space shape. The n-gon path reduces runtime objects by merging adjacent triangles before emitting those quads.
+Stock ProjectMER has no triangle primitive. The default quad output represents non-parallelogram pieces with a transform-hierarchy shear: a rotated child quad under a non-uniformly scaled empty parent produces the required world-space shape. The n-gon path reduces runtime objects by merging adjacent triangles before emitting those quads.
 
 The main modules are:
 

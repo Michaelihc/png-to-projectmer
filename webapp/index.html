@@ -32,6 +32,20 @@
 
     <section aria-labelledby="preview-heading">
       <h2 id="preview-heading" data-text="preview_heading">2. 预览合并图纸</h2>
+      <p>
+        <label for="primitive-mode"><span data-text="output_mode">输出基元</span>:</label>
+        <select id="primitive-mode">
+          <option value="quads" data-text="mode_quads">四边形（默认）</option>
+          <option value="shear" data-text="mode_shear">原生三角形：剪切父级</option>
+          <option value="split" data-text="mode_split">原生三角形：按高分割</option>
+        </select>
+        <label for="triangle-sides"><span data-text="triangle_sides">三角形面</span>:</label>
+        <select id="triangle-sides" disabled>
+          <option value="one-sided" data-text="sides_one">单面</option>
+          <option value="solid" data-text="sides_solid">双面（Solid）</option>
+        </select>
+      </p>
+      <p data-text="native_note">原生三角形需要 SCP:SL 15.0 与支持 Triangle90 的 ProjectMER。</p>
       <p id="preview-loading" hidden><strong data-text="preview_loading">正在加载合并预览…</strong></p>
       <figure id="preview-figure" hidden>
         <img id="preview" width="720" alt="Combined ProjectMER preview">
@@ -119,11 +133,19 @@
         detail: "Detail level",
         include: "Include in result",
         keep_one: "At least one layer must be included.",
-        layer_counts: (triangles, quads, objects) => `${triangles.toLocaleString()} source triangles · export: ${quads.toLocaleString()} quad primitives / ${objects.toLocaleString()} objects`,
+        output_mode: "Output primitives",
+        mode_quads: "Quads (default)",
+        mode_split: "Native triangles: split along altitude",
+        mode_shear: "Native triangles: one primitive under shear parent",
+        triangle_sides: "Triangle sides",
+        sides_one: "One-sided",
+        sides_solid: "Solid (two-sided)",
+        native_note: "Native triangles need SCP:SL 15.0 and a ProjectMER port that knows Triangle90.",
+        layer_counts: (triangles, quads, objects, native) => `${triangles.toLocaleString()} source triangles · quads: ${quads.toLocaleString()} primitives / ${objects.toLocaleString()} objects · native triangles: split ${native.split.primitives.toLocaleString()} / ${native.split.objects.toLocaleString()}, shear ${native.shear.primitives.toLocaleString()} / ${native.shear.objects.toLocaleString()}`,
         layer_preview_alt: number => `Triangulation preview of layer ${number}`,
         building: "Loading…",
         ready: "Preview updated.",
-        preview_caption: (triangles, quads, blocks, count) => `${triangles.toLocaleString()} source triangles · export: ${quads.toLocaleString()} quad primitives / ${blocks.toLocaleString()} objects · ${count} layers included`,
+        preview_caption: (triangles, quads, blocks, count, native, exported, modeLabel) => `${triangles.toLocaleString()} source triangles · quads: ${quads.toLocaleString()} primitives / ${blocks.toLocaleString()} objects · native triangles: split ${native.split.primitives.toLocaleString()} / ${native.split.objects.toLocaleString()}, shear ${native.shear.primitives.toLocaleString()} / ${native.shear.objects.toLocaleString()} (primitives / objects) · ${count} layers included · exporting ${modeLabel}: ${exported.primitives.toLocaleString()} primitives / ${exported.objects.toLocaleString()} objects`,
         failed: error => `Could not convert: ${error}`,
         selected_alt: "Selected source image",
         preview_alt: "Combined ProjectMER preview",
@@ -148,11 +170,19 @@
         detail: "细节级别",
         include: "包含在结果中",
         keep_one: "至少需要包含一个图层。",
-        layer_counts: (triangles, quads, objects) => `${triangles.toLocaleString()} 个源三角形 · 导出：${quads.toLocaleString()} 个四边形基元 / ${objects.toLocaleString()} 个对象`,
+        output_mode: "输出基元",
+        mode_quads: "四边形（默认）",
+        mode_split: "原生三角形：按高分割",
+        mode_shear: "原生三角形：剪切父级",
+        triangle_sides: "三角形面",
+        sides_one: "单面",
+        sides_solid: "双面（Solid）",
+        native_note: "原生三角形需要 SCP:SL 15.0 与支持 Triangle90 的 ProjectMER。",
+        layer_counts: (triangles, quads, objects, native) => `${triangles.toLocaleString()} 个源三角形 · 四边形：${quads.toLocaleString()} 个基元 / ${objects.toLocaleString()} 个对象 · 原生三角形：分割 ${native.split.primitives.toLocaleString()} / ${native.split.objects.toLocaleString()}，剪切 ${native.shear.primitives.toLocaleString()} / ${native.shear.objects.toLocaleString()}`,
         layer_preview_alt: number => `图层 ${number} 的三角剖分预览`,
         building: "加载中…",
         ready: "预览已更新。",
-        preview_caption: (triangles, quads, blocks, count) => `${triangles.toLocaleString()} 个源三角形 · 导出：${quads.toLocaleString()} 个四边形基元 / ${blocks.toLocaleString()} 个对象 · 已包含 ${count} 个图层`,
+        preview_caption: (triangles, quads, blocks, count, native, exported, modeLabel) => `${triangles.toLocaleString()} 个源三角形 · 四边形：${quads.toLocaleString()} 个基元 / ${blocks.toLocaleString()} 个对象 · 原生三角形：分割 ${native.split.primitives.toLocaleString()} / ${native.split.objects.toLocaleString()}，剪切 ${native.shear.primitives.toLocaleString()} / ${native.shear.objects.toLocaleString()}（基元 / 对象） · 已包含 ${count} 个图层 · 当前导出 ${modeLabel}：${exported.primitives.toLocaleString()} 个基元 / ${exported.objects.toLocaleString()} 个对象`,
         failed: error => `转换失败：${error}`,
         selected_alt: "已选择的源图片",
         preview_alt: "合并后的 ProjectMER 预览",
@@ -307,7 +337,8 @@
             "layer_counts",
             layerStats.source_triangles,
             layerStats.quad_primitives,
-            layerStats.objects
+            layerStats.objects,
+            layerStats.native
           );
           fieldset.append(count);
         }
@@ -323,7 +354,10 @@
         resultData.source_triangles,
         resultData.quad_primitives,
         resultData.blocks,
-        resultData.active_layers.length
+        resultData.active_layers.length,
+        resultData.native,
+        resultData.exported,
+        text(`mode_${resultData.primitive_mode}`)
       );
       setStatus(text("ready"));
     }
@@ -438,6 +472,8 @@
               .map(([layerName]) => layerName),
             changed_layer: changedLayer,
             rebuild_exports: rebuild,
+            primitive_mode: element("primitive-mode").value,
+            triangle_sides: element("triangle-sides").value,
           },
         });
         if (requestVersion !== stateVersion) return;
@@ -536,6 +572,11 @@
       if (file) loadFile(file);
     });
     nameInput.addEventListener("input", () => queuePreview());
+    element("primitive-mode").addEventListener("change", () => {
+      element("triangle-sides").disabled = element("primitive-mode").value === "quads";
+      queuePreview();
+    });
+    element("triangle-sides").addEventListener("change", () => queuePreview());
     element("language").addEventListener("click", () => {
       language = language === "en" ? "zh" : "en";
       applyLanguage();
