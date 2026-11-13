@@ -345,10 +345,12 @@ def main():
                     help="strips tries overlapping inward rectangles with residual filling; keeps ngon if cheaper.")
     ap.add_argument("--strip-tolerance", type=float, default=0.25, metavar="PIXELS",
                     help="Allowed strip overhang in input-image pixels (default 0.25); smaller preserves edges better.")
-    ap.add_argument("--native-triangles", choices=native.MODES, metavar="{split,shear}",
+    ap.add_argument("--native-triangles", choices=native.MODES, metavar="{shear,split}",
+                    nargs="?", const="shear",
                     help="Opt in to SCP:SL 15.0 native triangle primitives instead of quads: "
-                         "split cuts each triangle along its altitude into two Triangle90 "
-                         "primitives; shear uses one Triangle90 under a sheared Empty.")
+                         "shear (the default when given alone) uses one Triangle90 under a sheared "
+                         "Empty; split cuts each triangle along its altitude into two Triangle90 "
+                         "primitives. Both cost the same objects, so shear draws fewer primitives.")
     ap.add_argument("--triangle-sides", choices=("one-sided", "solid"), default="one-sided",
                     help="With --native-triangles: Triangle90 (visible from the front only, like "
                          "the quads) or Triangle90Solid (two-sided). Default one-sided.")

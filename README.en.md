@@ -100,11 +100,12 @@ The default converter and browser workflow continue to use n-gon filling.
 SCP:SL 15.0 adds triangle primitives (`Triangle90` is a right isosceles triangle, `Triangle90Solid` its two-sided variant). They need a ProjectMER port that knows these types, so quads stay the default and the export is opt-in:
 
 ```bash
-python tools/layered_emblem_to_mer.py nu22.png --name nu22 --quality 70   --native-triangles split --triangle-sides solid --preview
+python tools/layered_emblem_to_mer.py nu22.png --name nu22 --quality 70   --native-triangles --preview
 ```
 
-- `--native-triangles split` cuts every source triangle along its altitude into two right triangles, each one `Triangle90` with non-uniform scale and no helper empties (2 primitives, 2 objects per triangle; 1 if it already has a right angle).
-- `--native-triangles shear` emits one `Triangle90` under a sheared Empty parent (1 primitive, 2 objects per triangle).
+- `--native-triangles` on its own means `shear`: one `Triangle90` under a sheared Empty parent (1 primitive, 2 objects per triangle).
+- `--native-triangles split` cuts every source triangle along its altitude into two right triangles, each one `Triangle90` with non-uniform scale and no helper empties (2 primitives, 2 objects per triangle).
+- Both modes emit a triangle that already has a right angle as a single `Triangle90` (1 object). They cost the same objects otherwise, so `shear` draws half the primitives and is the default.
 - `--triangle-sides one-sided` (default) matches the quads, which show only one face; `solid` writes the two-sided `Triangle90Solid`.
 
 Native modes triangulate with the same earcut step as the quads and skip convex merging and the parallelogram cover. The converter always prints and stores both costs (`<name>.stats.json` for quads, `<name>.native-stats.json` for both triangle modes) so the browser UI shows them next to each other; its **Output primitives** selector picks what is exported.
